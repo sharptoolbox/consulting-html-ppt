@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>经营分析 · ECharts 图表模板库 v1</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<script>window.echarts||document.write('<scr'+'ipt src="https://unpkg.com/echarts@5.5.1/dist/echarts.min.js"><\/scr'+'ipt>');</script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --red:#CC0000;
+    --gray:#A3A3A3;
+    --blue:#006393;
+    --ink:#333333;
+    --bg:#F5F5F5;
+    --line:#CCCCCC;
+    --hair:#EEEEEE;
+    --hl:#FFF2F2;
+  }
+  body{
+    background:#FFFFFF;
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1360px;margin:0 auto;padding:56px 40px 96px}
+
+  /* 页头 */
+  .page-head{border-bottom:5px solid #000;padding-bottom:26px;margin-bottom:34px}
+  .page-head h1{font-size:32px;font-weight:700;letter-spacing:.5px}
+  .page-head p{margin-top:12px;font-size:14px;color:var(--gray);line-height:1.8}
+  .page-head p b{color:var(--ink)}
+  .page-head .legend{display:flex;gap:26px;margin-top:16px;flex-wrap:wrap}
+  .page-head .legend span{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--gray)}
+  .page-head .legend i{display:inline-block;width:14px;height:14px}
+  .page-head .specs{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .page-head .specs span{font-size:12.5px;color:var(--ink);background:var(--bg);border:1px solid #E5E5E5;padding:5px 11px}
+  .page-head .specs span b{color:var(--red)}
+  .page-head .warn{margin-top:18px;font-size:13px;line-height:1.85;color:#B36B00;background:#FFF8EC;
+    border:1px solid #F0DDBB;border-left:4px solid #E8A33D;padding:12px 16px}
+  .page-head .warn b{color:#8A5200}
+
+  /* 目录 */
+  .toc{margin-bottom:44px}
+  .toc-group{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:9px}
+  .toc-group .gl{flex:0 0 150px;font-size:12.5px;font-weight:700;color:var(--gray);letter-spacing:.5px}
+  .toc a{font-size:13px;color:var(--ink);text-decoration:none;border:1px solid var(--line);padding:6px 11px;background:#FFF;white-space:nowrap}
+  .toc a:hover{border-color:var(--red);color:var(--red)}
+  .toc a b{color:var(--red);margin-right:7px;font-variant-numeric:tabular-nums;font-weight:700}
+
+  /* 卡片 */
+  .card{border:1px solid var(--line);padding:28px 32px 30px;margin-bottom:38px;background:#FFF;scroll-margin-top:18px}
+  .card-head{display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+    padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:22px}
+  .card-head .idx{font-size:24px;font-weight:700;color:var(--red);font-variant-numeric:tabular-nums;line-height:1}
+  .card-head h2{font-size:19px;font-weight:600}
+  .card-head .tag{font-size:12.5px;color:var(--gray);margin-left:auto;letter-spacing:.3px}
+  .card-head .spec{font-size:12.5px;color:var(--blue);background:#F0F6FA;border:1px solid #CFE0EA;padding:5px 11px;white-space:nowrap}
+  .card-body{display:flex;justify-content:center;overflow-x:auto;padding:4px 0}
+  .chart{width:1120px;height:700px;flex:0 0 auto}
+  .note{margin-top:18px;font-size:13px;color:var(--gray);line-height:1.85;border-left:3px solid var(--line);padding-left:14px}
+  .note b{color:var(--ink)}
+  .note em{font-style:normal;color:var(--red);font-weight:600}
+  .note code{font-family:Consolas,"Courier New",monospace;font-size:12px;background:#F5F5F5;
+    border:1px solid #E5E5E5;border-radius:3px;padding:1px 5px;color:#333333}
+  .group-title{margin:52px 0 24px;font-size:15px;font-weight:700;color:var(--ink);
+    border-left:5px solid var(--red);padding-left:12px;letter-spacing:.5px}
+  .group-title span{font-weight:400;color:var(--gray);font-size:13px;margin-left:10px}
+  .fallback{display:none;padding:16px 20px;background:#FFF2F2;border:1px solid #CC0000;
+    color:#CC0000;font-size:14px;line-height:1.8;margin-bottom:32px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="page-head">
+    <h1>经营分析 · ECharts 图表模板库 v1</h1>
+    <p><b>28 种经营分析高频图表</b> · 百度 ECharts 5.5（公网 CDN 挂接）· 配色与《图表模板库.html》完全一致 · 按 1920×1080 画布的内容区尺寸设计</p>
+    <p><b>用途：</b>当 PPT 页面涉及<b>数据 / 指标 / 趋势 / 排名 / 构成 / 归因 / 转化 / 达成率</b>时，从本库选题 → 改数据 → 改标题 → 嵌入 PPT 页面右栏（1120×700）或通栏（1880×700）。</p>
+    <div class="legend">
+      <span><i style="background:#CC0000"></i>主指标 / 落点 #CC0000</span>
+      <span><i style="background:#006393"></i>对比 / 次级 #006393</span>
+      <span><i style="background:#333333"></i>结构 / 文字 #333333</span>
+      <span><i style="background:#A3A3A3"></i>参照 / 历史 #A3A3A3</span>
+      <span><i style="background:#F5F5F5;border:1px solid #CCCCCC"></i>分区底 #F5F5F5</span>
+      <span><i style="background:#FFF2F2;border:1px solid #CC0000"></i>高亮 #FFF2F2</span>
+    </div>
+    <div class="specs">
+      <span>画布 <b>1920×1080</b>（16:9）</span>
+      <span>右栏图表容器 <b>1120×700</b></span>
+      <span>通栏图表容器 <b>1880×700</b></span>
+      <span>图表字号 <b>16px</b>（轴 / 图例 / 标签）</span>
+      <span>图表颜色 <b>仅 8 色</b>（红蓝灰阶，禁止渐变/阴影）</span>
+      <span>底注 / 数据来源 <b>13–16px #A3A3A3</b></span>
+    </div>
+    <div class="warn">
+      <b>投放三条铁律</b>　① <b>容器尺寸 = 图表尺寸</b>：右栏投 <code>1120×700</code>、通栏投 <code>1880×700</code>，切换后调 <code>chart.resize()</code> 即可，<b>字号不用改</b>（高度恒为 700）。
+      ② <b>红色只有一处</b>：整页（含左栏文字）只允许一个"最该被看见"的系列/数据点走 <code>#CC0000</code>，其余用蓝、灰阶。
+      ③ <b>禁止</b>渐变、阴影、3D、圆点密集网格线、面积堆叠超过 3 层、饼图超过 6 类。
+    </div>
+  </div>
+
+  <nav class="toc">
+    <div class="toc-group"><span class="gl">A · 趋势与增长</span>
+      <a href="#e01"><b>01</b>趋势折线</a><a href="#e02"><b>02</b>堆叠面积</a><a href="#e03"><b>03</b>实际 vs 预测</a><a href="#e04"><b>04</b>双轴折柱</a><a href="#e05"><b>05</b>阶梯折线</a></div>
+    <div class="toc-group"><span class="gl">B · 对比与排名</span>
+      <a href="#e06"><b>06</b>分组柱状</a><a href="#e07"><b>07</b>堆叠柱状</a><a href="#e08"><b>08</b>百分比堆叠柱</a><a href="#e09"><b>09</b>横向条形排名</a><a href="#e10"><b>10</b>极坐标柱</a></div>
+    <div class="toc-group"><span class="gl">C · 构成与占比</span>
+      <a href="#e11"><b>11</b>饼图</a><a href="#e12"><b>12</b>环形 + 中心 KPI</a><a href="#e13"><b>13</b>玫瑰图</a><a href="#e14"><b>14</b>矩形树图</a><a href="#e15"><b>15</b>旭日图</a></div>
+    <div class="toc-group"><span class="gl">D · 拆解与归因</span>
+      <a href="#e16"><b>16</b>瀑布图</a><a href="#e17"><b>17</b>帕累托图</a><a href="#e18"><b>18</b>双向贡献条形</a><a href="#e19"><b>19</b>桑基流向</a></div>
+    <div class="toc-group"><span class="gl">E · 关联与分布</span>
+      <a href="#e20"><b>20</b>散点回归</a><a href="#e21"><b>21</b>气泡图</a><a href="#e22"><b>22</b>箱线图</a><a href="#e23"><b>23</b>热力矩阵</a></div>
+    <div class="toc-group"><span class="gl">F · 效率与目标</span>
+      <a href="#e24"><b>24</b>转化漏斗</a><a href="#e25"><b>25</b>仪表盘</a><a href="#e26"><b>26</b>进度条组</a></div>
+    <div class="toc-group"><span class="gl">G · 多维与关系</span>
+      <a href="#e27"><b>27</b>雷达对比</a><a href="#e28"><b>28</b>关系网络图</a></div>
+  </nav>
+
+  <div class="fallback" id="fb">未能加载 ECharts 公网库（jsDelivr / unpkg 均不可达）。请联网后刷新，或把 <code>echarts.min.js</code> 下载到同目录并把 <code>&lt;script src&gt;</code> 改成本地路径。</div>
+
+  <div class="group-title" id="gA">A · 趋势与增长 <span>时间序列 · 增长轨迹 · 预测外推 —— 经营分析里出现频率最高的一类</span></div>
+
+  <section class="card" id="e01">
+    <div class="card-head"><span class="idx">01</span><h2>趋势折线图</h2>
+      <span class="tag">趋势 / 时间序列</span><span class="spec">1120×700 · 通栏改 1880×700</span></div>
+    <div class="card-body"><div class="chart" id="c01"></div></div>
+    <div class="note">
+      <b>用在：</b>核心指标的月度 / 周度走势 —— 营收、利润、订单量、活跃客户数。回答"<em>涨还是跌、拐点在哪、和去年比如何</em>"。<br>
+      <b>关键配置：</b>主指标实线 3px 走红 + 极淡红底（<code>#FBE9E9</code>）；对照项（去年同期 / 目标线）灰色虚线 2px。折点用小圆（<code>symbolSize:7</code>），<b>不要每点标数值</b>，只在最高/最低点标。<br>
+      <b>慎用：</b>类目超过 12 个时改 09 横向条形；只有 2–3 个时点用 06 分组柱更清楚。
+    </div>
+  </section>
+
+  <section class="card" id="e02">
+    <div class="card-head"><span class="idx">02</span><h2>堆叠面积图</h2>
+      <span class="tag">趋势 × 构成</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c02"></div></div>
+    <div class="note">
+      <b>用在：</b>既要看总量趋势、又要看内部结构变化 —— 三条业务线的收入贡献如何共同推动总营收。<br>
+      <b>关键配置：</b><b>最多 3 层</b>（超过 3 层不可读）；层序固定为"大到小"或"战略优先级"；填充用纯色不透明（<code>#CC0000</code>/<code>#006393</code>/<code>#A3A3A3</code>）配 0.75 透明度即可，<b>禁止渐变</b>。<br>
+      <b>慎用：</b>需要精确读每个系列的数值 → 改 07 堆叠柱；需要看占比演变 → 改 08 百分比堆叠柱。
+    </div>
+  </section>
+
+  <section class="card" id="e03">
+    <div class="card-head"><span class="idx">03</span><h2>实际 vs 预测（含衔接段）</h2>
+      <span class="tag">趋势 / 预测</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c03"></div></div>
+    <div class="note">
+      <b>用在：</b>年度目标复盘与展望 —— 前 8 个月实际完成、后 4 个月滚动预测，中间用虚线切开。<br>
+      <b>关键配置：</b>虚线起点与实线终点<b>共享同一个数据点</b>（预测系列在该点也有值），否则会出现断口；预测区底色用 <code>#F5F5F5</code> 竖条（<code>markArea</code>）标出；预测段用 <code>#A3A3A3</code> 虚线，<b>不用红色</b>（红留给已完成事实）。<br>
+      <b>慎用：</b>预测依据不足时不要画，改 17 帕累托做差距归因。
+    </div>
+  </section>
+
+  <section class="card" id="e04">
+    <div class="card-head"><span class="idx">04</span><h2>双轴折柱组合</h2>
+      <span class="tag">规模 + 速度</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c04"></div></div>
+    <div class="note">
+      <b>用在：</b>"规模"与"速度"要同框 —— 营收（绝对额，柱）与同比增长率（百分比，线）。这是 CFO 汇报里最高频的一张图。<br>
+      <b>关键配置：</b>柱走蓝灰、线走红（线是结论）；左轴单位"万元"、右轴单位"%"，<b>两侧轴名必须显式标出</b>；增长率用 2px 线 + 数据点标注（每年只有 4–12 个点，可全标）。<br>
+      <b>慎用：</b>增长率有负值时务必把右轴 <code>min</code> 设为负数并画出 0 轴，否则视觉会误读。
+    </div>
+  </section>
+
+  <section class="card" id="e05">
+    <div class="card-head"><span class="idx">05</span><h2>阶梯折线图</h2>
+      <span class="tag">规则 / 分段</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c05"></div></div>
+    <div class="note">
+      <b>用在：</b>指标不是连续变化、而是<b>按规则跳档</b>的场景 —— 阶梯定价（量档单价）、佣金费率、折扣阶梯、SLA 分档。<br>
+      <b>关键配置：</b><code>step:'end'</code>（当期生效）或 <code>'start'</code>（次期生效）；在每档平台段标出"区间 + 单价"，档与档之间用竖直跳变线；<b>必须标出档位边界值</b>，否则读者读不出规则。<br>
+      <b>慎用：</b>连续型指标（如营收）误用阶梯图会失真 —— 那是 01 的活。
+    </div>
+  </section>
+
+  <div class="group-title" id="gB">B · 对比与排名 <span>同期对比 · 结构差异 · TOP N —— 回答"谁高谁低、差在哪"</span></div>
+
+  <section class="card" id="e06">
+    <div class="card-head"><span class="idx">06</span><h2>分组柱状图</h2>
+      <span class="tag">环比 / 同比对比</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c06"></div></div>
+    <div class="note">
+      <b>用在：</b>同一维度下的两个（最多三个）对象逐项对比 —— 今年 vs 去年分季度、我司 vs 竞品分产品、A/B 两个方案分指标。<br>
+      <b>关键配置：</b><b>只有 2 个系列</b>（并列柱），当前期走红、对照期走灰；柱宽 <code>barWidth</code> 固定（不用百分比），柱间留白 ≥ 柱宽 1/3；<b>组数 ≥ 8 时改横向（09）</b>。<br>
+      <b>慎用：</b>3 个以上系列并列会变"彩虹柱"——规范只允许 2 系列走色，其余转 07 / 08。
+    </div>
+  </section>
+
+  <section class="card" id="e07">
+    <div class="card-head"><span class="idx">07</span><h2>堆叠柱状图</h2>
+      <span class="tag">总量 × 结构</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c07"></div></div>
+    <div class="note">
+      <b>用在：</b>每月总量 + 内部三条线各贡献多少，两者都要读 —— 月度营收拆分硬件 / 软件 / 服务。<br>
+      <b>关键配置：</b>层序由下到上 = 由大到小；<b>只给最上面一层标数值</b>（标总量），其余层不标，否则柱子花掉；<code>stack</code> 同名字段必须一致。<br>
+      <b>慎用：</b>想看某一条线的走势 → 02 堆叠面积；想看占比变化 → 08。
+    </div>
+  </section>
+
+  <section class="card" id="e08">
+    <div class="card-head"><span class="idx">08</span><h2>百分比堆叠柱状图</h2>
+      <span class="tag">结构占比演变</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c08"></div></div>
+    <div class="note">
+      <b>用在：</b>总量被抹平后专门看<b>结构漂移</b> —— 高毛利业务占比是否逐年抬升、渠道结构是否在变。<br>
+      <b>关键配置：</b>数据必须先换算成百分比（合计 100%）；Y 轴 <code>max:100</code>、<code>formatter:'{value}%'</code>；<b>层内直接标百分比</b>（层够厚时），薄层改到图例侧；层数 ≤ 4。<br>
+      <b>慎用：</b>总量本身在剧烈波动时，占比会掩盖问题 —— 应与 07 配对使用。
+    </div>
+  </section>
+
+  <section class="card" id="e09">
+    <div class="card-head"><span class="idx">09</span><h2>横向条形排名（TOP N）</h2>
+      <span class="tag">排名 / 贡献度</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c09"></div></div>
+    <div class="note">
+      <b>用在：</b>类目多、名称长、要排名 —— 产品线销量 TOP10、渠道贡献排名、问题清单按影响排序。<br>
+      <b>关键配置：</b>降序排列、<b>第一名走红</b>其余蓝灰阶；条末标数值（<code>position:'right'</code>）；类目名放左轴、前置序号；条高固定、条距恒定，<b>不用背景网格竖线</b>。<br>
+      <b>慎用：</b>类目 ≤ 6 个且都重要 → 用 06 竖版分组柱，视觉更"正式"。
+    </div>
+  </section>
+
+  <section class="card" id="e10">
+    <div class="card-head"><span class="idx">10</span><h2>极坐标柱状图（玉珏）</h2>
+      <span class="tag">周期 / 时段分布</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c10"></div></div>
+    <div class="note">
+      <b>用在：</b>天然带<b>周期循环</b>的指标 —— 24 小时订单分布、一周七天的客流、12 个月的季节性。让人一眼看出"峰谷在哪"。 <br>
+      <b>关键配置：</b><code>polar</code> + <code>angleAxis</code>（类目）+ <code>radiusAxis</code>（数值）；扇区间留缝 <code>itemStyle.borderWidth:2</code> 白色；<b>峰值扇区单独走红</b>，其余蓝灰；中心可放一句结论（<code>graphic</code>）。<br>
+      <b>慎用：</b>非周期数据不要用圆环坐标 —— 读者无法比较弧长。
+    </div>
+  </section>
+
+  <div class="group-title" id="gC">C · 构成与占比 <span>拆份子 · 层级下钻 —— 回答"钱从哪来、谁占大头"</span></div>
+
+  <section class="card" id="e11">
+    <div class="card-head"><span class="idx">11</span><h2>饼图</h2>
+      <span class="tag">单一构成</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c11"></div></div>
+    <div class="note">
+      <b>用在：</b>一个总量的构成，类目少、彼此不可比 —— 营收来源 5 类、费用结构。 <br>
+      <b>关键配置：</b><b>类目 4–6 个、必须有 1 个明显主导项</b>；主导类目走红、其余用蓝 + 三级灰；<b>直接在外侧标注"名称 + 金额 + 百分比"</b>（<code>label position:'outside'</code> + 引导线）；起始角 <code>startAngle:90</code> 从 12 点顺时针。<br>
+      <b>慎用：</b>类目 ≥ 7 或占比接近 → 改 09 横向条形（人眼比较角度极差）；需要看趋势 → 08。
+    </div>
+  </section>
+
+  <section class="card" id="e12">
+    <div class="card-head"><span class="idx">12</span><h2>环形图 + 中心 KPI</h2>
+      <span class="tag">构成 + 总量落点</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c12"></div></div>
+    <div class="note">
+      <b>用在：</b>既要说构成、又要突出一个<b>总量数字</b> —— 总营收、总成本、总订单量居中亮相。比 11 更有"汇报感"。<br>
+      <b>关键配置：</b>环宽约占半径 35–45%（<code>radius:['58%','82%']</code>）；<b>中心放 2 行</b>：大数字（48px，红）+ 单位/标签（16px，灰），用 <code>graphic</code> 或 <code>title</code> 实现；环上直接标百分比。<br>
+      <b>慎用：</b>中心数字与图的构成无对应关系时（如中心放"员工数"、环是"营收构成"）会误导 —— 中心必须是这套构成的总量。
+    </div>
+  </section>
+
+  <section class="card" id="e13">
+    <div class="card-head"><span class="idx">13</span><h2>南丁格尔玫瑰图</h2>
+      <span class="tag">多类目构成</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c13"></div></div>
+    <div class="note">
+      <b>用在：</b>类目较多（6–10）且想强调<b>量级差异</b>的构成 —— 各渠道客户数、各行业收入贡献。<br>
+      <b>关键配置：</b><code>roseType:'radius'</code>（扇形角度等分、半径表数值）；<b>必须按数值排序</b>，否则视觉混乱；外圈标数值；红只给占比最大的一项。<br>
+      <b>慎用：</b>需要精确比较占比时不要用玫瑰图（面积感知误差大）—— 改 09 或 11。
+    </div>
+  </section>
+
+  <section class="card" id="e14">
+    <div class="card-head"><span class="idx">14</span><h2>矩形树图 Treemap</h2>
+      <span class="tag">层级占比</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c14"></div></div>
+    <div class="note">
+      <b>用在：</b>类目 10–30 个的<b>面积占比</b> —— 各产品线 / 各业务板块的收入结构、SKU 销售贡献、成本构成。<br>
+      <b>关键配置：</b>面积 = 数值；<b>同一族用同一色系深浅阶</b>（蓝系 / 红系 / 灰系各自成组，<code>data</code> 按族排列、<code>sort:'none'</code>，这样同族块会自然聚成一片）；块内标"名称 + 金额"；<b>浅色块上的文字必须换深色</b>（<code>#333333</code>），否则白字看不见；块间留 3px 白缝。<br>
+      <b>本模板的做法（踩过坑）：</b>ECharts 全展平的 treemap <b>不会渲染父节点的 <code>upperLabel</code></b>（该能力只在下钻层级 <code>leafDepth</code> 下生效），所以分组靠"同族同色"表达，<b>组名用底部色块 + 名称 + 金额做图例</b>。另外 <code>levels</code> 里<b>不能同时写 <code>color</code> 数组和 <code>colorSaturation</code></b>，会抛 <code>e.charAt is not a function</code> 导致整图空白 —— 颜色一律写在节点的 <code>itemStyle.color</code> 上。<br>
+      <b>慎用：</b>类目 ≤ 6 个时用饼图 / 条形更直观；需要看趋势变化 → 08。
+    </div>
+  </section>
+
+  <section class="card" id="e15">
+    <div class="card-head"><span class="idx">15</span><h2>旭日图 Sunburst</h2>
+      <span class="tag">二级下钻构成</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c15"></div></div>
+    <div class="note">
+      <b>用在：</b>明确的两层归属关系且要同时读内外圈 —— 区域 → 城市、事业部 → 产线、渠道 → 门店。<br>
+      <b>关键配置：</b>内圈 = 一级（总额）、外圈 = 二级；<b>内外圈同族同色相</b>（内深外浅），一眼看出归属；外圈标占比、内圈标名称 + 合计。<br>
+      <b>慎用：</b>层数 ≥ 3 时外圈会细如发丝 —— 经营分析只用 <b>2 层</b>，第 3 层改用 14 或下钻页。
+    </div>
+  </section>
+
+  <div class="group-title" id="gD">D · 拆解与归因 <span>从哪儿来的差异、谁的责任 —— 回答"为什么没达成"</span></div>
+
+  <section class="card" id="e16">
+    <div class="card-head"><span class="idx">16</span><h2>瀑布图（增减归因）</h2>
+      <span class="tag">差异拆解 / 归因</span><span class="spec">1120×700 · 建议通栏</span></div>
+    <div class="card-body"><div class="chart" id="c16"></div></div>
+    <div class="note">
+      <b>用在：</b>从起点走到终点，中间的<b>每一项各贡献多少</b> —— 预算 → 实际的差异归因、上季度 → 本季度的利润变化、客户数净增的加减拆解。<b>经营分析最有说服力的一张图。</b><br>
+      <b>关键配置：</b>用<b>两个 series 堆叠</b>实现：底层透明柱（<code>itemStyle.opacity:0</code>）做托举、上层可见柱表增减；<b>首尾两根是"总值"柱（红），中间是增减柱</b>（增 = 蓝 <code>#006393</code>、减 = 灰 <code>#A3A3A3</code>）；增减柱之间画 1px 虚线连接（<code>markLine</code> 或自定义）；<b>每根柱直接标数值 + 正负号</b>。<br>
+      <b>慎用：</b>增减项超过 7 个时归并成"其他"；终点必须等于起点 + 各项代数和，<b>算不平就不要画</b>。
+    </div>
+  </section>
+
+  <section class="card" id="e17">
+    <div class="card-head"><span class="idx">17</span><h2>帕累托图（ABC 分析）</h2>
+      <span class="tag">80/20 关键少数</span><span class="spec">1120×700 · 建议通栏</span></div>
+    <div class="card-body"><div class="chart" id="c17"></div></div>
+    <div class="note">
+      <b>用在：</b>找<b>关键少数</b> —— 哪些 20% 的产品贡献了 80% 的收入、哪些客户是利润主力、缺陷类型按影响排序。<br>
+      <b>关键配置：</b>柱 = 各项金额<b>降序</b>（蓝灰阶），折线 = 累计占比（红，右轴 0–100%）；<b>必须画 80% 水平参考虚线</b>，并标出与折线交点对应的类目数（如"前 3 项占 80%"）；右轴 <code>max:100, formatter:'{value}%'</code>。<br>
+      <b>慎用：</b>类目 ≥ 15 时横轴挤 → 只保留前 10 + "其他"；折线务必从 0 起、末点收在 100%。
+    </div>
+  </section>
+
+  <section class="card" id="e18">
+    <div class="card-head"><span class="idx">18</span><h2>双向贡献条形图</h2>
+      <span class="tag">正负贡献 / 增量来源</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c18"></div></div>
+    <div class="note">
+      <b>用在：</b>各单元的<b>增量贡献有正有负</b> —— 区域净增、品类同比增减、分公司缺口与超额。<br>
+      <b>关键配置：</b>类目轴放中间、值为 0 的竖直基准线；正向条向红/蓝（增长）、负向条向灰（拖累）；<b>条末标数值 + 正负号</b>；按数值大小排序（正的在上、负的在下）。<br>
+      <b>慎用：</b>全部同号时不要用双向图（左半边全空）—— 改 09 横向条形。
+    </div>
+  </section>
+
+  <section class="card" id="e19">
+    <div class="card-head"><span class="idx">19</span><h2>桑基流向图</h2>
+      <span class="tag">流向 / 资源分配</span><span class="spec">1120×700 · 建议通栏</span></div>
+    <div class="card-body"><div class="chart" id="c19"></div></div>
+    <div class="note">
+      <b>用在：</b>资源 / 客户 / 资金在<b>多个环节之间流动</b> —— 预算分配到各渠道再落到各业务、客户从获客渠道流向留存/流失、订单从品类流向区域。<br>
+      <b>关键配置：</b>3 层最多（源 → 中转 → 结果）；节点按数值降序排列、<b>线宽 = 流量</b>；节点用红（结论层）/蓝（中间层）/灰阶；<b>线用 0.35 透明度</b>，交叉线不得遮挡标签。<br>
+      <b>慎用：</b>节点 ≥ 15 时会糊成一团 —— 归并小节点为"其他"；单向线性关系用 12 Chevron 更清楚。
+    </div>
+  </section>
+
+  <div class="group-title" id="gE">E · 关联与分布 <span>两组变量的关系、数据的离散程度 —— 回答"它们有关系吗、波动大不大"</span></div>
+
+  <section class="card" id="e20">
+    <div class="card-head"><span class="idx">20</span><h2>散点图 + 回归趋势线</h2>
+      <span class="tag">相关性 / 投入产出</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c20"></div></div>
+    <div class="note">
+      <b>用在：</b>验证两个指标是否"同向走" —— 广告投入 vs 销售产出、促销力度 vs 客单价、单价 vs 销量。<br>
+      <b>关键配置：</b>一轴一个指标、<b>两轴都要标单位</b>；散点用灰色小圆（<code>symbolSize:10</code>、透明度 0.6）；<b>趋势线单独一个 line series</b>（红 2px 虚线）；<b>务必标出 R² 或相关系数</b>，并说明"相关不等于因果"。<br>
+      <b>慎用：</b>样本 &lt; 8 个时不要画趋势线；有异常点要单独标出（<code>markPoint</code>）。
+    </div>
+  </section>
+
+  <section class="card" id="e21">
+    <div class="card-head"><span class="idx">21</span><h2>气泡图（三变量）</h2>
+      <span class="tag">三变量定位</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c21"></div></div>
+    <div class="note">
+      <b>用在：</b>一张图看<b>三个变量</b> —— X 轴增长率、Y 轴毛利率、气泡大小营收规模。"哪些业务又大又快又赚"一目了然。<br>
+      <b>关键配置：</b>气泡 <code>symbolSize</code> 按数值线性映射（<b>半径映射，不是面积，需在注释说明</b>）；<b>每个气泡直接标名称</b>；用四分位参考线（<code>markLine</code> 两条中线）切成四个象限，象限注释放四角。<br>
+      <b>慎用：</b>气泡 ≥ 12 个必然重叠 —— 控制在 <b>6–10 个</b>；气泡之间大小差异不要超过 5 倍。
+    </div>
+  </section>
+
+  <section class="card" id="e22">
+    <div class="card-head"><span class="idx">22</span><h2>箱线图（分布 / 波动）</h2>
+      <span class="tag">分布 / 稳定性</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c22"></div></div>
+    <div class="note">
+      <b>用在：</b>看<b>波动与稳定性</b>，而不是看平均值 —— 各区域月度达成率的离散度、各门店日均销量分布、指标的一致性对比。<br>
+      <b>关键配置：</b>一个类目一箱 = 五数概括（最小 / Q1 / 中位 / Q3 / 最大）；<b>中位线走红</b>（这是"典型水平"）；异常点用灰点单独画（<code>type:'scatter'</code>）；轴标签注明单位与周期。<br>
+      <b>慎用：</b>样本 &lt; 8 个时箱线没有统计意义 → 直接画个体点（散点/条形）。汇报对象没听过箱线图时，<b>务必在图注里解释五条线的含义</b>。
+    </div>
+  </section>
+
+  <section class="card" id="e23">
+    <div class="card-head"><span class="idx">23</span><h2>热力矩阵</h2>
+      <span class="tag">二维交叉 / 密度</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c23"></div></div>
+    <div class="note">
+      <b>用在：</b>两个维度交叉后看<b>密度或水平</b> —— 品类 × 星期的销量强度、区域 × 月份的达成率、时段 × 门店的客流。<br>
+      <b>关键配置：</b>色阶用<b>同一色相 4–5 阶</b>（浅红 → 深红，或浅蓝 → 深蓝），<code>visualMap</code> 放右侧竖向、显式标出数值范围；<b>格内标数值</b>（格够大时）；格间用 2px 白缝。<br>
+      <b>慎用：</b><b>禁止用彩虹色阶</b>（红黄绿蓝），那是 Heatmap 最典型的错误；两个维度的类目数都 ≥ 15 时格子会读不清。
+    </div>
+  </section>
+
+  <div class="group-title" id="gF">F · 效率与目标 <span>转化 · 达成 · 进度 —— 回答"离目标还差多少"</span></div>
+
+  <section class="card" id="e24">
+    <div class="card-head"><span class="idx">24</span><h2>转化漏斗图</h2>
+      <span class="tag">转化率 / 环节流失</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c24"></div></div>
+    <div class="note">
+      <b>用在：</b>有<b>明确先后顺序</b>的环节逐级流失 —— 曝光 → 访问 → 加购 → 下单 → 支付；线索 → 商机 → 报价 → 成交。<br>
+      <b>关键配置：</b><code>sort:'descending'</code>；<b>每层标"绝对值 + 本级转化率 + 累计转化率"</b>（三者缺一，读者会算错）；层间距 <code>gap:4</code>；<b>瓶颈环节单独走红</b>（转化率最低那一跳）。<br>
+      <b>慎用：</b>环节之间<b>没有先后关系</b>时不要用漏斗（例如"构成"类）—— 那是 11 的活。漏斗的层数控制在 <b>4–6 层</b>。
+    </div>
+  </section>
+
+  <section class="card" id="e25">
+    <div class="card-head"><span class="idx">25</span><h2>仪表盘（达成率）</h2>
+      <span class="tag">KPI 达成</span><span class="spec">1120×700 · 常与 KPI 卡并置</span></div>
+    <div class="card-body"><div class="chart" id="c25"></div></div>
+    <div class="note">
+      <b>用在：</b>单个核心 KPI 的<b>目标达成进度</b> —— 年度营收完成 108%、生产计划达成 96%、客户满意度 4.6/5。<br>
+      <b>关键配置：</b>半环（<code>startAngle:180, endAngle:0</code>）；<b>100% 位置必须有显式刻度标记</b>，否则看不出"超了还是欠了"；<code>axisLine.lineStyle.color</code> 用分段色：未达成段灰、达成段红；指针细窄（<code>width:6</code>）；中心数字 48px。<br>
+      <b>慎用：</b><b>一页最多一个仪表盘</b>；多个 KPI 用 26 进度条组或 17 KPI 大数字条。仪表盘只表"一个数对一个目标"，不要塞多个指针。
+    </div>
+  </section>
+
+  <section class="card" id="e26">
+    <div class="card-head"><span class="idx">26</span><h2>进度条组（多 KPI 完成率）</h2>
+      <span class="tag">多项 KPI 进度</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c26"></div></div>
+    <div class="note">
+      <b>用在：</b><b>6–10 个 KPI 的完成率横向并列</b> —— 各部门目标完成度盘点、重点项目进度总览。比一排仪表盘干净得多。<br>
+      <b>关键配置：</b>横向条形 + <code>showBackground:true</code>（浅灰底槽 = 目标 100%）；<b>条长 = 完成率</b>，100% 刻度用红色竖直标线贯穿全图（<code>markLine</code>）；<b>超额部分用红色、未达成用蓝色</b>，条末标百分比；按完成率降序排列。<br>
+      <b>慎用：</b>KPI 的口径 / 单位不一致时，不要把百分比强行并排（会掩盖口径差异），需在图注中列明口径。
+    </div>
+  </section>
+
+  <div class="group-title" id="gG">G · 多维与关系 <span>多指标综合、主体之间的联系 —— 回答"综合来看怎么样"</span></div>
+
+  <section class="card" id="e27">
+    <div class="card-head"><span class="idx">27</span><h2>雷达图（多维对比）</h2>
+      <span class="tag">多维能力 / 综合评分</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c27"></div></div>
+    <div class="note">
+      <b>用在：</b><b>4–8 个维度</b>的综合画像与对比 —— 六个能力维度上"我司 vs 竞品"、"本季度 vs 上季度"、"三家分公司"。<br>
+      <b>关键配置：</b>维度 <b>4–8 个</b>（5–6 最舒服）；<b>所有维度先归一化到同一量纲</b>（0–100 或相对指数），否则形状无意义；当前态走红（面积填充 0.12 透明度）、对照态走灰虚线；<b>各维度名旁标出实际值</b>；<code>splitLine</code> 用浅灰、<code>axisLine</code> 收敛在圆心。<br>
+      <b>慎用：</b>维度 &gt; 8 或各维度量纲差异巨大时不要用雷达 —— 改 02 矩阵网格 / 23 热力矩阵。雷达的<b>面积不代表任何总量</b>，务必防止误读。
+    </div>
+  </section>
+
+  <section class="card" id="e28">
+    <div class="card-head"><span class="idx">28</span><h2>关系网络图（Graph）</h2>
+      <span class="tag">主体关系 / 结构</span><span class="spec">1120×700</span></div>
+    <div class="card-body"><div class="chart" id="c28"></div></div>
+    <div class="note">
+      <b>用在：</b>经营要素之间的<b>连接关系</b> —— 业务板块之间的收入依赖、客户与产品的交叉覆盖、供应链上下游关系、组织与指标的挂接。<br>
+      <b>关键配置：</b><code>layout:'force'</code> + <code>repulsion</code> 拉开距离；<b>节点大小 = 权重</b>、<b>核心节点走红</b>；连线粗细 = 关系强度、透明度 0.35；<b>节点标签必须全部可见</b>（<code>label.show:true</code>），必要时只标重点节点。<br>
+      <b>慎用：</b>节点 ≥ 20 时成"毛线球"—— 只画核心节点 + 一层关联；<b>层级关系用 14 树图 / 15 旭日图更准确</b>，力导向图只适合表达"网状、无层级"的关系。
+    </div>
+  </section>
+
+  <div class="group-title" id="gX">使用口诀 <span>选图只问三句话</span></div>
+  <div class="card">
+    <div class="note" style="border-left:3px solid #CC0000;margin-top:0;font-size:14px;line-height:2">
+      <b>第一句 —— 我有几个变量？</b><br>
+      1 个（一个指标随时间走）→ <b>01 / 02 / 03 / 05</b>；&nbsp;2 个（规模 + 速度）→ <b>04</b>；&nbsp;1 个类目 + 1 个数值 → <b>06–13</b>；&nbsp;2 个数值 → <b>20</b>；&nbsp;3 个数值 → <b>21</b>；&nbsp;2 个维度交叉 → <b>23</b>；&nbsp;4–8 个维度 → <b>27</b>。<br><br>
+      <b>第二句 —— 我要读者记住什么？</b><br>
+      "在涨" → <b>01</b>；&nbsp;"结构在变" → <b>02 / 08</b>；&nbsp;"谁第一" → <b>09</b>；&nbsp;"大头是谁" → <b>11 / 12</b>；&nbsp;"为什么差" → <b>16</b>；&nbsp;"关键少数" → <b>17</b>；&nbsp;"卡在哪" → <b>24</b>；&nbsp;"到没到" → <b>25 / 26</b>。<br><br>
+      <b>第三句 —— 这个选择有什么风险？</b><br>
+      读者能否<b>在 5 秒内</b>从这张图里读出一个结论？读不出 → 换图或拆成两页。图再漂亮，读不出结论就是装饰。
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* =========================================================================
+   经营分析 · ECharts 图表模板库 v1
+   配色与《图表模板库.html》一致：红 #CC0000 / 蓝 #006393 / 深灰 #333333 / 灰 #A3A3A3
+   规则：Flat（无渐变/阴影/3D）· 红只有一处 · 字号 16px · 类目 ≤ 6 或 ≤ 10
+   ========================================================================= */
+(function(){
+'use strict';
+
+/* ---------- 0. 基础变量与工具 ---------- */
+var C = {
+  red:'#CC0000', blue:'#006393', ink:'#333333', gray:'#A3A3A3',
+  g1:'#D9D9D9', g2:'#C4C4C4', lgray:'#F5F5F5', hl:'#FFF2F2',
+  line:'#CCCCCC', hair:'#EEEEEE', axis:'#666666', soft:'#777777',
+  redSoft:'#FBE9E9', redMid:'#E06666', blueMid:'#4A93B0', blueSoft:'#DCEBF2'
+};
+var FONT = '"PingFang SC","Microsoft YaHei","Hiragino Sans GB",Arial,sans-serif';
+var PAL  = [C.red, C.blue, C.ink, C.gray, C.redMid, C.blueMid, '#7F7F7F', C.g1];
+
+var MONTHS = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+var REV24  = [820,764,918,886,995,1052,978,1124,1186,1252,1310,1428];
+var REV23  = [702,688,776,802,861,904,876,948,1010,1076,1122,1198];
+var HW = [380,352,420,408,455,478,442,506,532,560,586,640];
+var SW = [268,252,306,296,332,352,326,372,394,418,436,474];
+var SV = [172,160,192,182,208,222,210,246,260,274,288,314];
+
+function TIP(trig, extra){
+  return Object.assign({
+    trigger: trig || 'axis',
+    backgroundColor:'#FFFFFF', borderColor:'#DDDDDD', borderWidth:1,
+    padding:[10,14], confine:true,
+    textStyle:{ color:C.ink, fontSize:15, fontFamily:FONT },
+    extraCssText:'border-radius:2px;box-shadow:none;'
+  }, extra || {});
+}
+function SHADOW_TIP(){
+  return TIP('axis', { axisPointer:{ type:'shadow', shadowStyle:{ color:'rgba(0,0,0,0.04)' } } });
+}
+function GRID(l, r, t, b){
+  return { left:l===undefined?24:l, right:r===undefined?24:r,
+           top:t===undefined?76:t, bottom:b===undefined?18:b, containLabel:true };
+}
+function AXCAT(d, extra){
+  return Object.assign({
+    type:'category', data:d, boundaryGap:true,
+    axisLine:{ lineStyle:{ color:C.line, width:1 } },
+    axisTick:{ show:false },
+    axisLabel:{ color:C.axis, fontSize:16, fontFamily:FONT, margin:12 }
+  }, extra || {});
+}
+function AXCATY(d, extra){
+  return Object.assign({
+    type:'category', data:d,
+    axisLine:{ lineStyle:{ color:C.line, width:1 } },
+    axisTick:{ show:false },
+    axisLabel:{ color:C.axis, fontSize:16, fontFamily:FONT, margin:12 }
+  }, extra || {});
+}
+function AXVAL(nm, fmt, extra){
+  return Object.assign({
+    type:'value', name:nm||'',
+    nameTextStyle:{ color:C.gray, fontSize:14, fontFamily:FONT, padding:[0,0,10,0] },
+    axisLine:{ show:false }, axisTick:{ show:false },
+    axisLabel:{ color:C.axis, fontSize:16, fontFamily:FONT, formatter:fmt||'{value}' },
+    splitLine:{ lineStyle:{ color:C.hair, type:'dashed' } }
+  }, extra || {});
+}
+function LEG(d, extra){
+  return Object.assign({
+    data:d, top:6, right:8, icon:'rect', itemWidth:15, itemHeight:10, itemGap:24,
+    textStyle:{ color:C.axis, fontSize:16, fontFamily:FONT }
+  }, extra || {});
+}
+/* 千分位 */
+function K(v){ return (v===null||v===undefined||v==='') ? '' : Number(v).toLocaleString('en-US'); }
+function PCT(part, whole){ return (part/whole*100).toFixed(1); }
+
+/* ---------- 1. 趋势与增长 ---------- */
+
+/* 01 趋势折线 —— 主指标红实线 + 同期灰虚线 + 均值参考线 */
+function c01(){
+  return {
+    tooltip: TIP('axis'),
+    legend: LEG(['2024 年（本期）','2023 年（同期）']),
+    grid: GRID(16, 28, 86, 18),
+    xAxis: AXCAT(MONTHS),
+    yAxis: AXVAL('营收（万元）'),
+    series: [
+      { name:'2024 年（本期）', type:'line', data:REV24, smooth:false,
+        symbol:'circle', symbolSize:8, z:5,
+        lineStyle:{ width:3.5, color:C.red },
+        itemStyle:{ color:C.red, borderColor:'#FFF', borderWidth:2 },
+        areaStyle:{ color:C.redSoft },
+        markLine:{ silent:true, symbol:'none',
+          data:[{ type:'average', name:'本期均值' }],
+          lineStyle:{ color:C.blue, type:'dashed', width:2 },
+          label:{ formatter:'本期均值 '+K(Math.round(REV24.reduce(function(a,b){return a+b;},0)/12))+' 万元',
+                  color:C.blue, fontSize:14, position:'insideStartTop' } } },
+      { name:'2023 年（同期）', type:'line', data:REV23, z:3,
+        symbol:'circle', symbolSize:6,
+        lineStyle:{ width:2, color:C.gray, type:'dashed' },
+        itemStyle:{ color:C.gray } }
+    ]
+  };
+}
+
+/* 02 堆叠面积 —— 三层，增长最快的服务层走红 */
+function c02(){
+  return {
+    tooltip: TIP('axis'),
+    legend: LEG(['硬件（基础盘）','软件（稳定层）','服务（增长极）']),
+    grid: GRID(16, 28, 86, 18),
+    xAxis: AXCAT(MONTHS),
+    yAxis: AXVAL('营收（万元）'),
+    series: [
+      { name:'硬件（基础盘）', type:'line', stack:'a', data:HW, symbol:'none',
+        lineStyle:{ width:2, color:C.blue }, itemStyle:{ color:C.blue },
+        areaStyle:{ color:C.blue, opacity:0.9 } },
+      { name:'软件（稳定层）', type:'line', stack:'a', data:SW, symbol:'none',
+        lineStyle:{ width:2, color:C.gray }, itemStyle:{ color:C.gray },
+        areaStyle:{ color:C.gray, opacity:0.9 } },
+      { name:'服务（增长极）', type:'line', stack:'a', data:SV, symbol:'none',
+        lineStyle:{ width:2, color:C.red }, itemStyle:{ color:C.red },
+        areaStyle:{ color:C.red, opacity:0.9 },
+        label:{ show:true, position:'top', fontSize:15, fontWeight:'bold', color:C.red,
+                formatter:function(p){ return p.dataIndex===11 ? '服务 314' : ''; } } }
+    ]
+  };
+}
+
+/* 03 实际 vs 预测 —— 8 月为衔接点，预测区灰底 */
+function c03(){
+  var ACT  = [820,764,918,886,995,1052,978,1124];
+  var PRED = [null,null,null,null,null,null,null,1124,1206,1268,1332,1404];
+  var JOIN = ACT.concat([null,null,null,null]);
+  return {
+    tooltip: TIP('axis'),
+    legend: LEG(['实际完成','滚动预测']),
+    grid: GRID(16, 28, 86, 18),
+    xAxis: AXCAT(MONTHS),
+    yAxis: AXVAL('营收（万元）'),
+    series: [
+      { name:'滚动预测', type:'line', data:PRED, z:4,
+        symbol:'circle', symbolSize:7,
+        lineStyle:{ width:3, color:C.gray, type:'dashed' },
+        itemStyle:{ color:C.gray },
+        label:{ show:true, position:'top', fontSize:15, color:C.axis,
+          formatter:function(p){ return p.dataIndex>=9 ? K(p.value) : ''; } },
+        markArea:{ silent:true,
+          itemStyle:{ color:C.lgray },
+          label:{ show:true, color:C.gray, fontSize:15, fontFamily:FONT, position:'insideTop' },
+          data:[[{ xAxis:'9月', name:'预测区间' },{ xAxis:'12月' }]] } },
+      { name:'实际完成', type:'line', data:JOIN, z:5,
+        symbol:'circle', symbolSize:8,
+        lineStyle:{ width:3.5, color:C.red },
+        itemStyle:{ color:C.red, borderColor:'#FFF', borderWidth:2 },
+        areaStyle:{ color:C.redSoft },
+        markLine:{ silent:true, symbol:'none',
+          data:[{ type:'average' }],
+          lineStyle:{ color:C.blue, type:'dashed', width:2 },
+          label:{ formatter:'1–8 月均值 '+K(Math.round(ACT.reduce(function(a,b){return a+b;},0)/8))+' 万元',
+                  color:C.blue, fontSize:14, position:'insideStartTop' } } }
+    ]
+  };
+}
+
+/* 04 双轴折柱 —— 柱=规模（蓝/灰），线=增长率（红） */
+function c04(){
+  var Q   = ['Q1','Q2','Q3','Q4'];
+  var cu  = [2502,2933,3288,3990];
+  var ly  = [2166,2567,2834,3396];
+  var gr  = [15.5,14.3,16.0,17.5];
+  return {
+    tooltip: SHADOW_TIP(),
+    legend: LEG(['本期营收','同期营收','同比增长率']),
+    grid: GRID(16, 56, 86, 18),
+    xAxis: AXCAT(Q, { axisLabel:{ color:C.axis, fontSize:17, fontFamily:FONT, margin:14 } }),
+    yAxis: [
+      AXVAL('营收（万元）'),
+      AXVAL('同比增长率', '{value}%', { min:0, max:24, splitLine:{ show:false } })
+    ],
+    series: [
+      { name:'本期营收', type:'bar', data:cu, barWidth:34, barGap:'24%',
+        itemStyle:{ color:C.blue },
+        label:{ show:true, position:'top', fontSize:15, color:C.blue, fontWeight:'bold', formatter:'{c}' } },
+      { name:'同期营收', type:'bar', data:ly, barWidth:34,
+        itemStyle:{ color:C.g2 },
+        label:{ show:true, position:'top', fontSize:15, color:C.gray, formatter:'{c}' } },
+      { name:'同比增长率', type:'line', yAxisIndex:1, data:gr, z:6,
+        symbol:'circle', symbolSize:10,
+        lineStyle:{ width:3.5, color:C.red },
+        itemStyle:{ color:C.red, borderColor:'#FFF', borderWidth:2 },
+        label:{ show:true, position:'top', fontSize:15, fontWeight:'bold', color:C.red, formatter:'{c}%' } }
+    ]
+  };
+}
+
+/* 05 阶梯折线 —— 分段规则（量档定价） */
+function c05(){
+  var B = ['0–999','1000–2999','3000–5999','6000–9999','10000–19999','≥20000'];
+  var P = [120,108,96,84,72,60];
+  return {
+    tooltip: TIP('axis'),
+    grid: GRID(16, 78, 60, 30),
+    xAxis: AXCAT(B, { axisLabel:{ color:C.axis, fontSize:16, fontFamily:FONT, margin:14 } }),
+    yAxis: AXVAL('阶梯单价（元 / 件）', '{value}', { min:40, max:145 }),
+    series: [
+      { type:'line', step:'end', data:P,
+        symbol:'circle', symbolSize:10,
+        lineStyle:{ width:3.5, color:C.red },
+        itemStyle:{ color:C.red, borderColor:'#FFF', borderWidth:2 },
+        areaStyle:{ color:C.redSoft },
+        label:{ show:true, position:'top', fontSize:16, fontWeight:'bold', color:C.ink, formatter:'{c} 元' },
+        markLine:{ silent:true, symbol:'none',
+          data:[{ xAxis:'10000–19999' }],
+          lineStyle:{ color:C.blue, type:'dashed', width:2 },
+          label:{ show:false } } }
+    ],
+    graphic:[
+      { type:'text', left:782, top:92,
+        style:{ text:'虚线 = 主力成交档位', font:FONT, fontSize:16, fontWeight:'bold', fill:C.blue } },
+      { type:'text', left:782, top:120,
+        style:{ text:'10,000–19,999 件', font:FONT, fontSize:15, fill:C.gray } }
+    ]
+  };
+}
+
+/* ---------- 2. 对比与排名 ---------- */
+
+/* 06 分组柱状图 —— 本期红 / 同期灰，仅 2 系列 */
+function c06(){
+  var Q = ['Q1','Q2','Q3','Q4'];
+  var cu = [2502,2933,3288,3990];
+  var ly = [2166,2567,2834,3396];
+  return {
+    tooltip: SHADOW_TIP(),
+    legend: LEG(['2024 年','2023 年']),
+    grid: GRID(16, 40, 86, 18),
+    xAxis: AXCAT(Q, { axisLabel:{ color:C.axis, fontSize:17, fontFamily:FONT, margin:14 } }),
+    yAxis: AXVAL('营收（万元）'),
+    series: [
+      { name:'2024 年', type:'bar', data:cu, barWidth:52, barGap:'26%',
+        itemStyle:{ color:C.red },
+        label:{ show:true, position:'top', fontSize:16, fontWeight:'bold', color:C.red, formatter:'{c}' } },
+      { name:'2023 年', type:'bar', data:ly, barWidth:52,
+        itemStyle:{ color:C.g2 },
+        label:{ show:true, position:'top', fontSize:16, color:C.gray, formatter:'{c}' } }
+    ]
+  };
+}
+
+/* 07 堆叠柱状图 —— 月度三线，只标顶层总量 */
+function c07(){
+  return {
+    tooltip: SHADOW_TIP(),
+    legend: LEG(['硬件','软件','服务']),
+    grid: GRID(16, 40, 86, 18),
+    xAxis: AXCAT(MONTHS),
+    yAxis: AXVAL('营收（万元）'),
+    series: [
+      { name:'硬件', type:'bar', stack:'m', data:HW, barWidth:40, itemStyle:{ color:C.blue } },
+      { name:'软件', type:'bar', stack:'m', data:SW, itemStyle:{ color:C.blueMid } },
+      { name:'服务', type:'bar', stack:'m', data:SV, itemStyle:{ color:C.gray },
+        label:{ show:true, position:'top', fontSize:15, fontWeight:'bold', color:C.ink,
+          formatter:function(p){ return K(REV24[p.dataIndex]); } } }
+    ]
+  };
+}
+
+/* 08 百分比堆叠柱 —— 结构漂移 */
+function c08(){
+  var Q  = ['Q1','Q2','Q3','Q4'];
+  var hw = [46.0,45.7,45.0,44.8];
+  var sw = [33.0,33.4,33.2,33.3];
+  var sv = [21.0,20.9,21.8,22.0];
+  return {
+    tooltip: TIP('axis', { valueFormatter:function(v){ return v+'%'; } }),
+    legend: LEG(['硬件','软件','服务']),
+    grid: GRID(16, 40, 86, 18),
+    xAxis: AXCAT(Q, { axisLabel:{ color:C.axis, fontSize:17, fontFamily:FONT, margin:14 } }),
+    yAxis: AXVAL('占比', '{value}%', { max:100 }),
+    series: [
+      { name:'硬件', type:'bar', stack:'p', data:hw, barWidth:76, itemStyle:{ color:C.g2 },
+        label:{ show:true, position:'inside', fontSize:16, color:C.ink, fontWeight:'bold', formatter:'{c}%' } },
+      { name:'软件', type:'bar', stack:'p', data:sw, itemStyle:{ color:C.blue },
+        label:{ show:true, position:'inside', fontSize:16, color:'#FFF', fontWeight:'bold', formatter:'{c}%' } },
+      { name:'服务', type:'bar', stack:'p', data:sv, itemStyle:{ color:C.red },
+        label:{ show:true, position:'inside', fontSize:16, color:'#FFF', fontWeight:'bold', formatter:'{c}%' } }
+    ]
+  };
+}
+
+/* 09 横向条形排名 —— TOP10，第一名走红 */
+function c09(){
+  var D = [['智能终端',3280],['企业软件',2940],['云服务',2160],['数据平台',1870],
+           ['运维外包',1420],['咨询服务',1180],['硬件配件',960],['培训服务',720],
+           ['定制开发',640],['其他',380]];
+  D.sort(function(a,b){ return b[1]-a[1]; });
+  return {
+    tooltip: TIP('item', { formatter:'{b}<br/>销售额 {c} 万元' }),
+    grid: GRID(16, 96, 24, 16),
+    xAxis: AXVAL('销售额（万元）', '{value}', { splitLine:{ lineStyle:{ color:C.hair, type:'dashed' } } }),
+    yAxis: AXCATY(D.map(function(d){ return d[0]; }), { inverse:true }),
+    series: [
+      { type:'bar', barWidth:26,
+        data:D.map(function(d,i){
+          return { value:d[1], itemStyle:{ color: i===0 ? C.red : (i<=2 ? C.blue : C.gray) } };
+        }),
+        label:{ show:true, position:'right', fontSize:16, fontWeight:'bold', color:C.ink, formatter:'{c}' } }
+    ]
+  };
+}
+
+/* 10 极坐标柱（玉珏）—— 24h 订单分布，峰值走红 */
+function c10(){
+  var H = ['00-02','02-04','04-06','06-08','08-10','10-12','12-14','14-16','16-18','18-20','20-22','22-24'];
+  var V = [42,18,16,86,246,318,208,168,362,288,196,124];
+  var mx = Math.max.apply(null, V);
+  return {
+    tooltip: TIP('item', { formatter:'{b} 时<br/>订单 {c} 单' }),
+    polar:{ radius:['22%','74%'], center:['50%','47%'] },
+    angleAxis:{ type:'category', data:H, boundaryGap:true,
+      axisLine:{ lineStyle:{ color:C.line } }, axisTick:{ show:false },
+      axisLabel:{ color:C.axis, fontSize:15, fontFamily:FONT },
+      splitLine:{ show:true, lineStyle:{ color:C.hair } } },
+    radiusAxis:{ axisLine:{ show:false }, axisTick:{ show:false },
+      axisLabel:{ color:C.gray, fontSize:14, fontFamily:FONT },
+      splitLine:{ lineStyle:{ color:C.hair, type:'dashed' } } },
+    series: [
+      { type:'bar', coordinateSystem:'polar', barWidth:'62%',
+        data:V.map(function(v){ return { value:v, itemStyle:{ color: v===mx ? C.red : C.blue } }; }),
+        itemStyle:{ borderColor:'#FFF', borderWidth:2 },
+        label:{ show:true, position:'middle', fontSize:15, fontWeight:'bold', color:'#FFF',
+          formatter:function(p){ return p.value>=300 ? p.value : ''; } } }
+    ],
+    graphic:[
+      { type:'text', left:'center', top:'48.5%',
+        style:{ text:'峰值 16–18 时', font:FONT, fontSize:15, fontWeight:'bold', fill:C.red, textAlign:'center' } },
+      { type:'text', left:'center', top:'93%',
+        style:{ text:'峰值时段 362 单 / 2 小时，占全天 17.5%', font:FONT, fontSize:16, fontWeight:'bold', fill:C.ink, textAlign:'center' } }
+    ]
+  };
+}
+
+/* ---------- 3. 构成与占比 ---------- */
+
+/* 11 饼图 —— 5 类，主导项走红 */
+function c11(){
+  var D = [{name:'核心产品',value:42800},{name:'增值服务',value:21600},
+           {name:'代理业务',value:14200},{name:'定制开发',value:8600},
+           {name:'边缘业务',value:3800}];
+  var CO = [C.red, C.blue, C.ink, C.gray, C.g1];
+  var T = D.reduce(function(a,b){ return a+b.value; }, 0);
+  return {
+    tooltip: TIP('item', { formatter:function(p){ return p.name+'<br/>'+K(p.value)+' 万元 · '+PCT(p.value,T)+'%'; } }),
+    series: [
+      { type:'pie', radius:'70%', center:['38%','52%'], startAngle:90,
+        data:D.map(function(d,i){ return { value:d.value, name:d.name, itemStyle:{ color:CO[i] } }; }),
+        itemStyle:{ borderColor:'#FFF', borderWidth:3 },
+        label:{ show:true, fontSize:16, fontFamily:FONT, color:C.ink, lineHeight:23,
+          formatter:function(p){ return p.name+'\n'+K(p.value)+' 万元 · '+PCT(p.value,T)+'%'; } },
+        labelLine:{ length:20, length2:26, lineStyle:{ color:C.line } } }
+    ],
+    graphic:[
+      { type:'text', left:'81%', top:'30%',
+        style:{ text:'合计', font:FONT, fontSize:15, fill:C.gray } },
+      { type:'text', left:'81%', top:'35%',
+        style:{ text:K(T)+' 万元', font:FONT, fontSize:26, fontWeight:'bold', fill:C.ink } },
+      { type:'text', left:'81%', top:'42%',
+        style:{ text:'核心产品占 '+PCT(42800,T)+'%', font:FONT, fontSize:15, fill:C.red, fontWeight:'bold' } }
+    ]
+  };
+}
+
+/* 12 环形 + 中心 KPI —— 构成与总量落点 */
+function c12(){
+  var done = 14280, target = 20000;
+  return {
+    tooltip: TIP('item', { formatter:function(p){ return p.name+'<br/>'+K(p.value)+' 万元'; } }),
+    series: [
+      { type:'pie', radius:['58%','82%'], center:['50%','50%'], startAngle:90, clockwise:true,
+        data:[
+          { name:'已达成', value:done, itemStyle:{ color:C.red } },
+          { name:'剩余', value:target-done, itemStyle:{ color:C.g1 } }
+        ],
+        itemStyle:{ borderColor:'#FFF', borderWidth:3 },
+        label:{ show:false }, labelLine:{ show:false } }
+    ],
+    graphic:[
+      { type:'text', left:'center', top:'38%',
+        style:{ text:K(done), font:FONT, fontSize:54, fontWeight:'bold', fill:C.red, textAlign:'center' } },
+      { type:'text', left:'center', top:'49%',
+        style:{ text:'万元 · 累计营收（1–8 月）', font:FONT, fontSize:16, fill:C.gray, textAlign:'center' } },
+      { type:'text', left:'center', top:'56%',
+        style:{ text:'年度目标 '+K(target)+' 万元　达成 '+PCT(done,target)+'%',
+                font:FONT, fontSize:17, fontWeight:'bold', fill:C.ink, textAlign:'center' } }
+    ]
+  };
+}
+
+/* 13 玫瑰图 —— 6 类渠道，最大项走红 */
+function c13(){
+  var D = [['线上直营',3860],['经销商',3240],['大客户',2480],
+           ['电商平台',1960],['海外代理',1240],['其他渠道',680]];
+  D.sort(function(a,b){ return b[1]-a[1]; });
+  var CO = [C.red, C.blue, C.blueMid, C.ink, C.gray, C.g1];
+  var T = D.reduce(function(a,b){ return a+b[1]; }, 0);
+  return {
+    tooltip: TIP('item', { formatter:function(p){ return p.name+'<br/>客户 '+K(p.value)+' 家 · '+PCT(p.value,T)+'%'; } }),
+    series: [
+      { type:'pie', roseType:'radius', radius:['16%','80%'], center:['50%','52%'],
+        data:D.map(function(d,i){ return { value:d[1], name:d[0], itemStyle:{ color:CO[i] } }; }),
+        itemStyle:{ borderColor:'#FFF', borderWidth:3 },
+        label:{ show:true, fontSize:15, fontFamily:FONT, color:C.ink, lineHeight:22,
+          formatter:function(p){ return p.name+'\n'+K(p.value)+' 家'; } },
+        labelLine:{ length:16, length2:22, lineStyle:{ color:C.line } } }
+    ]
+  };
+}
+
+/* 14 矩形树图 —— 单层平铺 + 色族分区 + 底部图例
+   两点经验：① 全展平的 treemap 不会显示父节点的 upperLabel（该能力只在下钻层级 leafDepth 下生效），
+   所以分组靠"同族同色 + data 按族排列"来表达，组名放底部图例；
+   ② levels 内不得写 color / colorSaturation（数组与色彩饱和度混用会抛 e.charAt is not a function），
+   颜色一律写在节点的 itemStyle.color 上。 */
+function c14(){
+  function leaf(name, value, color, labColor){
+    return { name:name, value:value, itemStyle:{ color:color }, label:{ color: labColor || '#FFFFFF' } };
+  }
+  var data = [
+    leaf('智能终端',3280,'#2E7FA3'), leaf('可穿戴',1980,'#5CA3C0'),
+    leaf('配件',960,'#8ABFD4','#333333'), leaf('其他硬件',600,'#B4D7E4','#333333'),
+    leaf('企业软件',2940,'#E06666'), leaf('云服务',2160,'#EFA0A0','#333333'),
+    leaf('数据平台',1870,'#B8B8B8','#333333'), leaf('运维外包',1420,'#C6C6C6','#333333'),
+    leaf('咨询服务',1180,'#D2D2D2','#333333'), leaf('定制开发',640,'#DFDFDF','#333333'),
+    leaf('培训服务',380,'#EAEAEA','#333333')
+  ];
+  var LEGEND = [
+    ['智能硬件', 6820, C.blue],
+    ['软件与云', 5100, C.red],
+    ['服务业务', 5490, C.gray]
+  ];
+  var gfx = [];
+  LEGEND.forEach(function(L, i){
+    var x = 24 + i * 372;
+    gfx.push({ type:'rect', left:x, top:664, shape:{ width:13, height:13 },
+               style:{ fill:L[2] }, silent:true });
+    gfx.push({ type:'text', left:x + 22, top:661,
+               style:{ text:L[0] + '　' + K(L[1]) + ' 万元', font:FONT, fontSize:16,
+                       fill:C.ink, fontWeight:'bold' }, silent:true });
+  });
+  return {
+    color: [C.blue, C.red, C.gray],
+    tooltip: TIP('item', { formatter:function(p){ return p.name+'<br/>'+K(p.value)+' 万元'; } }),
+    series: [
+      { type:'treemap', roam:false, nodeClick:false, breadcrumb:{ show:false },
+        left:8, right:8, top:8, bottom:64,
+        sort:'none',
+        itemStyle:{ borderColor:'#FFF', borderWidth:3, gapWidth:3 },
+        label:{ show:true, fontSize:16, fontFamily:FONT, color:'#FFFFFF', lineHeight:23,
+          formatter:function(p){ return p.name+'\n'+K(p.value)+' 万元'; } },
+        data:data }
+    ],
+    graphic: gfx
+  };
+}
+
+/* 15 旭日图 —— 两层层级；二级节点必须显式上色，否则会落回 ECharts 默认彩虹色板 */
+function c15(){
+  function sub(name, value, color, labColor){
+    return { name:name, value:value, itemStyle:{ color:color }, label:{ color: labColor || '#FFFFFF' } };
+  }
+  var data = [
+    { name:'华东', value:5200, itemStyle:{ color:C.red }, children:[
+      sub('上海',2600,'#E06666'), sub('江苏',1500,'#E88A8A'), sub('浙江',1100,'#F0A8A8') ] },
+    { name:'华南', value:4100, itemStyle:{ color:C.blue }, children:[
+      sub('广东',2800,'#2E7FA3'), sub('福建',1300,'#5CA3C0') ] },
+    { name:'华北', value:3400, itemStyle:{ color:C.ink }, children:[
+      sub('北京',2200,'#5C5C5C'), sub('其他',1200,'#7A7A7A') ] },
+    { name:'西部', value:2400, itemStyle:{ color:C.g1 }, children:[
+      sub('四川',1400,'#C6C6C6','#333333'), sub('重庆',1000,'#D8D8D8','#333333') ] }
+  ];
+  var T = 15100;
+  return {
+    color: [C.red, C.blue, C.ink, C.g1],
+    tooltip: TIP('item', { formatter:function(p){ return p.name+'<br/>'+K(p.value)+' 万元'; } }),
+    series: [
+      { type:'sunburst', radius:['16%','86%'], center:['50%','52%'],
+        nodeClick:false, sort:null,
+        data:data,
+        itemStyle:{ borderColor:'#FFF', borderWidth:3 },
+        label:{ show:true, fontFamily:FONT, minAngle:8,
+          fontSize:15, color:'#FFFFFF', lineHeight:22,
+          formatter:function(p){
+            if(p.treePathInfo.length<=2) return p.name;
+            return p.name+'\n'+PCT(p.value,T)+'%';
+          } },
+        levels:[
+          { r0:'16%', r:'44%', label:{ rotate:0, color:'#FFFFFF', fontSize:16, fontWeight:'bold' } },
+          { r0:'46%', r:'86%', label:{ rotate:'tangential', color:'#FFFFFF', fontSize:15 } }
+        ] }
+    ]
+  };
+}
+/* ---------- 4. 拆解与归因 ---------- */
+
+/* 16 瀑布图 —— 用透明托举柱 + 可见增减柱实现 */
+function c16(){
+  var cats  = ['预算基线','新增客户','产品提价','客户流失','折扣让利','成本上涨','实际达成'];
+  var lift  = [0, 10000, 12400, 13260, 11940, 11300, 0];
+  var magna = [10000, 2400, 860, 1320, 640, 480, 10820];
+  var signed= [10000, 2400, 860, -1320, -640, -480, 10820];
+  var CO    = [C.red, C.blue, C.blue, C.gray, C.gray, C.gray, C.red];
+  return {
+    tooltip: TIP('axis', {
+      axisPointer:{ type:'shadow', shadowStyle:{ color:'rgba(0,0,0,0.04)' } },
+      formatter:function(ps){
+        var i = ps[0].dataIndex;
+        var head = cats[i] + '<br/>';
+        if(i===0 || i===6) return head + '金额 ' + K(signed[i]) + ' 万元';
+        return head + (signed[i]>0?'增量 +':'减量 ') + K(Math.abs(signed[i])) + ' 万元';
+      }
+    }),
+    grid: GRID(20, 28, 66, 22),
+    xAxis: AXCAT(cats, { axisLabel:{ color:C.axis, fontSize:16, fontFamily:FONT, margin:14, interval:0 } }),
+    yAxis: AXVAL('金额（万元）', '{value}', { max:16000 }),
+    series: [
+      { name:'_lift', type:'bar', stack:'w', silent:true,
+        itemStyle:{ color:'rgba(0,0,0,0)' }, emphasis:{ disabled:true }, data:lift },
+      { name:'增减', type:'bar', stack:'w', barWidth:56,
+        data:magna.map(function(v,i){ return { value:v, itemStyle:{ color:CO[i] } }; }),
+        label:{ show:true, position:'top', fontSize:16, fontWeight:'bold', color:C.ink,
+          formatter:function(p){
+            var i = p.dataIndex;
+            if(i===0 || i===6) return K(signed[i]);
+            return (signed[i]>0?'+':'−') + K(Math.abs(signed[i]));
+          } },
+        markLine:{ silent:true, symbol:'none',
+          data:[{ yAxis:10000 }],
+          lineStyle:{ color:C.gray, type:'dashed', width:2 },
+          label:{ formatter:'预算基线 10,000', color:C.gray, fontSize:14, position:'insideStartTop' } } }
+    ]
+  };
+}
+
+/* 17 帕累托图 —— 柱降序 + 累计占比线 + 80% 分界线 */
+function c17(){
+  var cats = ['产品线 A','产品线 B','产品线 C','产品线 D','产品线 E','产品线 F','产品线 G','产品线 H'];
+  var v    = [3200,2650,1840,1260,920,680,460,340];
+  var T    = v.reduce(function(a,b){ return a+b; }, 0);
+  var s = 0, cum = v.map(function(x){ s += x; return Number(PCT(s, T)); });
+  return {
+    tooltip: SHADOW_TIP(),
+    legend: LEG(['销售额','累计占比']),
+    grid: GRID(16, 64, 86, 20),
+    xAxis: AXCAT(cats, { axisLabel:{ color:C.axis, fontSize:16, fontFamily:FONT, margin:13 } }),
+    yAxis: [
+      AXVAL('销售额（万元）', '{value}'),
+      AXVAL('累计占比', '{value}%', { max:100, splitLine:{ show:false } })
+    ],
+    series: [
+      { name:'销售额', type:'bar', barWidth:46,
+        data:v.map(function(x,i){ return { value:x, itemStyle:{ color: i<3 ? C.blue : C.g2 } }; }),
+        label:{ show:true, position:'top', fontSize:15, color:C.axis, formatter:'{c}' } },
+      { name:'累计占比', type:'line', yAxisIndex:1, data:cum, z:6,
+        symbol:'circle', symbolSize:9,
+        lineStyle:{ width:3.5, color:C.red },
+        itemStyle:{ color:C.red, borderColor:'#FFF', borderWidth:2 },
+        label:{ show:true, position:'top', fontSize:15, fontWeight:'bold', color:C.red, formatter:'{c}%' },
+        markLine:{ silent:true, symbol:'none',
+          data:[{ yAxis:80 }],
+          lineStyle:{ color:C.ink, type:'dashed', width:2 },
+          label:{ formatter:'80% 分界线', color:C.ink, fontSize:14, position:'insideStartTop' } } }
+    ]
+  };
+}
+
+/* 18 双向贡献条形 —— 正负增量分列 */
+function c18(){
+  var D = [['华东',1860],['华南',1420],['西南',520],['华中',260],['西北',-320],['东北',-180]];
+  D.sort(function(a,b){ return b[1]-a[1]; });
+  var names = D.map(function(d){ return d[0]; });
+  return {
+    tooltip: SHADOW_TIP(),
+    legend: LEG(['净增','净减']),
+    grid: GRID(20, 110, 86, 18),
+    xAxis: AXVAL('净增贡献（万元）', '{value}'),
+    yAxis: AXCATY(names, { inverse:true }),
+    series: [
+      { name:'净增', type:'bar', barWidth:30,
+        data:D.map(function(d){ return d[1]>=0 ? d[1] : null; }),
+        itemStyle:{ color:C.blue },
+        label:{ show:true, position:'right', fontSize:16, fontWeight:'bold', color:C.blue, formatter:'+{c}' },
+        markLine:{ silent:true, symbol:'none', data:[{ xAxis:0 }],
+          lineStyle:{ color:C.ink, width:2 }, label:{ show:false } } },
+      { name:'净减', type:'bar', barWidth:30,
+        data:D.map(function(d){ return d[1]<0 ? d[1] : null; }),
+        itemStyle:{ color:C.gray },
+        label:{ show:true, position:'left', fontSize:16, fontWeight:'bold', color:C.gray,
+          formatter:function(p){ return '−'+Math.abs(p.value); } } }
+    ]
+  };
+}
+
+/* 19 桑基流向 —— 投入 → 转化 → 产出 */
+function c19(){
+  return {
+    tooltip: TIP('item', { formatter:function(p){
+      if(p.dataType === 'edge') return p.data.source + ' → ' + p.data.target + '<br/>' + K(p.data.value) + ' 万元';
+      return p.name;
+    } }),
+    series: [
+      { type:'sankey', left:24, right:132, top:24, bottom:24,
+        nodeWidth:20, nodeGap:26, nodeAlign:'right', draggable:false,
+        emphasis:{ focus:'adjacency' },
+        data:[
+          { name:'市场推广' },{ name:'研发投入' },{ name:'渠道补贴' },
+          { name:'线上投放' },{ name:'线下活动' },{ name:'产品能力' },
+          { name:'新增客户收入' },{ name:'存量续约收入' }
+        ],
+        links:[
+          { source:'市场推广', target:'线上投放', value:2000 },
+          { source:'市场推广', target:'线下活动', value:1600 },
+          { source:'市场推广', target:'产品能力', value:600 },
+          { source:'研发投入', target:'产品能力', value:3000 },
+          { source:'研发投入', target:'线上投放', value:800 },
+          { source:'渠道补贴', target:'线下活动', value:800 },
+          { source:'渠道补贴', target:'产品能力', value:400 },
+          { source:'渠道补贴', target:'线上投放', value:800 },
+          { source:'线上投放', target:'新增客户收入', value:2400 },
+          { source:'线上投放', target:'存量续约收入', value:1200 },
+          { source:'线下活动', target:'新增客户收入', value:1600 },
+          { source:'线下活动', target:'存量续约收入', value:800 },
+          { source:'产品能力', target:'新增客户收入', value:1200 },
+          { source:'产品能力', target:'存量续约收入', value:2800 }
+        ],
+        label:{ fontSize:16, fontFamily:FONT, color:C.ink },
+        lineStyle:{ color:'source', opacity:0.32, curveness:0.5 },
+        levels:[
+          { depth:0, itemStyle:{ color:C.ink }, lineStyle:{ opacity:0.22 } },
+          { depth:1, itemStyle:{ color:C.blue }, lineStyle:{ opacity:0.30 } },
+          { depth:2, itemStyle:{ color:C.red }, lineStyle:{ opacity:0.38 } }
+        ] }
+    ]
+  };
+}
+
+/* ---------- 5. 关联与分布 ---------- */
+
+/* 20 散点 + 回归趋势线 */
+function c20(){
+  var X = [12,15,18,20,22,25,28,30,32,35,38,40,42,45,48,50,52,55,58,60];
+  var Y = [42,49,58,62,70,78,86,94,99,110,118,124,133,139,148,156,161,170,178,185];
+  var pts = X.map(function(x,i){ return [x, Y[i]]; });
+  return {
+    tooltip: TIP('item', { formatter:function(p){
+      if(p.seriesName === '回归趋势线') return '回归趋势线';
+      return '广告投入 ' + p.value[0] + ' 万元<br/>销售产出 ' + p.value[1] + ' 万元';
+    } }),
+    legend: LEG(['样本点','回归趋势线']),
+    grid: GRID(24, 40, 86, 24),
+    xAxis: AXVAL('广告投入（万元）', '{value}', { min:6, max:66, splitLine:{ show:false } }),
+    yAxis: AXVAL('销售产出（万元）', '{value}', { min:20, max:200 }),
+    series: [
+      { name:'样本点', type:'scatter', data:pts, symbolSize:12, z:4,
+        itemStyle:{ color:C.blue, opacity:0.75 } },
+      { name:'回归趋势线', type:'line', data:[[12,44],[60,192]], symbol:'none', z:5,
+        lineStyle:{ width:3, color:C.red, type:'dashed' },
+        endLabel:{ show:true, formatter:'R² = 0.98', color:C.red, fontSize:16, fontWeight:'bold', distance:8 } }
+    ]
+  };
+}
+
+/* 21 气泡图 —— 三变量（增速 / 毛利率 / 规模） */
+function c21(){
+  var D = [
+    { name:'智能终端', v:[12, 18, 3280], c:C.blue },
+    { name:'企业软件', v:[26, 62, 2940], c:C.red },
+    { name:'云服务',   v:[48, 41, 2160], c:C.blueMid },
+    { name:'数据平台', v:[35, 55, 1870], c:C.blue },
+    { name:'运维外包', v:[-6, 24, 1420], c:C.gray }
+  ];
+  return {
+    tooltip: TIP('item', { formatter:function(p){
+      return p.name + '<br/>增速 ' + p.value[0] + '%　毛利率 ' + p.value[1] + '%<br/>规模 ' + K(p.value[2]) + ' 万元';
+    } }),
+    grid: GRID(24, 48, 76, 28),
+    xAxis: AXVAL('营收增速（%）', '{value}%', { min:-14, max:56, splitLine:{ show:false } }),
+    yAxis: AXVAL('毛利率（%）', '{value}%', { min:8, max:72 }),
+    series: [
+      { type:'scatter', data:D.map(function(d){ return { name:d.name, value:d.v, itemStyle:{ color:d.c, opacity:0.72 } }; }),
+        symbolSize:function(v){ return Math.max(30, Math.sqrt(v[2]) * 0.95); },
+        label:{ show:true, position:'top', fontSize:16, fontWeight:'bold', color:C.ink, formatter:'{b}' },
+        markLine:{ silent:true, symbol:'none',
+          data:[{ xAxis:26 }, { yAxis:41 }],
+          lineStyle:{ color:C.line, type:'dashed', width:1.5 },
+          label:{ show:false } },
+        markArea:{ silent:true, itemStyle:{ color:'#FCFCFC' },
+          label:{ show:true, color:C.gray, fontSize:15, fontFamily:FONT, position:'insideTopRight' },
+          data:[[{ xAxis:26, yAxis:41 },{ xAxis:56, yAxis:72 }]] } }
+    ],
+    graphic:[
+      { type:'text', left:76, top:'9%',
+        style:{ text:'右上象限「高增长 + 高毛利」= 优先加资源', font:FONT, fontSize:16, fontWeight:'bold', fill:C.red } }
+    ]
+  };
+}
+
+/* 22 箱线图 —— 各区域月度达成率分布 */
+function c22(){
+  var names = ['华东','华南','西南','华北','西部','东北'];
+  var box = [
+    [82, 92, 98, 106, 118],
+    [78, 88, 95, 103, 112],
+    [72, 86, 94, 102, 116],
+    [70, 84, 92, 101, 115],
+    [65, 76, 86, 94, 108],
+    [58, 72, 80, 90, 104]
+  ];
+  return {
+    tooltip: TIP('item', { formatter:function(p){
+      if(p.seriesName !== '达成率分布') return p.name;
+      var d = p.data;
+      return names[p.dataIndex] + '<br/>最高 ' + d[4] + '%<br/>Q3 ' + d[3] + '%<br/>中位 ' + d[2] +
+             '%<br/>Q1 ' + d[1] + '%<br/>最低 ' + d[0] + '%';
+    } }),
+    grid: GRID(20, 40, 60, 26),
+    xAxis: AXCAT(names, { axisLabel:{ color:C.axis, fontSize:17, fontFamily:FONT, margin:14 } }),
+    yAxis: AXVAL('月度达成率', '{value}%', { min:40, max:130 }),
+    series: [
+      { name:'达成率分布', type:'boxplot', data:box, boxWidth:[24,62], z:4,
+        itemStyle:{ color:C.blueSoft, borderColor:C.blue, borderWidth:2.5 },
+        label:{ show:true, position:'inside', fontSize:15, fontWeight:'bold', color:C.red,
+          formatter:function(p){ return '中位 '+p.data[2]; } } }
+    ],
+    graphic:[
+      { type:'text', left:'center', top:'4%',
+        style:{ text:'箱体 = 中间 50% 的月份落在这一区间；箱内红字 = 中位数',
+                font:FONT, fontSize:15, fill:C.gray } }
+    ]
+  };
+}
+
+/* 23 热力矩阵 —— 品类 × 星期 */
+function c23(){
+  var xd = ['周一','周二','周三','周四','周五','周六','周日'];
+  var yd = ['生鲜','日用','服饰','家电','美妆','母婴'];
+  var base = [86, 62, 48, 36, 52, 42];
+  var wk   = [1.00, 1.02, 1.05, 1.08, 1.24, 1.62, 1.48];
+  var rows = [];
+  var data = [];
+  for(var i=0;i<xd.length;i++){
+    for(var j=0;j<yd.length;j++){
+      var v = Math.round(base[j] * wk[i] + ((i*7 + j*3) % 9) - 4);
+      data.push([i, j, v]);
+      rows.push(v);
+    }
+  }
+  return {
+    tooltip: TIP('item', { formatter:function(p){
+      return xd[p.value[0]] + ' · ' + yd[p.value[1]] + '<br/>销售指数 ' + p.value[2];
+    } }),
+    grid: GRID(20, 100, 42, 30),
+    xAxis: AXCAT(xd, { splitArea:{ show:false }, axisLabel:{ color:C.axis, fontSize:16, fontFamily:FONT, margin:12 } }),
+    yAxis: AXCATY(yd, { splitArea:{ show:false } }),
+    visualMap:{ min:20, max:140, calculable:false, orient:'vertical',
+      right:14, top:'center', itemWidth:16, itemHeight:200,
+      text:['高','低'], textStyle:{ color:C.gray, fontSize:14, fontFamily:FONT },
+      inRange:{ color:['#FFF2F2','#F5C6C6','#E88A8A','#D24C4C','#CC0000'] } },
+    series: [
+      { type:'heatmap', data:data,
+        label:{ show:true, fontFamily:FONT,
+          formatter:function(p){ return (p.value[2] >= 92 ? '{hi|' + p.value[2] + '}' : '{lo|' + p.value[2] + '}'); },
+          rich:{ hi:{ color:'#FFFFFF', fontSize:15, fontWeight:'bold', fontFamily:FONT },
+                 lo:{ color:'#333333', fontSize:15, fontFamily:FONT } } },
+        itemStyle:{ borderColor:'#FFF', borderWidth:3 },
+        emphasis:{ itemStyle:{ borderColor:C.ink, borderWidth:2 } } }
+    ]
+  };
+}
+
+/* ---------- 6. 效率与目标 ---------- */
+
+/* 24 转化漏斗 —— 瓶颈环节走红 */
+function c24(){
+  var D = [
+    { name:'曝光', value:100000 },
+    { name:'访问', value:46000 },
+    { name:'加购', value:18400 },
+    { name:'下单', value:5600 },
+    { name:'支付', value:4200 }
+  ];
+  var BAD = 3;
+  return {
+    tooltip: TIP('item', { formatter:function(p){
+      var i = p.dataIndex;
+      var prev = i>0 ? D[i-1].value : null;
+      return D[i].name + '<br/>绝对值 ' + K(D[i].value) +
+             '<br/>本级转化 ' + (prev ? PCT(D[i].value, prev)+'%' : '—') +
+             '<br/>累计转化 ' + PCT(D[i].value, D[0].value) + '%';
+    } }),
+    series: [
+      { type:'funnel', left:'7%', right:'7%', top:30, bottom:106,
+        minSize:'44%', maxSize:'100%', sort:'none', gap:6, funnelAlign:'center',
+        itemStyle:{ borderColor:'#FFF', borderWidth:2 },
+        data:D.map(function(d,i){
+          /* 用固定色阶而不是整体降透明度：透明会把最后一层稀释到白字不可读 */
+          var CO = [C.blue, '#1E7A9E', '#3A8FAE', C.red, '#4A93B0'];
+          return { value:d.value, name:d.name, itemStyle:{ color: CO[i] } };
+        }),
+        label:{ show:true, position:'inside', fontSize:16, fontFamily:FONT, color:'#FFF', lineHeight:24,
+          formatter:function(p){
+            var i = p.dataIndex;
+            var prev = i>0 ? D[i-1].value : null;
+            return p.name + '　' + K(p.value) + '\n本级转化 ' + (prev ? PCT(p.value, prev)+'%' : '—');
+          } }
+      }
+    ],
+    graphic:[
+      { type:'text', left:'center', top:'91%',
+        style:{ text:'瓶颈在下单环节：加购 → 下单仅 '+PCT(5600,18400)+'%，全链路最低',
+                font:FONT, fontSize:17, fontWeight:'bold', fill:C.red } }
+    ]
+  };
+}
+
+/* 25 仪表盘 —— 单个 KPI 达成率 */
+function c25(){
+  return {
+    series: [
+      { type:'gauge', startAngle:180, endAngle:0, min:0, max:120,
+        center:['50%','72%'], radius:'94%',
+        axisLine:{ lineStyle:{ width:30, color:[[100/120, C.g1], [1, C.red]] } },
+        pointer:{ icon:'rect', width:9, length:'60%', offsetCenter:[0,0], itemStyle:{ color:C.ink } },
+        anchor:{ show:true, size:14, showAbove:true, itemStyle:{ color:C.ink, borderWidth:0 } },
+        axisTick:{ splitNumber:6, length:12, lineStyle:{ color:'#FFF', width:2 } },
+        splitLine:{ length:24, lineStyle:{ color:'#FFF', width:3 } },
+        axisLabel:{ distance:28, color:C.gray, fontSize:15, fontFamily:FONT,
+          formatter:function(v){ return v % 20 === 0 ? v + '%' : ''; } },
+        detail:{ offsetCenter:[0,'-26%'], fontSize:64, fontWeight:'bold', color:C.red, formatter:'{value}%' },
+        title:{ offsetCenter:[0,'16%'], fontSize:18, fontFamily:FONT, color:C.axis },
+        data:[{ value:108, name:'年度营收目标达成率' }] }
+    ],
+    graphic:[
+      { type:'text', left:'center', top:'90%',
+        style:{ text:'灰段 = 0–100% 目标区　红段 = 100–120% 超额区　指针 108% 已进入超额区',
+                font:FONT, fontSize:15, fill:C.gray, textAlign:'center' } }
+    ]
+  };
+}
+
+/* 26 进度条组 —— 多 KPI 完成率 */
+function c26(){
+  var D = [['营业收入',108],['毛利率',104],['回款额',96],['客户续约率',92],['新签合同',88],['人均产值',76]];
+  return {
+    tooltip: TIP('item', { formatter:'{b}　完成率 {c}%' }),
+    grid: GRID(20, 90, 30, 18),
+    xAxis: AXVAL('完成率（%）', '{value}%', { max:120, min:0 }),
+    yAxis: AXCATY(D.map(function(d){ return d[0]; }), { inverse:true,
+      axisLabel:{ color:C.ink, fontSize:17, fontWeight:'bold', fontFamily:FONT, margin:14 } }),
+    series: [
+      { type:'bar', barWidth:28,
+        showBackground:true, backgroundStyle:{ color:C.lgray },
+        data:D.map(function(d){ return { value:d[1], itemStyle:{ color: d[1]>=100 ? C.red : C.blue } }; }),
+        label:{ show:true, position:'right', fontSize:17, fontWeight:'bold', color:C.ink, formatter:'{c}%' },
+        markLine:{ silent:true, symbol:'none',
+          data:[{ xAxis:100 }],
+          lineStyle:{ color:C.red, width:2 },
+          label:{ formatter:'目标 100%', color:C.red, fontSize:15, position:'start' } } }
+    ]
+  };
+}
+
+/* ---------- 7. 多维与关系 ---------- */
+
+/* 27 雷达图 —— 同量纲多维对比 */
+function c27(){
+  var ind = [
+    { name:'营收规模', max:100 },
+    { name:'毛利率', max:100 },
+    { name:'客户增长', max:100 },
+    { name:'运营效率', max:100 },
+    { name:'产品质量', max:100 },
+    { name:'创新能力', max:100 }
+  ];
+  return {
+    tooltip: TIP('item'),
+    legend: LEG(['本年度','上年度'], { top:10 }),
+    radar:{ center:['50%','56%'], radius:'68%', splitNumber:4,
+      indicator:ind,
+      axisName:{ color:C.ink, fontSize:17, fontFamily:FONT, fontWeight:'bold' },
+      axisLine:{ lineStyle:{ color:C.line } },
+      splitLine:{ lineStyle:{ color:C.hair } },
+      splitArea:{ show:true, areaStyle:{ color:['#FFFFFF','#FCFCFC'] } } },
+    series: [
+      { type:'radar', symbolSize:7,
+        data:[
+          { name:'本年度', value:[86,74,68,82,90,62],
+            lineStyle:{ width:3.5, color:C.red },
+            itemStyle:{ color:C.red },
+            areaStyle:{ color:C.red, opacity:0.14 } },
+          { name:'上年度', value:[72,70,58,75,85,54],
+            lineStyle:{ width:2, color:C.gray, type:'dashed' },
+            itemStyle:{ color:C.gray },
+            areaStyle:{ color:C.gray, opacity:0.06 } }
+        ] }
+    ],
+    graphic:[
+      { type:'text', left:'center', top:'95%',
+        style:{ text:'六个维度均已归一化到 0–100 分位，形状可比较；雷达面积为相对示意，不代表总量',
+                font:FONT, fontSize:14, fill:C.gray, textAlign:'center' } }
+    ]
+  };
+}
+
+/* 28 关系网络图 —— 经营指标驱动关系 */
+function c28(){
+  var nodes = [
+    { name:'营业收入', symbolSize:64, itemStyle:{ color:C.red }, category:0 },
+    { name:'客户增长', symbolSize:48, itemStyle:{ color:C.blue }, category:1 },
+    { name:'客单价',   symbolSize:48, itemStyle:{ color:C.blue }, category:1 },
+    { name:'复购率',   symbolSize:48, itemStyle:{ color:C.blue }, category:1 },
+    { name:'市场投入', symbolSize:36, itemStyle:{ color:C.gray }, category:2 },
+    { name:'渠道覆盖', symbolSize:36, itemStyle:{ color:C.gray }, category:2 },
+    { name:'产品组合', symbolSize:36, itemStyle:{ color:C.gray }, category:2 },
+    { name:'定价策略', symbolSize:36, itemStyle:{ color:C.gray }, category:2 },
+    { name:'服务质量', symbolSize:36, itemStyle:{ color:C.gray }, category:2 },
+    { name:'客户成功', symbolSize:36, itemStyle:{ color:C.gray }, category:2 }
+  ];
+  var links = [
+    { source:'客户增长', target:'营业收入' },
+    { source:'客单价',   target:'营业收入' },
+    { source:'复购率',   target:'营业收入' },
+    { source:'市场投入', target:'客户增长' },
+    { source:'渠道覆盖', target:'客户增长' },
+    { source:'产品组合', target:'客单价' },
+    { source:'定价策略', target:'客单价' },
+    { source:'服务质量', target:'复购率' },
+    { source:'客户成功', target:'复购率' }
+  ];
+  return {
+    tooltip: TIP('item'),
+    legend: LEG(['核心指标','直接驱动','支撑要素'], { top:6, data:['核心指标','直接驱动','支撑要素'] }),
+    series: [
+      { type:'graph', layout:'force', roam:false, draggable:false,
+        left:170, right:170, top:120, bottom:96,
+        categories:[
+          { name:'核心指标', itemStyle:{ color:C.red } },
+          { name:'直接驱动', itemStyle:{ color:C.blue } },
+          { name:'支撑要素', itemStyle:{ color:C.gray } }
+        ],
+        force:{ repulsion:1500, edgeLength:[90,140], gravity:0.45, friction:0.5, layoutAnimation:false },
+        /* 标签放节点外侧 + 白色描边：节点可以画小、避免标签撑破圆形，白色描边保证压线也读得清 */
+        label:{ show:true, position:'bottom', fontSize:15, fontWeight:'bold', fontFamily:FONT,
+                color:C.ink, distance:5, textBorderColor:'#FFFFFF', textBorderWidth:3 },
+        edgeSymbol:['none','arrow'], edgeSymbolSize:8,
+        lineStyle:{ color:C.line, width:2, opacity:0.85, curveness:0.06 },
+        emphasis:{ focus:'adjacency', lineStyle:{ width:3.5, color:C.red } },
+        data:nodes, links:links }
+    ]
+  };
+}
+
+/* ---------- 8. 懒加载初始化 ---------- */
+var BUILD = {
+  c01:c01, c02:c02, c03:c03, c04:c04, c05:c05, c06:c06, c07:c07, c08:c08, c09:c09, c10:c10,
+  c11:c11, c12:c12, c13:c13, c14:c14, c15:c15, c16:c16, c17:c17, c18:c18, c19:c19, c20:c20,
+  c21:c21, c22:c22, c23:c23, c24:c24, c25:c25, c26:c26, c27:c27, c28:c28
+};
+
+/* 统一修补：value 型 x 轴的轴名默认贴在轴末端，会和最后一个刻度标签压在一起 —— 改为居中下移，
+   同时把 grid 底部空间撑到至少 46px，避免轴名被裁。所有图表在 setOption 前都会过这一道。 */
+function polish(opt){
+  var xa = opt.xAxis;
+  var list = !xa ? [] : (Array.isArray(xa) ? xa : [xa]);
+  list.forEach(function(ax){
+    if(ax && ax.type === 'value' && ax.name){
+      if(ax.nameLocation === undefined) ax.nameLocation = 'middle';
+      if(ax.nameGap === undefined) ax.nameGap = 34;
+    }
+  });
+  function bump(g){ if(g && typeof g.bottom === 'number' && g.bottom < 46) g.bottom = 46; }
+  if(opt.grid){ if(Array.isArray(opt.grid)) opt.grid.forEach(bump); else bump(opt.grid); }
+  return opt;
+}
+
+function boot(){
+  var fb = document.getElementById('fb');
+  if(!window.echarts){ if(fb) fb.style.display = 'block'; return; }
+  var els = [].slice.call(document.querySelectorAll('.chart'));
+  var made = [];
+  var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+
+  function one(el){
+    if(el.getAttribute('data-done')) return;
+    var fn = BUILD[el.id];
+    if(!fn) return;
+    var inst = echarts.init(el, null, { renderer:'canvas', devicePixelRatio:dpr });
+    inst.setOption(polish(fn()), true);
+    el.setAttribute('data-done', '1');
+    made.push(inst);
+  }
+
+  /* 默认懒加载（滚动到附近才渲染）；URL 带 ?all 或 #all 时一次性全部渲染 —— 打印 / 导出 PDF / 截图时用 */
+  var forceAll = /[?&#]all\b/.test(location.href);
+  if(!forceAll && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(ents){
+      ents.forEach(function(e){
+        if(e.isIntersecting){ one(e.target); io.unobserve(e.target); }
+      });
+    }, { rootMargin:'600px 0px' });
+    els.forEach(function(el){ io.observe(el); });
+  } else {
+    els.forEach(one);
+  }
+
+  var tm = null;
+  window.addEventListener('resize', function(){
+    clearTimeout(tm);
+    tm = setTimeout(function(){ made.forEach(function(c){ c.resize(); }); }, 200);
+  });
+}
+
+if(document.readyState === 'complete') boot();
+else window.addEventListener('load', boot);
+
+})();
+
+
+</script>
+</body>
+</html>

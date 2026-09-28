@@ -1,0 +1,417 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>唯品会（VIPS）经营分析报告 · 2025 年全年 & 2026 年 1—9 月</title><script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script><script>window.echarts||document.write('<scr'+'ipt src="https://unpkg.com/echarts@5.5.1/dist/echarts.min.js"><\/scr'+'ipt>');</script><style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:#E8E8E8;overflow:hidden;
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",Arial,sans-serif}
+#viewport{position:fixed;inset:0;overflow:hidden}
+#stage{position:absolute;top:0;left:0;width:1920px;height:1080px;transform-origin:top left}
+.slide{position:absolute;top:0;left:0;width:1920px;height:1080px;background:#FFFFFF;
+  padding:20px;display:none}
+.slide.on{display:block}
+.title-zone{height:150px;display:flex;align-items:center;justify-content:space-between}
+.title-zone h1{font-size:48px;font-weight:700;color:#333333;line-height:1.2;max-width:1400px}
+.kicker{font-size:18px;font-weight:600;color:#A3A3A3;letter-spacing:3px;white-space:nowrap}
+.rule{height:5px;background:#000000;margin:0 -20px}
+.body{position:relative;height:885px;display:flex;flex-direction:column;
+  justify-content:center;gap:44px}
+.body.plain{height:1040px}
+.summary{display:flex;gap:26px;flex:0 0 76px}
+.summary .bar{width:6px;background:#CC0000;flex:0 0 6px}
+.summary p{font-size:25px;font-weight:600;color:#333333;line-height:1.45}
+.summary p span{display:block;font-size:23px;font-weight:400;color:#777777;line-height:1.5}
+.main{display:flex;gap:60px;flex:0 0 700px}
+.main.full{flex:0 0 1040px}
+.col-text{width:700px}
+.pt{margin-bottom:34px}
+.pt .row{display:flex;align-items:center;gap:18px;margin-bottom:12px}
+.pt .ico{width:44px;height:44px;color:#CC0000;flex:0 0 44px}
+.pt h3{font-size:25px;font-weight:700;color:#333333}
+.pt p{font-size:20px;color:#777777;line-height:1.7;padding-left:62px}
+.col-figure{width:1120px;display:flex;align-items:center;justify-content:center}
+.main.wide .col-figure{width:1880px}
+.main.full .col-figure{width:1880px}
+.col-figure svg{display:block;width:100%;height:auto}
+.echart{width:1120px;height:700px}
+.echart.wide{width:1880px}
+.footer{position:absolute;left:0;bottom:0;width:1880px;display:flex;
+  justify-content:space-between;font-size:14px;color:#A3A3A3}
+#nav{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);display:flex;align-items:center;
+  gap:12px;background:rgba(255,255,255,.96);border:1px solid #DDDDDD;border-radius:999px;
+  padding:7px 16px;font-size:13px;color:#666666;z-index:99;white-space:nowrap;
+  opacity:0;transition:opacity .25s ease;pointer-events:none}
+#nav.show{opacity:1;pointer-events:auto}
+@media print{#nav{display:none !important}}
+#nav button{border:1px solid #DDDDDD;background:#FFF;border-radius:6px;width:28px;height:24px;
+  cursor:pointer;color:#666;font-size:14px;line-height:1}
+#nav button:hover{border-color:#CC0000;color:#CC0000}
+.dot{width:8px;height:8px;border-radius:50%;background:#CCCCCC;display:inline-block;margin:0 3px;
+  cursor:pointer}
+.dot.on{background:#CC0000}
+</style></head><body><svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true"><defs><symbol id="i-target" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="16"/><circle cx="24" cy="24" r="8"/><circle cx="24" cy="24" r="2.5" fill="currentColor" stroke="none"/></symbol><symbol id="i-bulb" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8a11 11 0 0 1 6 20v4H18v-4A11 11 0 0 1 24 8z"/><path d="M20 36h8"/><path d="M22 41h4"/></symbol><symbol id="i-clock" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="16"/><path d="M24 24V13"/><path d="M24 24l9 5"/></symbol><symbol id="i-code" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 15 7 24l10 9"/><path d="M31 15l10 9-10 9"/><path d="M27 12l-6 24"/></symbol><symbol id="i-loop" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 24a12 12 0 0 1 20-9"/><path d="M33 9v8h-8"/><path d="M36 24a12 12 0 0 1-20 9"/><path d="M15 39v-8h8"/></symbol><symbol id="i-grid" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="15" height="15"/><rect x="26" y="7" width="15" height="15"/><rect x="7" y="26" width="15" height="15"/><rect x="26" y="26" width="15" height="15"/></symbol><symbol id="i-check" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="16"/><path d="M16 25l6 6 11-13"/></symbol><symbol id="i-node" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="10" r="5"/><circle cx="10" cy="35" r="5"/><circle cx="38" cy="35" r="5"/><path d="M21 14l-8 16"/><path d="M27 14l8 16"/><path d="M15 35h18"/></symbol><symbol id="i-chart" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 36l11-12 8 6 15-18"/><path d="M31 12h10v10"/><path d="M7 41h34"/></symbol><symbol id="i-scale" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 8v30"/><path d="M8 15h32"/><path d="M8 15 2 27h12z"/><path d="M40 15 34 27h12z"/><path d="M16 41h16"/></symbol><symbol id="i-search" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="21" cy="21" r="12"/><path d="M30 30l11 11"/></symbol><symbol id="i-doc" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5h17l9 9v29H11z"/><path d="M28 5v9h9"/><path d="M17 24h14"/><path d="M17 32h14"/></symbol><symbol id="i-shield" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5l15 6v13c0 9-6 15-15 19-9-4-15-10-15-19V11z"/><path d="M17 24l5 5 10-11"/></symbol><symbol id="i-people" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="15" r="7"/><path d="M10 41c0-8 6-13 14-13s14 5 14 13"/></symbol><symbol id="i-step" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="31" width="12" height="11"/><rect x="18" y="21" width="12" height="21"/><rect x="30" y="11" width="12" height="31"/></symbol><symbol id="i-flag" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v38"/><path d="M12 8h22l-5 8 5 8H12z"/></symbol><symbol id="i-db" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="24" cy="12" rx="14" ry="6"/><path d="M10 12v24c0 3 6 6 14 6s14-3 14-6V12"/><path d="M10 24c0 3 6 6 14 6s14-3 14-6"/></symbol><symbol id="i-warn" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 7l17 30H7z"/><path d="M24 18v11"/><path d="M24 33v.5"/></symbol><symbol id="i-book" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 13C21 9 15 8 6 8v27c9 0 15 1 18 5 3-4 9-5 18-5V8c-9 0-15 1-18 5z"/><path d="M24 13v27"/></symbol><symbol id="i-flame" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6c6 8 12 12 12 21a12 12 0 0 1-24 0c0-9 6-13 12-21z"/><path d="M24 27c3 4 4 5 4 8a4 4 0 0 1-8 0c0-3 1-4 4-8z"/></symbol><symbol id="i-eye" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 24s8-13 20-13 20 13 20 13-8 13-20 13S4 24 4 24z"/><circle cx="24" cy="24" r="6"/></symbol><symbol id="i-compass" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="17"/><polygon points="32,16 19,20 16,32 29,28"/></symbol><symbol id="i-tree" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="20" y="5" width="8" height="7"/><rect x="4" y="34" width="9" height="7"/><rect x="20" y="34" width="9" height="7"/><rect x="35" y="34" width="9" height="7"/><path d="M24 12v10"/><path d="M8.5 34v-8h31v8"/><path d="M24.5 26v8"/></symbol><symbol id="i-globe" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="17"/><path d="M7 24h34"/><path d="M24 7c5 6 7 11 7 17s-2 11-7 17c-5-6-7-11-7-17s2-11 7-17z"/></symbol><symbol id="i-lang" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 11h19"/><path d="M15 7v4"/><path d="M20 11c0 9-7 18-15 21"/><path d="M11 17c2 6 7 11 13 14"/><path d="M26 42l8-21 8 21"/><path d="M29 35h10"/></symbol><symbol id="i-brain" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 8c-7 0-10 4-10 8-4 2-6 5-6 9s2 7 6 9c0 4 3 8 10 8V8z"/><path d="M26 8c7 0 10 4 10 8 4 2 6 5 6 9s-2 7-6 9c0 4-3 8-10 8V8z"/><path d="M12 20h6"/><path d="M30 27h6"/></symbol><symbol id="i-key" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="24" r="9"/><path d="M23 24h21"/><path d="M36 24v7"/><path d="M43 24v5"/></symbol><symbol id="i-crown" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 36 5 14l10 8 9-14 9 14 10-8-2 22z"/><path d="M7 41h34"/></symbol><symbol id="i-law" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 9v30"/><path d="M9 16h30"/><path d="M9 16 3 28h12z"/><path d="M39 16 33 28h12z"/><path d="M16 41h16"/></symbol><symbol id="i-pyramid" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 7 45 42H3z"/><path d="M24 7 24 42"/><path d="M14 29h20"/></symbol><symbol id="i-split" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6v13"/><path d="M24 19 10 33v9"/><path d="M24 19l14 14v9"/></symbol><symbol id="i-wave" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 30c6-10 10-10 16 0s10 10 16 0 8-6 8-6"/><path d="M4 40c6-8 10-8 16 0"/></symbol><symbol id="i-church" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5v34"/><path d="M14 17h20"/><path d="M9 41V27l15-9 15 9v14z"/></symbol><symbol id="i-thought" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 30a10 10 0 0 1 2-19c2-4 7-6 12-4 5-2 10 0 12 4a10 10 0 0 1 2 19z"/><path d="M17 30h14"/><circle cx="17" cy="38" r="2.6"/><circle cx="25" cy="42" r="1.8"/></symbol><symbol id="i-infinity" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 24c0-5 3-8 7-8 6 0 7 16 13 16 4 0 7-3 7-8s-3-8-7-8c-6 0-7 16-13 16-4 0-7-3-7-8z"/></symbol></defs></svg><div id="viewport"><div id="stage"><section class="slide" data-kind="cover"><main class="body plain"><div class="main full"><div class="col-figure"><svg viewBox="0 0 1880 1040" font-family="'Microsoft YaHei','PingFang SC','Hiragino Sans GB',Arial,sans-serif" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><text x="0" y="104" font-size="20" fill="#A3A3A3" font-weight="600" text-anchor="start">经 营 分 析 报 告  ·  2026 年 9 月</text><rect x="0" y="156" width="140" height="8" rx="0" fill="#CC0000"/><text x="0" y="292" font-size="76" fill="#333333" font-weight="700" text-anchor="start">唯品会（VIPS）经营分析</text><text x="0" y="362" font-size="30" fill="#777777" font-weight="400" text-anchor="start">增长承压，底盘稳固 —— 一份基于公开财务数据的经营体检</text><line x1="0" y1="444" x2="1880" y2="444" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><text x="0" y="652" font-size="54" fill="#006393" font-weight="700" text-anchor="start">1,059 亿元</text><text x="0" y="702" font-size="20" fill="#333333" font-weight="700" text-anchor="start">2025 年净营收</text><text x="0" y="734" font-size="16" fill="#A3A3A3" font-weight="400" text-anchor="start">同比 −2.3%，连续第二年下滑</text><line x1="440" y1="552" x2="440" y2="764" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><text x="480" y="652" font-size="54" fill="#006393" font-weight="700" text-anchor="start">1,000 万+</text><text x="480" y="702" font-size="20" fill="#333333" font-weight="700" text-anchor="start">活跃 SVIP 会员</text><text x="480" y="734" font-size="16" fill="#A3A3A3" font-weight="400" text-anchor="start">贡献线上销售额 54%</text><line x1="920" y1="552" x2="920" y2="764" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><text x="960" y="652" font-size="54" fill="#006393" font-weight="700" text-anchor="start">22 家</text><text x="960" y="702" font-size="20" fill="#333333" font-weight="700" text-anchor="start">自持奥莱广场</text><text x="960" y="734" font-size="16" fill="#A3A3A3" font-weight="400" text-anchor="start">自持面积超 209 万平方米</text><line x1="1400" y1="552" x2="1400" y2="764" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><text x="1440" y="652" font-size="54" fill="#006393" font-weight="700" text-anchor="start">53 个季度</text><text x="1440" y="702" font-size="20" fill="#333333" font-weight="700" text-anchor="start">连续保持盈利</text><text x="1440" y="734" font-size="16" fill="#A3A3A3" font-weight="400" text-anchor="start">2025 年经营净现金 75 亿元</text><line x1="0" y1="844" x2="1880" y2="844" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><text x="0" y="904" font-size="20" fill="#777777" font-weight="400" text-anchor="start">报告期间：2025 年全年 &amp; 2026 年 1—9 月</text><text x="0" y="940" font-size="17" fill="#A3A3A3" font-weight="400" text-anchor="start">数据来源：唯品会公开财报、公司公告与行业研究资料汇编（不构成投资建议）</text></svg></div></div></main></section><section class="slide" data-kind="content"><header class="title-zone"><h1>盈利底盘未破，增长动能待解</h1><span class="kicker">00 · EXECUTIVE SUMMARY</span></header><div class="rule"></div><main class="body"><div class="main wide"><div class="col-figure"><svg viewBox="0 0 1880 700" font-family="'Microsoft YaHei','PingFang SC','Hiragino Sans GB',Arial,sans-serif" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><text x="0" y="62" font-size="17" fill="#A3A3A3" font-weight="400" text-anchor="start">关键指标一眼看全 · 每个数字都标注口径与期间（最多 4 个）</text><rect x="0" y="108" width="440" height="400" rx="0" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/><text x="220" y="296" font-size="78" fill="#006393" font-weight="700" text-anchor="middle">1,059</text><text x="220" y="366" font-size="21" fill="#333333" font-weight="700" text-anchor="middle">亿元 · 2025 年净营收</text><text x="220" y="404" font-size="16.5" fill="#777777" font-weight="400" text-anchor="middle">同比 −2.3%，连续第二年下滑</text><line x1="60" y1="440" x2="380" y2="440" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><text x="220" y="474" font-size="14" fill="#999999" font-weight="400" text-anchor="middle">口径：2025 年全年净营收</text><rect x="480" y="108" width="440" height="400" rx="0" fill="#FFF2F2" stroke="#CC0000" stroke-width="2"/><rect x="480" y="108" width="440" height="8" rx="0" fill="#CC0000"/><text x="700" y="296" font-size="78" fill="#CC0000" font-weight="700" text-anchor="middle">54%</text><text x="700" y="366" font-size="21" fill="#CC0000" font-weight="700" text-anchor="middle">线上销售额由 SVIP 贡献</text><text x="700" y="404" font-size="16.5" fill="#777777" font-weight="400" text-anchor="middle">2026Q2，会员规模突破 1,000 万</text><line x1="540" y1="440" x2="860" y2="440" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><text x="700" y="474" font-size="14" fill="#999999" font-weight="400" text-anchor="middle">口径：SVIP 贡献的线上销售额占比</text><rect x="960" y="108" width="440" height="400" rx="0" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/><text x="1180" y="296" font-size="78" fill="#006393" font-weight="700" text-anchor="middle">22</text><text x="1180" y="366" font-size="21" fill="#333333" font-weight="700" text-anchor="middle">家 · 自持奥莱广场</text><text x="1180" y="404" font-size="16.5" fill="#777777" font-weight="400" text-anchor="middle">自持面积超 209 万㎡，2026 年目标 23 家</text><line x1="1020" y1="440" x2="1340" y2="440" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><text x="1180" y="474" font-size="14" fill="#999999" font-weight="400" text-anchor="middle">口径：2025 年末已运营奥莱广场数</text><rect x="1440" y="108" width="440" height="400" rx="0" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/><text x="1660" y="296" font-size="78" fill="#006393" font-weight="700" text-anchor="middle">8.2%</text><text x="1660" y="366" font-size="21" fill="#333333" font-weight="700" text-anchor="middle">2025 年 Non-GAAP 净利率</text><text x="1660" y="404" font-size="16.5" fill="#777777" font-weight="400" text-anchor="middle">净利润 87 亿元，连续 53 个季度盈利</text><line x1="1500" y1="440" x2="1820" y2="440" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><text x="1660" y="474" font-size="14" fill="#999999" font-weight="400" text-anchor="middle">口径：Non-GAAP 净利润 ÷ 净营收</text><rect x="0" y="556" width="6" height="84" rx="0" fill="#CC0000"/><text x="28" y="592" font-size="25" fill="#333333" font-weight="700" text-anchor="start">四个指标指向同一判断：盈利底盘未破，但增长动能正在衰减。</text><text x="28" y="626" font-size="19" fill="#777777" font-weight="400" text-anchor="start">会员与奥莱是仅有的两个确定性增量来源；营收与订单量则连续两年承压。</text><line x1="0" y1="668" x2="1880" y2="668" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><text x="0" y="692" font-size="14" fill="#999999" font-weight="400" text-anchor="start">注：净利率为 Non-GAAP 口径；SVIP 为 2026Q2 数据。</text></svg></div></div><div class="footer"><span>来源：唯品会公开财报、公司公告与行业研究资料汇编（2026 年 9 月）</span><span>02 / 16</span></div></main></section><section class="slide" data-kind="content"><header class="title-zone"><h1>大盘涨 8.6%，唯品会净营收反降 2.3%</h1><span class="kicker">01 · INDUSTRY</span></header><div class="rule"></div><main class="body"><div class="summary"><div class="bar"></div><p>行业大盘仍在增长，唯品会却已连续两年营收下滑<span>2025 年剪刀差达 10.9 个百分点 —— 增长红利并未落在传统实物电商</span></p></div><div class="main"><div class="col-text"><div class="pt"><div class="row"><svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-chart"/></svg><h3>大盘仍在增长</h3></div><p>2025 年全国网上零售额 15.97 万亿元，同比增长 8.6%<br>实物商品网上零售额同比增长 5.2%，占社零比重 26.1%</p></div><div class="pt"><div class="row"><svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-warn"/></svg><h3>唯品会逆势下滑</h3></div><p>2025 年净营收 1,059 亿元，同比下降 2.3%<br>营收连续第二年下滑，与大盘增速的剪刀差达 10.9 个百分点</p></div><div class="pt"><div class="row"><svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-search"/></svg><h3>增长红利未落到实物电商</h3></div><p>实物商品占社零比重两年来逐年下降，行业转入存量竞争<br>唯品会同时面对综合电商与内容电商的双重挤压</p></div></div><div class="col-figure"><div class="echart" id="ch3"></div></div></div><div class="footer"><span>来源：唯品会公开财报、公司公告与行业研究资料汇编（2026 年 9 月）</span><span>03 / 16</span></div></main></section><section class="slide" data-kind="content"><header class="title-zone"><h1>特卖赛道驶入深水区：三股力量同时挤压</h1><span class="kicker">02 · COMPETITION</span></header><div class="rule"></div><main class="body"><div class="summary"><div class="bar"></div><p>竞争焦点已从「有没有折扣」转向「快不快、便不便宜」<span>特卖心智的稀缺性下降，壁垒必须回到会员深度与线下资产</span></p></div><div class="main wide"><div class="col-figure"><svg viewBox="0 0 1880 700" font-family="'Microsoft YaHei','PingFang SC','Hiragino Sans GB',Arial,sans-serif" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><g transform="translate(0,27.27) scale(1.5666667)"><rect x="0" y="0" width="580" height="196" rx="0" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="1.5"/><rect x="0" y="0" width="580" height="46" rx="0" fill="#333333"/><use href="#i-grid" x="16" y="12" width="22" height="22" style="color:#FFFFFF"/><text x="48" y="30" font-size="18" fill="#FFFFFF" font-weight="700" text-anchor="start">综合电商平台</text><line x1="22" y1="71" x2="34" y2="71" stroke="#333333" stroke-width="2.5" stroke-linecap="butt"/><text x="44" y="76" font-size="15" fill="#333333" font-weight="400" text-anchor="start">淘宝「大牌奥莱」分流品牌折扣需求</text><line x1="22" y1="103" x2="34" y2="103" stroke="#333333" stroke-width="2.5" stroke-linecap="butt"/><text x="44" y="108" font-size="15" fill="#333333" font-weight="400" text-anchor="start">京东「闪购」抢占即时特卖场景</text><line x1="22" y1="135" x2="34" y2="135" stroke="#333333" stroke-width="2.5" stroke-linecap="butt"/><text x="44" y="140" font-size="15" fill="#333333" font-weight="400" text-anchor="start">拼多多「百亿补贴」压制价格带</text><line x1="22" y1="167" x2="34" y2="167" stroke="#333333" stroke-width="2.5" stroke-linecap="butt"/><text x="44" y="172" font-size="15" fill="#333333" font-weight="400" text-anchor="start">品牌折扣从差异化变成行业标配</text><rect x="620" y="0" width="580" height="196" rx="0" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="1.5"/><rect x="620" y="0" width="580" height="46" rx="0" fill="#006393"/><use href="#i-eye" x="636" y="12" width="22" height="22" style="color:#FFFFFF"/><text x="668" y="30" font-size="18" fill="#FFFFFF" font-weight="700" text-anchor="start">内容电商</text><line x1="642" y1="71" x2="654" y2="71" stroke="#006393" stroke-width="2.5" stroke-linecap="butt"/><text x="664" y="76" font-size="15" fill="#333333" font-weight="400" text-anchor="start">抖音直播间以内容即渠道切分份额</text><line x1="642" y1="103" x2="654" y2="103" stroke="#006393" stroke-width="2.5" stroke-linecap="butt"/><text x="664" y="108" font-size="15" fill="#333333" font-weight="400" text-anchor="start">快手直播间强化冲动型消费场景</text><line x1="642" y1="135" x2="654" y2="135" stroke="#006393" stroke-width="2.5" stroke-linecap="butt"/><text x="664" y="140" font-size="15" fill="#333333" font-weight="400" text-anchor="start">流量裂变效率远高于货架电商</text><line x1="642" y1="167" x2="654" y2="167" stroke="#006393" stroke-width="2.5" stroke-linecap="butt"/><text x="664" y="172" font-size="15" fill="#333333" font-weight="400" text-anchor="start">对上新与爆品节奏形成直接冲击</text><rect x="0" y="216" width="580" height="196" rx="0" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="1.5"/><rect x="0" y="216" width="580" height="46" rx="0" fill="#A3A3A3"/><use href="#i-step" x="16" y="228" width="22" height="22" style="color:#333333"/><text x="48" y="246" font-size="18" fill="#333333" font-weight="700" text-anchor="start">折扣零售新势力</text><line x1="22" y1="287" x2="34" y2="287" stroke="#A3A3A3" stroke-width="2.5" stroke-linecap="butt"/><text x="44" y="292" font-size="15" fill="#333333" font-weight="400" text-anchor="start">盒马「超盒算 NB」改造门店突破 500 家</text><line x1="22" y1="319" x2="34" y2="319" stroke="#A3A3A3" stroke-width="2.5" stroke-linecap="butt"/><text x="44" y="324" font-size="15" fill="#333333" font-weight="400" text-anchor="start">京东折扣超市拓展华北华东线下版图</text><line x1="22" y1="351" x2="34" y2="351" stroke="#A3A3A3" stroke-width="2.5" stroke-linecap="butt"/><text x="44" y="356" font-size="15" fill="#333333" font-weight="400" text-anchor="start">线下硬折扣加速布点，贴身竞争</text><line x1="22" y1="383" x2="34" y2="383" stroke="#A3A3A3" stroke-width="2.5" stroke-linecap="butt"/><text x="44" y="388" font-size="15" fill="#333333" font-weight="400" text-anchor="start">折扣赛道由「蓝海」快速驶入「深水区」</text><rect x="620" y="216" width="580" height="196" rx="0" fill="#FFF2F2" stroke="#CC0000" stroke-width="2"/><rect x="620" y="216" width="580" height="46" rx="0" fill="#CC0000"/><use href="#i-warn" x="636" y="228" width="22" height="22" style="color:#FFFFFF"/><text x="668" y="246" font-size="18" fill="#FFFFFF" font-weight="700" text-anchor="start">结论：特卖壁垒被稀释</text><line x1="642" y1="287" x2="654" y2="287" stroke="#CC0000" stroke-width="2.5" stroke-linecap="butt"/><text x="664" y="292" font-size="15" fill="#333333" font-weight="400" text-anchor="start">竞争焦点从「有没有」转向「快不快、便不便宜」</text><line x1="642" y1="319" x2="654" y2="319" stroke="#CC0000" stroke-width="2.5" stroke-linecap="butt"/><text x="664" y="324" font-size="15" fill="#333333" font-weight="400" text-anchor="start">唯品会特卖心智的稀缺性正在下降</text><line x1="642" y1="351" x2="654" y2="351" stroke="#CC0000" stroke-width="2.5" stroke-linecap="butt"/><text x="664" y="356" font-size="15" fill="#333333" font-weight="400" text-anchor="start">差异化必须回到会员深度与线下资产</text><line x1="642" y1="383" x2="654" y2="383" stroke="#CC0000" stroke-width="2.5" stroke-linecap="butt"/><text x="664" y="388" font-size="15" fill="#333333" font-weight="400" text-anchor="start">价格优势不再可持续，效率与复购是唯一护城河</text></g></svg></div></div><div class="footer"><span>来源：唯品会公开财报、公司公告与行业研究资料汇编（2026 年 9 月）</span><span>04 / 16</span></div></main></section><section class="slide" data-kind="content"><header class="title-zone"><h1>七个季度只有两个正增长，拐点尚未确认</h1><span class="kicker">03 · REVENUE</span></header><div class="rule"></div><main class="body"><div class="summary"><div class="bar"></div><p>2025Q1—2026Q2 七个季度中，仅 2025Q3 与 2026Q1 实现正增长<span>2026Q3 指引区间 203—214 亿元，对应同比下降约 5% 至持平</span></p></div><div class="main wide"><div class="col-figure"><div class="echart wide" id="ch5"></div></div></div><div class="footer"><span>来源：唯品会公开财报、公司公告与行业研究资料汇编（2026 年 9 月）</span><span>05 / 16</span></div></main></section><section class="slide" data-kind="content"><header class="title-zone"><h1>GMV 微增、营收下滑：两条腿开始分岔</h1><span class="kicker">04 · GMV</span></header><div class="rule"></div><main class="body"><div class="summary"><div class="bar"></div><p>2025 年 GMV 同比 +2.0%，净营收同比 −2.3%，出现方向性背离<span>缺口反映变现结构与折扣让利的变化，而非单纯的规模问题</span></p></div><div class="main"><div class="col-text"><div class="pt"><div class="row"><svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-scale"/></svg><h3>两条腿开始分岔</h3></div><p>2025 年 GMV 2,135 亿元，同比 +2.0%；净营收同比 −2.3%<br>GMV 在涨、收入在跌，说明变现结构与折扣让利在变化</p></div><div class="pt"><div class="row"><svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-chart"/></svg><h3>2026 年先扬后抑</h3></div><p>Q1 GMV 同比 +8.6%，Q2 回落至 −1.6%<br>季节性回暖未能延续，消费需求整体偏弱</p></div><div class="pt"><div class="row"><svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-bulb"/></svg><h3>用户运营抬高了单位产出</h3></div><p>会员与高价值用户的深度运营，支撑了单位用户产出<br>但增长高度绑定少数付费用户，天花板更加明确</p></div></div><div class="col-figure"><div class="echart" id="ch6"></div></div></div><div class="footer"><span>来源：唯品会公开财报、公司公告与行业研究资料汇编（2026 年 9 月）</span><span>06 / 16</span></div></main></section><section class="slide" data-kind="content"><header class="title-zone"><h1>用户池趋于固化：活跃用户横盘、订单连年萎缩</h1><span class="kicker">05 · USERS</span></header><div class="rule"></div><main class="body"><div class="summary"><div class="bar"></div><p>活跃用户连续两年在 8,500 万上下徘徊，订单量连续萎缩<span>增长高度绑定少数高价值付费用户，普通非会员用户持续流失</span></p></div><div class="main wide"><div class="col-figure"><div class="echart wide" id="ch7"></div></div></div><div class="footer"><span>来源：唯品会公开财报、公司公告与行业研究资料汇编（2026 年 9 月）</span><span>07 / 16</span></div></main></section><section class="slide" data-kind="content"><header class="title-zone"><h1>SVIP 破千万、贡献 54%：高价值用户扛起基本盘</h1><span class="kicker">06 · MEMBERSHIP</span></header><div class="rule"></div><main class="body"><div class="summary"><div class="bar"></div><p>SVIP 会员规模突破 1,000 万，贡献 54% 的线上销售额<span>用户增长趋缓背景下，运营重心从规模扩张转向高价值用户深度运营</span></p></div><div class="main"><div class="col-text"><div class="pt"><div class="row"><svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-people"/></svg><h3>会员规模逆势扩张</h3></div><p>2025 年活跃 SVIP 会员 980 万，同比增长 11%<br>2026Q2 进一步突破 1,000 万，同比仍增长 8%</p></div><div class="pt"><div class="row"><svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-target"/></svg><h3>贡献度持续抬升</h3></div><p>2025 年贡献 52% 线上销售额，2026Q1 保持 50% 以上<br>2026Q2 升至 54%，成为绝对的收入基本盘</p></div><div class="pt"><div class="row"><svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-key"/></svg><h3>权益体系持续加码</h3></div><p>私享特卖、超 V 试用提供稀缺性与惊喜感的商品体验<br>黑钻会员新增 15 天无忧退换、星愿观演、尊享客服</p></div></div><div class="col-figure"><div class="echart" id="ch8"></div></div></div><div class="footer"><span>来源：唯品会公开财报、公司公告与行业研究资料汇编（2026 年 9 月）</span><span>08 / 16</span></div></main></section><section class="slide" data-kind="content"><header class="title-zone"><h1>四大场景协同：线上特卖为核，奥莱与 AI 为翼</h1><span class="kicker">07 · SCENARIOS</span></header><div class="rule"></div><main class="body"><div class="summary"><div class="bar"></div><p>线上特卖仍是核心现金流场景，奥莱与 AI 提供增量与效率<span>四大场景共享同一批品牌供给与会员资产，是协同而非并列</span></p></div><div class="main wide"><div class="col-figure"><svg viewBox="0 0 1880 700" font-family="'Microsoft YaHei','PingFang SC','Hiragino Sans GB',Arial,sans-serif" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><line x1="940" y1="246" x2="940" y2="152" stroke="#CCCCCC" stroke-width="2" stroke-linecap="butt"/><line x1="940" y1="454" x2="940" y2="548" stroke="#CCCCCC" stroke-width="2" stroke-linecap="butt"/><line x1="836" y1="350" x2="600" y2="350" stroke="#CCCCCC" stroke-width="2" stroke-linecap="butt"/><line x1="1044" y1="350" x2="1280" y2="350" stroke="#CCCCCC" stroke-width="2" stroke-linecap="butt"/><circle cx="940" cy="152" r="3.5" fill="#A3A3A3"/><circle cx="940" cy="548" r="3.5" fill="#A3A3A3"/><circle cx="600" cy="350" r="3.5" fill="#A3A3A3"/><circle cx="1280" cy="350" r="3.5" fill="#A3A3A3"/><rect x="730" y="40" width="420" height="112" rx="0" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/><use href="#i-people" x="754" y="70" width="30" height="30" style="color:#006393"/><text x="800" y="98" font-size="26" fill="#333333" font-weight="700" text-anchor="start">会员运营（SVIP）</text><text x="800" y="132" font-size="16" fill="#777777" font-weight="400" text-anchor="start">规模破 1,000 万，贡献 54% 线上销售</text><rect x="1280" y="294" width="420" height="112" rx="0" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/><use href="#i-grid" x="1304" y="324" width="30" height="30" style="color:#006393"/><text x="1350" y="352" font-size="26" fill="#333333" font-weight="700" text-anchor="start">线下奥莱（杉杉）</text><text x="1350" y="386" font-size="16" fill="#777777" font-weight="400" text-anchor="start">22 家广场，2026 年目标 23 家</text><rect x="730" y="548" width="420" height="112" rx="0" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/><use href="#i-flag" x="754" y="578" width="30" height="30" style="color:#006393"/><text x="800" y="606" font-size="26" fill="#333333" font-weight="700" text-anchor="start">品牌特卖供给</text><text x="800" y="640" font-size="16" fill="#777777" font-weight="400" text-anchor="start">大牌日·品类日·运动节，定制 +40%</text><rect x="180" y="294" width="420" height="112" rx="0" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/><use href="#i-brain" x="204" y="324" width="30" height="30" style="color:#006393"/><text x="250" y="352" font-size="26" fill="#333333" font-weight="700" text-anchor="start">AI 技术平台</text><text x="250" y="386" font-size="16" fill="#777777" font-weight="400" text-anchor="start">虚拟试衣·智能客服·供应链提效</text><circle cx="940" cy="350" r="104" fill="#CC0000"/><text x="940" y="346" font-size="34" fill="#FFFFFF" font-weight="700" text-anchor="middle">唯品会</text><text x="940" y="382" font-size="17" fill="#FFFFFF" font-weight="400" text-anchor="middle" fill-opacity="0.88">线上特卖为核</text><line x1="0" y1="676" x2="1880" y2="676" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><text x="0" y="698" font-size="17" fill="#777777" font-weight="400" text-anchor="start">线上特卖是核心现金流场景；会员、奥莱、供给、AI 分别承担提频、增量、差异与提效四种角色。</text></svg></div></div><div class="footer"><span>来源：唯品会公开财报、公司公告与行业研究资料汇编（2026 年 9 月）</span><span>09 / 16</span></div></main></section><section class="slide" data-kind="content"><header class="title-zone"><h1>线下奥莱：从 5 家到 23 家，第二增长曲线成形</h1><span class="kicker">08 · OFF-MALL</span></header><div class="rule"></div><main class="body"><div class="summary"><div class="bar"></div><p>门店由 5 家增至 22 家，销售保持 20% 以上增长，2026 年目标 23 家<span>REITs 上市确认 57.9 亿元一次性收益，线下资产价值释放进入新阶段</span></p></div><div class="main wide"><div class="col-figure"><svg viewBox="0 0 1880 700" font-family="'Microsoft YaHei','PingFang SC','Hiragino Sans GB',Arial,sans-serif" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><line x1="100" y1="350" x2="1790" y2="350" stroke="#CCCCCC" stroke-width="2" stroke-linecap="butt"/><polygon points="1804.0,350.0 1788.0,357.2 1788.0,342.8" fill="#A3A3A3"/><line x1="170" y1="350" x2="170" y2="270" stroke="#CCCCCC" stroke-width="2" stroke-linecap="butt"/><rect x="0" y="100" width="340" height="170" rx="0" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/><text x="24" y="144" font-size="24" fill="#006393" font-weight="700" text-anchor="start">2019</text><text x="24" y="182" font-size="19" fill="#333333" font-weight="700" text-anchor="start">收购杉杉商业</text><text x="24" y="216" font-size="16" fill="#777777" font-weight="400" text-anchor="start">以 5 家门店切入线下奥莱</text><text x="24" y="242" font-size="16" fill="#777777" font-weight="400" text-anchor="start">开启「线上特卖 + 线下奥莱」双渠道</text><circle cx="170" cy="350" r="11" fill="#FFFFFF" stroke="#006393" stroke-width="3"/><line x1="550" y1="350" x2="550" y2="420" stroke="#CCCCCC" stroke-width="2" stroke-linecap="butt"/><rect x="380" y="420" width="340" height="170" rx="0" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/><text x="404" y="464" font-size="24" fill="#006393" font-weight="700" text-anchor="start">2025</text><text x="404" y="502" font-size="19" fill="#333333" font-weight="700" text-anchor="start">门店增至 22 家</text><text x="404" y="536" font-size="16" fill="#777777" font-weight="400" text-anchor="start">自持奥莱面积超 209 万平方米</text><text x="404" y="562" font-size="16" fill="#777777" font-weight="400" text-anchor="start">整体销售保持 20% 以上增长</text><circle cx="550" cy="350" r="11" fill="#FFFFFF" stroke="#006393" stroke-width="3"/><line x1="930" y1="350" x2="930" y2="270" stroke="#CCCCCC" stroke-width="2" stroke-linecap="butt"/><rect x="760" y="100" width="340" height="170" rx="0" fill="#FFF2F2" stroke="#CC0000" stroke-width="2"/><rect x="760" y="100" width="340" height="6" rx="0" fill="#CC0000"/><text x="784" y="144" font-size="24" fill="#CC0000" font-weight="700" text-anchor="start">2026.6</text><text x="784" y="182" font-size="19" fill="#333333" font-weight="700" text-anchor="start">REITs 上市</text><text x="784" y="216" font-size="16" fill="#777777" font-weight="400" text-anchor="start">部分商业物业完成 REITs 上市</text><text x="784" y="242" font-size="16" fill="#777777" font-weight="400" text-anchor="start">确认一次性投资收益 57.9 亿元</text><circle cx="930" cy="350" r="11" fill="#FFFFFF" stroke="#CC0000" stroke-width="3"/><line x1="1310" y1="350" x2="1310" y2="420" stroke="#CCCCCC" stroke-width="2" stroke-linecap="butt"/><rect x="1140" y="420" width="340" height="170" rx="0" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/><text x="1164" y="464" font-size="24" fill="#006393" font-weight="700" text-anchor="start">2026H1</text><text x="1164" y="502" font-size="19" fill="#333333" font-weight="700" text-anchor="start">销售延续高增</text><text x="1164" y="536" font-size="16" fill="#777777" font-weight="400" text-anchor="start">奥莱整体销售增长 20% 以上</text><text x="1164" y="562" font-size="16" fill="#777777" font-weight="400" text-anchor="start">存量项目同店目标保持双位数增长</text><circle cx="1310" cy="350" r="11" fill="#FFFFFF" stroke="#006393" stroke-width="3"/><line x1="1690" y1="350" x2="1690" y2="270" stroke="#CCCCCC" stroke-width="2" stroke-linecap="butt"/><rect x="1520" y="100" width="340" height="170" rx="0" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/><text x="1544" y="144" font-size="24" fill="#006393" font-weight="700" text-anchor="start">2026E</text><text x="1544" y="182" font-size="19" fill="#333333" font-weight="700" text-anchor="start">目标 23 家</text><text x="1544" y="216" font-size="16" fill="#777777" font-weight="400" text-anchor="start">无锡、西安等项目在建开发</text><text x="1544" y="242" font-size="16" fill="#777777" font-weight="400" text-anchor="start">资产价值释放进入新阶段</text><circle cx="1690" cy="350" r="11" fill="#FFFFFF" stroke="#006393" stroke-width="3"/><line x1="0" y1="646" x2="1880" y2="646" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><text x="0" y="680" font-size="18" fill="#777777" font-weight="400" text-anchor="start">线下已从「补充渠道」升级为第二增长曲线，同时成为资产价值释放的通道 —— 六年门店数增长 3.4 倍。</text></svg></div></div><div class="footer"><span>来源：唯品会公开财报、公司公告与行业研究资料汇编（2026 年 9 月）</span><span>10 / 16</span></div></main></section><section class="slide" data-kind="content"><header class="title-zone"><h1>2026Q2 利润暴增是「纸面」的：一次性因素主导</h1><span class="kicker">09 · ANOMALY</span></header><div class="rule"></div><main class="body"><div class="summary"><div class="bar"></div><p>GAAP 归母净利润同比 +189.1%，但 Non-GAAP 净利润同比 −81%<span>剔除 REITs 收益与股息预提税后，核心调整后净利润约 20 亿元</span></p></div><div class="main"><div class="col-text"><div class="pt"><div class="row"><svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-warn"/></svg><h3>GAAP 净利暴增 189.1%</h3></div><p>2026Q2 GAAP 归母净利润 43 亿元<br>但同期 Non-GAAP 净利润仅 3.92 亿元，同比骤降 81%</p></div><div class="pt"><div class="row"><svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-db"/></svg><h3>差额来自两项一次性因素</h3></div><p>REITs 上市确认一次性投资收益 +57.9 亿元<br>历史股息预提税费用 −15.6 亿元（预计第三季度支付）</p></div><div class="pt"><div class="row"><svg class="ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><use href="#i-check"/></svg><h3>核心盈利能力仍然稳定</h3></div><p>剔除一次性因素后，核心调整后净利润约 20 亿元<br>核心净利率约 7.9%，整体核心盈利能力相对稳定</p></div></div><div class="col-figure"><div class="echart" id="ch11"></div></div></div><div class="footer"><span>来源：唯品会公开财报、公司公告与行业研究资料汇编（2026 年 9 月）</span><span>11 / 16</span></div></main></section><section class="slide" data-kind="content"><header class="title-zone"><h1>毛利率守住底盘，但费用率已全面抬升</h1><span class="kicker">10 · COST & MARGIN</span></header><div class="rule"></div><main class="body"><div class="summary"><div class="bar"></div><p>毛利率稳定在 23.1%—23.3%，而 2026Q2 三项费用率同比上行 0.2—0.5 个百分点<span>运营利润率 7.7%、核心净利率 7.9% —— 盈利端呈温和收窄，控费红利接近天花板</span></p></div><div class="main wide"><div class="col-figure"><div class="echart wide" id="ch12"></div></div></div><div class="footer"><span>来源：唯品会公开财报、公司公告与行业研究资料汇编（2026 年 9 月）</span><span>12 / 16</span></div></main></section><section class="slide" data-kind="content"><header class="title-zone"><h1>财务底盘稳健，低估值叠加高股东回报</h1><span class="kicker">11 · FINANCIALS</span></header><div class="rule"></div><main class="body"><div class="summary"><div class="bar"></div><p>连续 53 个季度盈利，现金及短期投资超 300 亿元，负债率约 44%<span>低估值叠加积极的股东回报政策，为投资者提供了一定的安全边际</span></p></div><div class="main wide"><div class="col-figure"><svg viewBox="0 0 1880 700" font-family="'Microsoft YaHei','PingFang SC','Hiragino Sans GB',Arial,sans-serif" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><rect x="0" y="0" width="900" height="700" rx="0" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/><rect x="0" y="0" width="900" height="8" rx="0" fill="#CC0000"/><text x="32" y="76" font-size="32" fill="#333333" font-weight="700" text-anchor="start">财务底盘稳健，流动性充裕</text><text x="32" y="112" font-size="16" fill="#A3A3A3" font-weight="400" text-anchor="start">现金流、资产负债表与信用评级（2025 年末口径）</text><rect x="32" y="160" width="3.5" height="22" rx="0" fill="#006393"/><text x="48" y="180" font-size="19" fill="#777777" font-weight="400" text-anchor="start">经营活动净现金</text><text x="868" y="180" font-size="26" fill="#333333" font-weight="700" text-anchor="end">75 亿元</text><line x1="32" y1="214" x2="868" y2="214" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><rect x="32" y="236" width="3.5" height="22" rx="0" fill="#006393"/><text x="48" y="256" font-size="19" fill="#777777" font-weight="400" text-anchor="start">自由现金流</text><text x="868" y="256" font-size="26" fill="#333333" font-weight="700" text-anchor="end">约 54 亿元</text><line x1="32" y1="290" x2="868" y2="290" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><rect x="32" y="312" width="3.5" height="22" rx="0" fill="#006393"/><text x="48" y="332" font-size="19" fill="#777777" font-weight="400" text-anchor="start">现金及短期投资</text><text x="868" y="332" font-size="26" fill="#333333" font-weight="700" text-anchor="end">245 亿元 + 59 亿元</text><line x1="32" y1="366" x2="868" y2="366" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><rect x="32" y="388" width="3.5" height="22" rx="0" fill="#006393"/><text x="48" y="408" font-size="19" fill="#777777" font-weight="400" text-anchor="start">资产负债率</text><text x="868" y="408" font-size="26" fill="#333333" font-weight="700" text-anchor="end">约 44%</text><line x1="32" y1="442" x2="868" y2="442" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><rect x="32" y="464" width="3.5" height="22" rx="0" fill="#006393"/><text x="48" y="484" font-size="19" fill="#777777" font-weight="400" text-anchor="start">国际信用评级</text><text x="868" y="484" font-size="26" fill="#333333" font-weight="700" text-anchor="end">穆迪 Baa1 · 惠誉 BBB</text><line x1="32" y1="600" x2="868" y2="600" stroke="#CCCCCC" stroke-width="1.5" stroke-linecap="butt"/><text x="32" y="638" font-size="22" fill="#CC0000" font-weight="700" text-anchor="start">连续 53 个季度盈利</text><text x="32" y="670" font-size="17" fill="#777777" font-weight="400" text-anchor="start">净现金为正 + 低负债，构成穿越周期的缓冲空间</text><rect x="940" y="0" width="940" height="220" rx="0" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/><text x="980" y="60" font-size="24" fill="#333333" font-weight="700" text-anchor="start">2025 年股东回报</text><line x1="980" y1="84" x2="1840" y2="84" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><text x="980" y="126" font-size="18" fill="#777777" font-weight="400" text-anchor="start">股票回购 + 分红合计约 9.4 亿美元</text><text x="980" y="164" font-size="18" fill="#777777" font-weight="400" text-anchor="start">向股东派发每股 ADS 现金股息 0.62 美元</text><rect x="940" y="240" width="940" height="220" rx="0" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/><text x="980" y="300" font-size="24" fill="#333333" font-weight="700" text-anchor="start">2026 年上半年</text><line x1="980" y1="324" x2="1840" y2="324" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><text x="980" y="366" font-size="18" fill="#777777" font-weight="400" text-anchor="start">已通过分红与回购回馈股东近 4 亿美元</text><text x="980" y="404" font-size="18" fill="#777777" font-weight="400" text-anchor="start">新增不超过 10 亿美元的股票回购计划</text><text x="980" y="442" font-size="18" fill="#777777" font-weight="400" text-anchor="start">在低估值背景下为投资者提供安全边际</text><rect x="940" y="480" width="940" height="220" rx="0" fill="#FFF2F2" stroke="#CC0000" stroke-width="2"/><text x="980" y="540" font-size="24" fill="#CC0000" font-weight="700" text-anchor="start">估值处于历史低位</text><line x1="980" y1="564" x2="1840" y2="564" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><text x="980" y="606" font-size="18" fill="#777777" font-weight="400" text-anchor="start">PE 3.87x · PB 0.89x · 股价约 12.38 美元</text><text x="980" y="644" font-size="18" fill="#777777" font-weight="400" text-anchor="start">总市值 58.87 亿美元，较 2025 年 6 月的高点缩水近 40%</text></svg></div></div><div class="footer"><span>来源：唯品会公开财报、公司公告与行业研究资料汇编（2026 年 9 月）</span><span>13 / 16</span></div></main></section><section class="slide" data-kind="content"><header class="title-zone"><h1>增长端全面承压，但确定性地基并未松动</h1><span class="kicker">12 · BALANCE</span></header><div class="rule"></div><main class="body"><div class="summary"><div class="bar"></div><p>增长端四条压力线均已确认，盈利与现金流的确定性未松动<span>估值锚正从「增长弹性」切换到「盈利确定性 + 现金回报」</span></p></div><div class="main wide"><div class="col-figure"><svg viewBox="0 0 1880 700" font-family="'Microsoft YaHei','PingFang SC','Hiragino Sans GB',Arial,sans-serif" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><rect x="0" y="0" width="880" height="88" rx="0" fill="#A3A3A3"/><text x="28" y="55" font-size="24" fill="#FFFFFF" font-weight="700" text-anchor="start">RISK · 增长端压力</text><rect x="1000" y="0" width="880" height="88" rx="0" fill="#CC0000"/><text x="1028" y="55" font-size="24" fill="#FFFFFF" font-weight="700" text-anchor="start">MOAT · 确定性来源</text><line x1="940" y1="0" x2="940" y2="660" stroke="#CCCCCC" stroke-width="2" stroke-linecap="butt" stroke-dasharray="10 8"/><rect x="0" y="132" width="880" height="108" rx="0" fill="#F5F5F5"/><rect x="1000" y="132" width="880" height="108" rx="0" fill="#FFF2F2" stroke="#CC0000" stroke-width="1.5"/><text x="28" y="197" font-size="21" fill="#777777" font-weight="400" text-anchor="start">用户池见顶：活跃用户连续两年在 8,500 万上下徘徊</text><text x="1028" y="197" font-size="21" fill="#333333" font-weight="700" text-anchor="start">千万级 SVIP 贡献 52%–54% 线上销售额</text><polygon points="892.0,172.0 936.0,186.0 892.0,200.0" fill="#CC0000"/><rect x="0" y="264" width="880" height="108" rx="0" fill="#F5F5F5"/><rect x="1000" y="264" width="880" height="108" rx="0" fill="#FFF2F2" stroke="#CC0000" stroke-width="1.5"/><text x="28" y="329" font-size="21" fill="#777777" font-weight="400" text-anchor="start">订单量连续萎缩：2025 年 −3.3%、2026Q2 −5.5%</text><text x="1028" y="329" font-size="21" fill="#333333" font-weight="700" text-anchor="start">高价值会员支撑客单与复购，会员规模逆势 +8%</text><polygon points="892.0,304.0 936.0,318.0 892.0,332.0" fill="#CC0000"/><rect x="0" y="396" width="880" height="108" rx="0" fill="#F5F5F5"/><rect x="1000" y="396" width="880" height="108" rx="0" fill="#FFF2F2" stroke="#CC0000" stroke-width="1.5"/><text x="28" y="461" font-size="21" fill="#777777" font-weight="400" text-anchor="start">特卖心智被稀释：大牌奥莱、闪购、百亿补贴成标配</text><text x="1028" y="461" font-size="21" fill="#333333" font-weight="700" text-anchor="start">线下奥莱销售保持 20% 以上高增速</text><polygon points="892.0,436.0 936.0,450.0 892.0,464.0" fill="#CC0000"/><rect x="0" y="528" width="880" height="108" rx="0" fill="#F5F5F5"/><rect x="1000" y="528" width="880" height="108" rx="0" fill="#FFF2F2" stroke="#CC0000" stroke-width="1.5"/><text x="28" y="593" font-size="21" fill="#777777" font-weight="400" text-anchor="start">收入缺乏催化：2026 年下半年预计仍有压力</text><text x="1028" y="593" font-size="21" fill="#333333" font-weight="700" text-anchor="start">连续 53 季盈利，现金及短期投资超 300 亿元</text><polygon points="892.0,568.0 936.0,582.0 892.0,596.0" fill="#CC0000"/><line x1="0" y1="672" x2="1880" y2="672" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><text x="0" y="696" font-size="18" fill="#777777" font-weight="400" text-anchor="start">结论：这家公司的估值锚不在增长弹性，而在盈利的确定性与现金回报。</text></svg></div></div><div class="footer"><span>来源：唯品会公开财报、公司公告与行业研究资料汇编（2026 年 9 月）</span><span>14 / 16</span></div></main></section><section class="slide" data-kind="content"><header class="title-zone"><h1>三条增长主线：会员、奥莱、AI</h1><span class="kicker">13 · OUTLOOK</span></header><div class="rule"></div><main class="body"><div class="summary"><div class="bar"></div><p>会员提频、奥莱放量、AI 提效 —— 三条主线决定中短期业绩弹性<span>管理层将用户增长定位为「首要战略目标」，理想状态下增速应超过营收</span></p></div><div class="main wide"><div class="col-figure"><svg viewBox="0 0 1880 700" font-family="'Microsoft YaHei','PingFang SC','Hiragino Sans GB',Arial,sans-serif" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><polygon points="20.0,190.0 620.0,190.0 660.0,300.0 620.0,410.0 20.0,410.0" fill="#CC0000"/><text x="340.0" y="296" font-size="27" fill="#FFFFFF" font-weight="700" text-anchor="middle">① 深化 SVIP 会员运营</text><text x="340.0" y="332" font-size="17" fill="#FFFFFF" font-weight="400" text-anchor="middle" fill-opacity="0.88">提升高价值用户消费频次与客单价</text><polygon points="620.0,190.0 1220.0,190.0 1260.0,300.0 1220.0,410.0 620.0,410.0 660.0,300.0" fill="#006393"/><text x="940.0" y="296" font-size="27" fill="#FFFFFF" font-weight="700" text-anchor="middle">② 加速线下奥莱布局</text><text x="940.0" y="332" font-size="17" fill="#FFFFFF" font-weight="400" text-anchor="middle" fill-opacity="0.88">以 REITs 等资产证券化释放资产价值</text><polygon points="1220.0,190.0 1820.0,190.0 1860.0,300.0 1820.0,410.0 1220.0,410.0 1260.0,300.0" fill="#333333"/><text x="1540.0" y="296" font-size="27" fill="#FFFFFF" font-weight="700" text-anchor="middle">③ 推进 AI 规模化落地</text><text x="1540.0" y="332" font-size="17" fill="#FFFFFF" font-weight="400" text-anchor="middle" fill-opacity="0.88">营销、客服、供应链全流程提效</text><line x1="20" y1="456" x2="1860" y2="456" stroke="#CCCCCC" stroke-width="1.5" stroke-linecap="butt" stroke-dasharray="8 6"/><text x="340" y="490" font-size="18" fill="#333333" font-weight="700" text-anchor="middle">目标：会员贡献占比进一步提升</text><text x="340" y="518" font-size="16" fill="#A3A3A3" font-weight="400" text-anchor="middle">把「首要战略目标」落在用户规模上</text><text x="940" y="490" font-size="18" fill="#333333" font-weight="700" text-anchor="middle">目标：存量同店双位数增长</text><text x="940" y="518" font-size="16" fill="#A3A3A3" font-weight="400" text-anchor="middle">在建项目按计划开业，2026 年达 23 家</text><text x="1540" y="490" font-size="18" fill="#333333" font-weight="700" text-anchor="middle">目标：从工具升级为智能平台</text><text x="1540" y="518" font-size="16" fill="#A3A3A3" font-weight="400" text-anchor="middle">在生意诊断、人群洞察、货品策略赋能商家</text><rect x="0" y="560" width="1880" height="120" rx="0" fill="#F5F5F5"/><rect x="0" y="560" width="6" height="120" rx="0" fill="#CC0000"/><text x="28" y="606" font-size="23" fill="#333333" font-weight="700" text-anchor="start">但拐点尚需观察：浦银国际预计 2026 年下半年收入下降约 3%，维持「持有」评级，目标价 15 美元。</text><text x="28" y="644" font-size="18" fill="#777777" font-weight="400" text-anchor="start">短期内营收反转难度较大，投资价值更多体现在稳健盈利能力与积极股东回报，而非增长弹性。</text></svg></div></div><div class="footer"><span>来源：唯品会公开财报、公司公告与行业研究资料汇编（2026 年 9 月）</span><span>15 / 16</span></div></main></section><section class="slide" data-kind="back"><main class="body plain"><div class="main full"><div class="col-figure"><svg viewBox="0 0 1880 700" font-family="'Microsoft YaHei','PingFang SC','Hiragino Sans GB',Arial,sans-serif" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><line x1="150" y1="300" x2="380" y2="300" stroke="#CCCCCC" stroke-width="2" stroke-linecap="butt"/><line x1="1500" y1="300" x2="1730" y2="300" stroke="#CCCCCC" stroke-width="2" stroke-linecap="butt"/><rect x="860" y="176" width="160" height="8" rx="0" fill="#CC0000"/><text x="940" y="320" font-size="44" fill="#333333" font-weight="700" text-anchor="middle">增长见顶时，守住盈利与回报本身就是稀缺能力</text><text x="940" y="396" font-size="23" fill="#A3A3A3" font-weight="400" text-anchor="middle">唯品会的投资价值，更多来自稳健的盈利能力与积极的股东回报，而非增长弹性。</text><line x1="700" y1="486" x2="1180" y2="486" stroke="#E5E5E5" stroke-width="1.5" stroke-linecap="butt"/><text x="940" y="540" font-size="18" fill="#999999" font-weight="400" text-anchor="middle">唯品会（VIPS）经营分析 · 2026 年 9 月</text></svg></div></div></main></section></div></div><div id="nav"><button id="prev">‹</button><span id="dots"></span><span id="pg"></span><button id="next">›</button></div><script>
+(function(){
+'use strict';
+
+/* ---------- 0. 配色与 ECharts 基础工具（与 echarts图表模板.html 一致） ---------- */
+var C = {
+  red:'#CC0000', blue:'#006393', ink:'#333333', gray:'#A3A3A3',
+  g1:'#D9D9D9', g2:'#C4C4C4', lgray:'#F5F5F5', hl:'#FFF2F2',
+  line:'#CCCCCC', hair:'#EEEEEE', axis:'#666666', soft:'#777777',
+  redSoft:'#FBE9E9', redMid:'#E06666', blueMid:'#4A93B0', blueSoft:'#DCEBF2'
+};
+var FONT = '"PingFang SC","Microsoft YaHei","Hiragino Sans GB",Arial,sans-serif';
+
+function TIP(trig, extra){
+  return Object.assign({
+    trigger: trig || 'axis',
+    backgroundColor:'#FFFFFF', borderColor:'#DDDDDD', borderWidth:1,
+    padding:[10,14], confine:true,
+    textStyle:{ color:C.ink, fontSize:15, fontFamily:FONT },
+    extraCssText:'border-radius:2px;box-shadow:none;'
+  }, extra || {});
+}
+function SHADOW_TIP(){
+  return TIP('axis', { axisPointer:{ type:'shadow', shadowStyle:{ color:'rgba(0,0,0,0.04)' } } });
+}
+function GRID(l, r, t, b){
+  return { left:l===undefined?24:l, right:r===undefined?24:r,
+           top:t===undefined?76:t, bottom:b===undefined?18:b, containLabel:true };
+}
+function AXCAT(d, extra){
+  return Object.assign({
+    type:'category', data:d, boundaryGap:true,
+    axisLine:{ lineStyle:{ color:C.line, width:1 } },
+    axisTick:{ show:false },
+    axisLabel:{ color:C.axis, fontSize:17, fontFamily:FONT, margin:14 }
+  }, extra || {});
+}
+function AXCATY(d, extra){
+  return Object.assign({
+    type:'category', data:d,
+    axisLine:{ lineStyle:{ color:C.line, width:1 } },
+    axisTick:{ show:false },
+    axisLabel:{ color:C.axis, fontSize:18, fontFamily:FONT, margin:14 }
+  }, extra || {});
+}
+function AXVAL(nm, fmt, extra){
+  return Object.assign({
+    type:'value', name:nm||'',
+    nameTextStyle:{ color:C.gray, fontSize:15, fontFamily:FONT, padding:[0,0,10,0] },
+    axisLine:{ show:false }, axisTick:{ show:false },
+    axisLabel:{ color:C.axis, fontSize:17, fontFamily:FONT, formatter:fmt||'{value}' },
+    splitLine:{ lineStyle:{ color:C.hair, type:'dashed' } }
+  }, extra || {});
+}
+function LEG(d, extra){
+  return Object.assign({
+    data:d, top:6, right:8, icon:'rect', itemWidth:15, itemHeight:10, itemGap:26,
+    textStyle:{ color:C.axis, fontSize:17, fontFamily:FONT }
+  }, extra || {});
+}
+function K(v){ return (v===null||v===undefined||v==='') ? '' :
+  Number(v).toLocaleString('en-US'); }
+function SG(v){ return (v>0?'+':'') + v; }
+
+/* 全局兜底：value 轴轴名居中下移；grid.bottom 不足 46 的抬到 46 */
+function polish(opt){
+  var xa = opt.xAxis;
+  var list = !xa ? [] : (Array.isArray(xa) ? xa : [xa]);
+  list.forEach(function(ax){
+    if(ax && ax.type === 'value' && ax.name){
+      if(ax.nameLocation === undefined) ax.nameLocation = 'middle';
+      if(ax.nameGap === undefined) ax.nameGap = 34;
+    }
+  });
+  function bump(g){ if(g && typeof g.bottom === 'number' && g.bottom < 46) g.bottom = 46; }
+  if(opt.grid){ if(Array.isArray(opt.grid)) opt.grid.forEach(bump); else bump(opt.grid); }
+  return opt;
+}
+
+/* ---------- 1. 各数据页的 option（照抄模板库对应编号后替换数据） ---------- */
+var OPT = {};
+
+/* 03 —— 模板 09 横向条形排名：大盘 vs 唯品会（分栏 1120×700） */
+var D3 = [['网上零售额（全国）', 8.6], ['实物商品网上零售额', 5.2], ['唯品会净营收', -2.3]];
+D3.sort(function(a,b){ return b[1]-a[1]; });
+OPT.ch3 = {
+  tooltip: TIP('item', { formatter:function(p){
+    return p.name + '<br/>2025 年同比 ' + SG(p.value) + '%'; } }),
+  grid: GRID(20, 66, 40, 78),
+  xAxis: AXVAL('2025 年同比（%）', '{value}%', { min:-6, max:12 }),
+  yAxis: AXCATY(D3.map(function(d){ return d[0]; }), { inverse:true }),
+  series: [{
+    type:'bar', barWidth:48,
+    data: D3.map(function(d){
+      return { value:d[1],
+               itemStyle:{ color: d[1] < 0 ? C.red : (d[1] > 6 ? C.blue : C.blueMid) },
+               label:{ position: d[1] < 0 ? 'left' : 'right' } };
+    }),
+    label:{ show:true, fontSize:19, fontWeight:'bold', color:C.ink,
+            formatter:function(p){ return SG(p.value) + '%'; } },
+    markLine:{ silent:true, symbol:'none', data:[{ xAxis:0 }],
+               lineStyle:{ color:C.axis, width:2, type:'dashed' }, label:{ show:false } }
+  }],
+  graphic:[
+    { type:'text', left:20, bottom:10,
+      style:{ text:'注：唯品会口径为净营收，行业口径为网上零售额。',
+              font:FONT, fontSize:14, fill:C.gray } }
+  ]
+};
+
+/* 05 —— 模板 04 双轴折柱：季度净营收（柱）+ 同比增速（线）（通栏 1880×700） */
+var Q5   = ['2025Q1','2025Q2','2025Q3','2025Q4','2026Q1','2026Q2','2026Q3 指引'];
+var REV5 = [263, 258, 214, 325, 266, 247, 209];
+var YOY5 = [-4.7, -3.5, 3.4, -2.1, 1.2, -4.3, null];
+OPT.ch5 = {
+  tooltip: SHADOW_TIP(),
+  legend: LEG(['季度净营收（亿元）','同比增速']),
+  grid: GRID(26, 82, 106, 96),
+  xAxis: AXCAT(Q5, { axisLabel:{ color:C.axis, fontSize:18, fontFamily:FONT, margin:16 } }),
+  yAxis: [ AXVAL('净营收（亿元）'),
+           AXVAL('同比增速', '{value}%', { min:-8, max:8, splitLine:{ show:false } }) ],
+  series: [
+    { name:'季度净营收（亿元）', type:'bar', barWidth:76,
+      data: REV5.map(function(v,i){
+        return { value:v, itemStyle:{ color: i===6 ? C.g2 : C.blue },
+                 label:{ color: i===6 ? C.gray : C.blue } }; }),
+      label:{ show:true, position:'top', fontSize:18, fontWeight:'bold',
+              color:C.blue, formatter:'{c}' } },
+    { name:'同比增速', type:'line', yAxisIndex:1, data:YOY5, z:6,
+      symbol:'circle', symbolSize:12,
+      lineStyle:{ width:3.5, color:C.red },
+      itemStyle:{ color:C.red, borderColor:'#FFF', borderWidth:2 },
+      label:{ show:true, position:'top', fontSize:18, fontWeight:'bold', color:C.red,
+              textBorderColor:'#FFFFFF', textBorderWidth:4,
+              formatter:function(p){ return p.value==null ? '' : SG(p.value) + '%'; } },
+      markLine:{ silent:true, symbol:'none', data:[{ yAxis:0 }],
+                 lineStyle:{ color:C.gray, type:'dashed', width:2 }, label:{ show:false } } }
+  ],
+  graphic:[
+    { type:'text', left:26, bottom:10,
+      style:{ text:'注：2026Q3 为公司指引区间 203—214 亿元（同比 −5% 至持平），柱高取区间中值，故不绘制同比点。',
+              font:FONT, fontSize:15, fill:C.gray } }
+  ]
+};
+
+/* 06 —— 模板 01 趋势折线：GMV 与净营收的同比背离（分栏 1120×700） */
+var X6   = ['2025Q3','2025Q4','2026Q1','2026Q2'];
+var GMV6 = [7.5, 0.6, 8.6, -1.6];
+var REV6 = [3.4, -2.1, 1.2, -4.3];
+OPT.ch6 = {
+  tooltip: TIP('axis', { valueFormatter:function(v){ return SG(v) + '%'; } }),
+  legend: LEG(['GMV 同比','净营收同比']),
+  grid: GRID(20, 40, 96, 46),
+  xAxis: AXCAT(X6),
+  yAxis: AXVAL('同比（%）', '{value}%', { min:-8, max:12 }),
+  series: [
+    { name:'GMV 同比', type:'line', data:GMV6,
+      symbol:'circle', symbolSize:11,
+      lineStyle:{ width:3.5, color:C.blue },
+      itemStyle:{ color:C.blue, borderColor:'#FFF', borderWidth:2 },
+      areaStyle:{ color:C.blueSoft },
+      label:{ show:true, position:'top', fontSize:17, fontWeight:'bold', color:C.blue,
+              formatter:function(p){ return SG(p.value) + '%'; } } },
+    { name:'净营收同比', type:'line', data:REV6,
+      symbol:'circle', symbolSize:11,
+      lineStyle:{ width:3.5, color:C.red, type:'dashed' },
+      itemStyle:{ color:C.red, borderColor:'#FFF', borderWidth:2 },
+      label:{ show:true, position:'bottom', fontSize:17, fontWeight:'bold', color:C.red,
+              formatter:function(p){ return SG(p.value) + '%'; } },
+      markLine:{ silent:true, symbol:'none', data:[{ yAxis:0 }],
+                 lineStyle:{ color:C.gray, type:'dashed', width:2 }, label:{ show:false } } }
+  ]
+};
+
+/* 07 —— 模板 06 分组柱状：活跃用户与订单量的同比（通栏 1880×700） */
+OPT.ch7 = {
+  tooltip: SHADOW_TIP(),
+  legend: LEG(['活跃用户同比','订单量同比']),
+  grid: GRID(40, 50, 110, 96),
+  xAxis: AXCAT(['2025 全年','2025Q3','2025Q4','2026Q2'],
+               { axisLabel:{ color:C.axis, fontSize:19, fontFamily:FONT, margin:16 } }),
+  yAxis: AXVAL('同比（%）', '{value}%', { min:-8, max:4 }),
+  series: [
+    { name:'活跃用户同比', type:'bar', barWidth:80, barGap:'26%',
+      data:[0.1, 1.3, -0.9, -2.8].map(function(v){
+        return { value:v, itemStyle:{ color:C.blue },
+                 label:{ position: v < 0 ? 'bottom' : 'top' } }; }),
+      itemStyle:{ color:C.blue },
+      label:{ show:true, fontSize:18, fontWeight:'bold', color:C.blue,
+              textBorderColor:'#FFFFFF', textBorderWidth:3,
+              formatter:function(p){ return SG(p.value) + '%'; } },
+      markLine:{ silent:true, symbol:'none', data:[{ yAxis:0 }],
+                 lineStyle:{ color:C.gray, type:'dashed', width:2 }, label:{ show:false } } },
+    { name:'订单量同比', type:'bar', barWidth:80,
+      data:[-3.3, 1.5, -5.3, -5.5].map(function(v){
+        return { value:v, itemStyle:{ color:C.red },
+                 label:{ position: v < 0 ? 'bottom' : 'top' } }; }),
+      itemStyle:{ color:C.red },
+      label:{ show:true, fontSize:18, fontWeight:'bold', color:C.red,
+              textBorderColor:'#FFFFFF', textBorderWidth:3,
+              formatter:function(p){ return SG(p.value) + '%'; } } }
+  ],
+  graphic:[
+    { type:'text', left:40, bottom:10,
+      style:{ text:'口径：活跃用户为当季活跃买家数；订单量为当季总订单数。2026Q1 活跃用户同比为正但公司未披露具体值，故不绘制。',
+              font:FONT, fontSize:15, fill:C.gray } }
+  ]
+};
+
+/* 08 —— 模板 12 环形 + 中心 KPI：SVIP 贡献占比（分栏 1120×700） */
+OPT.ch8 = {
+  tooltip: TIP('item', { formatter:function(p){ return p.name + '：' + p.value + '%'; } }),
+  series: [{
+    type:'pie', radius:['52%','76%'], center:['50%','48%'], startAngle:90, clockwise:true,
+    data:[ { name:'SVIP 会员', value:54, itemStyle:{ color:C.red } },
+           { name:'非 SVIP 用户', value:46, itemStyle:{ color:C.g1 } } ],
+    itemStyle:{ borderColor:'#FFF', borderWidth:4 },
+    label:{ show:true, position:'outside', fontSize:18, fontWeight:'bold', color:C.ink,
+            formatter:function(p){ return p.name + '  ' + p.value + '%'; } },
+    labelLine:{ length:20, length2:28, lineStyle:{ color:C.line } }
+  }],
+  graphic:[
+    { type:'text', left:'center', top:'34%',
+      style:{ text:'54%', font:FONT, fontSize:68, fontWeight:'bold', fill:C.red, textAlign:'center' } },
+    { type:'text', left:'center', top:'45%',
+      style:{ text:'线上销售额由 SVIP 贡献', font:FONT, fontSize:18, fill:C.gray, textAlign:'center' } },
+    { type:'text', left:'center', top:'50%',
+      style:{ text:'2026Q2 · 会员规模突破 1,000 万', font:FONT, fontSize:19, fontWeight:'bold',
+              fill:C.ink, textAlign:'center' } },
+    { type:'text', left:'center', top:'92%',
+      style:{ text:'口径：SVIP 贡献的线上销售额占比（2026Q2）。', font:FONT, fontSize:14,
+              fill:C.gray, textAlign:'center' } }
+  ]
+};
+
+/* 11 —— 模板 16 瀑布图：2026Q2 净利润拆解（分栏 1120×700） */
+var CAT11 = ['Non-GAAP 净利','REITs 投资收益','股息预提税','其他差异','GAAP 归母净利'];
+var LIFT11 = [0, 3.92, 61.82, 46.22, 0];
+var MAG11  = [3.92, 57.9, 15.6, 3.22, 43.0];
+var SIGN11 = [3.92, 57.9, -15.6, -3.22, 43.0];
+var COL11  = [C.blue, C.red, C.gray, C.gray, C.ink];
+OPT.ch11 = {
+  tooltip: TIP('axis', {
+    axisPointer:{ type:'shadow', shadowStyle:{ color:'rgba(0,0,0,0.04)' } },
+    formatter:function(ps){
+      var i = ps[0].dataIndex;
+      var head = CAT11[i] + '<br/>';
+      if(i===0 || i===4) return head + '金额 ' + SIGN11[i] + ' 亿元';
+      return head + (SIGN11[i] > 0 ? '增量 +' : '减量 ') + Math.abs(SIGN11[i]) + ' 亿元';
+    } }),
+  grid: GRID(20, 34, 66, 78),
+  xAxis: AXCAT(CAT11, { axisLabel:{ color:C.axis, fontSize:16, fontFamily:FONT, margin:14, interval:0 } }),
+  yAxis: AXVAL('金额（亿元）', '{value}', { max:72 }),
+  series: [
+    { name:'_lift', type:'bar', stack:'w', silent:true, emphasis:{ disabled:true },
+      itemStyle:{ color:'rgba(0,0,0,0)' }, data:LIFT11 },
+    { name:'增减', type:'bar', stack:'w', barWidth:78,
+      data: MAG11.map(function(v,i){ return { value:v, itemStyle:{ color:COL11[i] } }; }),
+      label:{ show:true, position:'top', fontSize:17, fontWeight:'bold', color:C.ink,
+        formatter:function(p){
+          var i = p.dataIndex;
+          if(i===0 || i===4) return p.value;
+          return (SIGN11[i] > 0 ? '+' : '−') + Math.abs(SIGN11[i]);
+        } },
+      markLine:{ silent:true, symbol:'none', data:[{ yAxis:3.92 }],
+                 lineStyle:{ color:C.gray, type:'dashed', width:2 }, label:{ show:false } } }
+  ],
+  graphic:[
+    { type:'text', left:20, bottom:10,
+      style:{ text:'注：「其他差异」为公开数据倒算的轧差项（其他损益与口径差异）；柱高单位：亿元。',
+              font:FONT, fontSize:14, fill:C.gray } }
+  ]
+};
+
+/* 12 —— 模板 06 分组柱状：三项费用率同比（通栏 1880×700） */
+OPT.ch12 = {
+  tooltip: SHADOW_TIP(),
+  legend: LEG(['2025Q2','2026Q2']),
+  grid: GRID(40, 50, 110, 96),
+  xAxis: AXCAT(['履约费用率','营销费用率','技术和内容费用率'],
+               { axisLabel:{ color:C.axis, fontSize:20, fontFamily:FONT, margin:16 } }),
+  yAxis: AXVAL('占收入比（%）', '{value}%', { max:10 }),
+  series: [
+    { name:'2025Q2', type:'bar', barWidth:96, barGap:'26%',
+      data:[8.2, 2.8, 1.7], itemStyle:{ color:C.g2 },
+      label:{ show:true, position:'top', fontSize:19, fontWeight:'bold', color:C.gray,
+              formatter:'{c}%' } },
+    { name:'2026Q2', type:'bar', barWidth:96,
+      data:[8.7, 3.1, 2.0], itemStyle:{ color:C.red },
+      label:{ show:true, position:'top', fontSize:19, fontWeight:'bold', color:C.red,
+              formatter:'{c}%' } }
+  ],
+  graphic:[
+    { type:'text', left:40, bottom:10,
+      style:{ text:'口径：费用率 = 该项费用 ÷ 净营收，2026Q2 对比 2025Q2。2025 全年一般及行政费用率由 3.7% 升至 4.1%。',
+              font:FONT, fontSize:15, fill:C.gray } }
+  ]
+};
+
+/* ---------- 2. 页面 → 图表 映射 ---------- */
+var CHART_IDS = { 2:['ch3'], 4:['ch5'], 5:['ch6'], 6:['ch7'],
+                  7:['ch8'], 10:['ch11'], 11:['ch12'] };
+var INST = {};
+
+/* ---------- 3. 翻页 + 图表渲染 ---------- */
+var stage = document.getElementById('stage');
+var slides = [].slice.call(document.querySelectorAll('.slide'));
+var dots = document.getElementById('dots'), label = document.getElementById('pg'), cur = 0;
+var forceAll = /[?&#]all\b/.test(location.href);
+
+function fit(){
+  var s = Math.min(innerWidth/1920, innerHeight/1080);
+  stage.style.transform = 'translate('+((innerWidth-1920*s)/2)+'px,'+
+                          ((innerHeight-1080*s)/2)+'px) scale('+s+')';
+}
+addEventListener('resize', fit); fit();
+
+function drawCharts(i){
+  var ids = CHART_IDS[i];
+  if(!ids || !window.echarts) return;
+  ids.forEach(function(id){
+    var el = document.getElementById(id);
+    if(!el) return;
+    if(!INST[id]) INST[id] = echarts.init(el, null, { renderer:'canvas', devicePixelRatio:2 });
+    INST[id].setOption(polish(OPT[id]));
+    INST[id].resize();
+  });
+}
+
+slides.forEach(function(_,i){
+  var d = document.createElement('span'); d.className = 'dot';
+  d.onclick = function(){ go(i); };
+  dots.appendChild(d);
+});
+
+function go(i){
+  cur = (i + slides.length) % slides.length;
+  slides.forEach(function(s,k){ s.className = 'slide' + (k===cur ? ' on' : ''); });
+  [].slice.call(dots.children).forEach(function(d,k){ d.className = 'dot' + (k===cur ? ' on' : ''); });
+  label.textContent = String(cur+1).padStart(2,'0') + ' / ' + slides.length;
+  drawCharts(cur);
+}
+
+document.getElementById('prev').onclick = function(){ go(cur-1); };
+document.getElementById('next').onclick = function(){ go(cur+1); };
+addEventListener('keydown', function(e){
+  if(e.key==='ArrowRight' || e.key===' ' || e.key==='PageDown'){ e.preventDefault(); go(cur+1); }
+  if(e.key==='ArrowLeft' || e.key==='PageUp'){ e.preventDefault(); go(cur-1); }
+});
+
+/* ?all / #all：把每一页都渲染一遍，供打印 / PDF / 无头截图使用 */
+if(forceAll){
+  slides.forEach(function(_,k){ slides[k].className = 'slide on'; drawCharts(k); });
+}
+
+var h = parseInt(location.hash.replace('#',''), 10);
+go(isNaN(h) ? 0 : h-1);
+
+addEventListener('resize', function(){
+  Object.keys(INST).forEach(function(id){ INST[id].resize(); });
+});
+
+var nav = document.getElementById('nav'), tm = null;
+function poke(){ nav.className = 'show'; clearTimeout(tm);
+  tm = setTimeout(function(){ nav.className = ''; }, 1800); }
+addEventListener('mousemove', poke);
+addEventListener('keydown', poke);
+})();
+</script></body></html>

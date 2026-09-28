@@ -1,0 +1,2036 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>咨询公司风格 · SVG 图表模板库 v3</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --red:#CC0000;
+    --gray:#A3A3A3;
+    --blue:#006393;
+    --ink:#333333;
+    --bg:#F5F5F5;
+    --line:#CCCCCC;
+  }
+  body{
+    background:#FFFFFF;
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1360px;margin:0 auto;padding:56px 40px 96px}
+
+  /* 页头 */
+  .page-head{border-bottom:5px solid #000;padding-bottom:26px;margin-bottom:34px}
+  .page-head h1{font-size:32px;font-weight:700;letter-spacing:.5px}
+  .page-head p{margin-top:12px;font-size:14px;color:var(--gray);line-height:1.8}
+  .page-head .legend{display:flex;gap:26px;margin-top:16px;flex-wrap:wrap}
+  .page-head .legend span{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--gray)}
+  .page-head .legend i{display:inline-block;width:14px;height:14px}
+  .page-head .specs{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .page-head .specs span{font-size:12.5px;color:var(--ink);background:var(--bg);border:1px solid #E5E5E5;padding:5px 11px}
+  .page-head .specs span b{color:var(--red)}
+
+  /* 目录 */
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:44px}
+  .toc a{font-size:13px;color:var(--ink);text-decoration:none;border:1px solid var(--line);padding:6px 12px;background:#FFF}
+  .toc a:hover{border-color:var(--red);color:var(--red)}
+  .toc a b{color:var(--red);margin-right:7px;font-variant-numeric:tabular-nums;font-weight:700}
+
+  /* 卡片 */
+  .card{
+    border:1px solid var(--line);
+    padding:28px 32px 30px;
+    margin-bottom:38px;
+    background:#FFF;
+    scroll-margin-top:18px;
+  }
+  .card-head{
+    display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+    padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:26px;
+  }
+  .card-head .idx{font-size:24px;font-weight:700;color:var(--red);font-variant-numeric:tabular-nums;line-height:1}
+  .card-head h2{font-size:19px;font-weight:600}
+  .card-head .tag{font-size:12.5px;color:var(--gray);margin-left:auto;letter-spacing:.3px}
+  .card-head .spec{font-size:12.5px;color:var(--blue);background:#F0F6FA;border:1px solid #CFE0EA;padding:5px 11px;white-space:nowrap}
+  .card-head .spec.wide{color:#B36B00;background:#FFF8EC;border-color:#F0DDBB}
+  .card-head .btn{font-size:12.5px;color:var(--gray);border:1px solid var(--line);background:#FFF;padding:5px 11px;cursor:pointer;font-family:inherit}
+  .card-head .btn:hover{border-color:var(--red);color:var(--red)}
+  .card-body{display:flex;justify-content:center;overflow-x:auto;padding:4px 0}
+  .card-body svg{display:block;max-width:100%;height:auto}
+  .note{margin-top:20px;font-size:13px;color:var(--gray);line-height:1.8;border-left:3px solid var(--line);padding-left:14px}
+  .note code{font-family:Consolas,"Courier New",monospace;font-size:12px;background:#F5F5F5;border:1px solid #E5E5E5;border-radius:3px;padding:1px 5px;color:#333333}
+  .note b{color:var(--ink)}
+  svg{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif}
+  svg text{user-select:none}
+  .group-title{margin:52px 0 24px;font-size:15px;font-weight:700;color:var(--ink);
+    border-left:5px solid var(--red);padding-left:12px;letter-spacing:.5px}
+  .group-title span{font-weight:400;color:var(--gray);font-size:13px;margin-left:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="page-head">
+    <h1>咨询公司风格 · SVG 图表模板库 v3</h1>
+    <p>28 个标准模板（00 页面骨架 + 01–22 图形构图 + 23–27 文本分类版式）· Flat Design · 纯白背景 · 按 1920×1080 画布的内容区尺寸设计 · 可直接复制 SVG 源码进 PPT 页面</p>
+    <p><b>v3 新增：</b>内容<b>无法图形化</b>时不再强行画图 —— 改用「线 + 框」的文本分类版式（<b>23</b> 横向分类 / <b>24</b> 纵向分列 / <b>25</b> 分组框聚合 / <b>26</b> 类目行式·右侧单列 / <b>27</b> 分类 + 结论带）。</p>
+    <div class="legend">
+      <span><i style="background:#CC0000"></i>主色 #CC0000</span>
+      <span><i style="background:#006393"></i>深蓝 #006393</span>
+      <span><i style="background:#333333"></i>深青 #333333</span>
+      <span><i style="background:#A3A3A3"></i>辅助灰 #A3A3A3</span>
+      <span><i style="background:#F5F5F5;border:1px solid #CCCCCC"></i>浅灰底 #F5F5F5</span>
+      <span><i style="background:#FFF2F2;border:1px solid #CC0000"></i>高亮 #FFF2F2 / #CC0000</span>
+    </div>
+    <div class="specs">
+      <span>画布 <b>1920×1080</b>（16:9）</span>
+      <span>四边边距 <b>20px</b></span>
+      <span>标题区 <b>y=20–170</b> · 标题 48px 加粗左对齐垂直居中</span>
+      <span>分隔线 <b>y=170 · 5px 纯黑 · 左右拉通</b></span>
+      <span>内容区 <b>y=175–1060 · 1880×885</b></span>
+      <span>总结条 <b>≤2 行</b>（仅竖线式）</span>
+      <span>左右分栏 <b>700 + 60 + 1120</b>（图 1120×700 居中）</span>
+      <span>流程类可 <b>通栏 1880×700</b>（拉满）</span>
+      <span>文本分类版式 <b>基准 1200×447</b>（通栏等比 1.567 → 正好铺满 1880×700；删掉图底说明行后 viewBox 收至 <b>1200×380 / 1200×404</b> 再居中）</span>
+    </div>
+  </div>
+
+  <div class="toc">
+    <a href="#c00"><b>00</b>页面骨架</a>
+    <a href="#c01"><b>01</b>四象限</a>
+    <a href="#c02"><b>02</b>矩阵网格</a>
+    <a href="#c03"><b>03</b>金字塔</a>
+    <a href="#c04"><b>04</b>雷达图</a>
+    <a href="#c05"><b>05</b>发展阶段流程</a>
+    <a href="#c06"><b>06</b>分解图</a>
+    <a href="#c07"><b>07</b>PDCA 循环</a>
+    <a href="#c08"><b>08</b>漏斗模型</a>
+    <a href="#c09"><b>09</b>闭环模型</a>
+    <a href="#c10"><b>10</b>双轮驱动</a>
+    <a href="#c11"><b>11</b>横向时间轴</a>
+    <a href="#c12"><b>12</b>Chevron 流程</a>
+    <a href="#c13"><b>13</b>总结陈述条</a>
+    <a href="#c14"><b>14</b>中心辐射</a>
+    <a href="#c15"><b>15</b>阶梯递进</a>
+    <a href="#c16"><b>16</b>对比双栏</a>
+    <a href="#c17"><b>17</b>大数字指标条</a>
+    <a href="#c18"><b>18</b>便当格 Bento</a>
+    <a href="#c19"><b>19</b>天平权衡图</a>
+    <a href="#c20"><b>20</b>因果箭头链</a>
+    <a href="#c21"><b>21</b>金句聚焦页</a>
+    <a href="#c22"><b>22</b>泳道流程图</a>
+    <a href="#c23"><b>23</b>横向分类 ★</a>
+    <a href="#c24"><b>24</b>纵向分列 ★</a>
+    <a href="#c25"><b>25</b>分组框聚合 ★</a>
+    <a href="#c26"><b>26</b>类目行式（单列）★</a>
+    <a href="#c27"><b>27</b>分类+结论带 ★</a>
+  </div>
+
+  <div class="group-title">第一部分 · 页面骨架与顶部组件<span>00–13（沿用并修订）</span></div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 00 版式骨架 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c00">
+    <div class="card-head">
+      <span class="idx">00</span>
+      <h2>页面版式骨架（1920×1080）</h2>
+      <span class="tag">画布规范 / 边距 / 分区</span>
+      <span class="spec">整页 1920×1080</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="960" height="540" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="1920" height="1080" fill="#FFFFFF"/>
+
+        <!-- 20px 安全区虚线 -->
+        <rect x="20" y="20" width="1880" height="1040" fill="none" stroke="#CCCCCC" stroke-width="2" stroke-dasharray="12 10"/>
+
+        <!-- 标题区 y=20–170（150px），标题 48px 加粗 -->
+        <text x="20" y="112" font-size="48" font-weight="700" fill="#333333">页面标题：一句话表达本页核心结论（48px）</text>
+        <text x="1900" y="104" text-anchor="end" font-size="20" font-weight="600" fill="#A3A3A3" letter-spacing="2">SECTION 01 · CONTEXT</text>
+
+        <!-- 5px 纯黑分隔线 @ y=170，横向拉通到画布左右边缘 -->
+        <rect x="0" y="170" width="1920" height="5" fill="#000000"/>
+
+        <!-- 内容区 y=175–1060 -->
+        <rect x="20" y="175" width="1880" height="885" fill="#FCFCFC" stroke="#E5E5E5" stroke-width="2"/>
+        <text x="1888" y="212" text-anchor="end" font-size="20" fill="#BBBBBB">内容区 1880 × 885（y 175–1060）</text>
+
+        <!-- 总结条（可选 · ≤2 行 · 只用竖线式） -->
+        <rect x="20" y="240" width="8" height="100" fill="#CC0000"/>
+        <text x="58" y="282" font-size="26" font-weight="700" fill="#333333">总结行一：核心判断，一句话说清（最多两行，可省略）</text>
+        <text x="58" y="322" font-size="24" font-weight="400" fill="#777777">总结行二：边界条件 / 关键支撑</text>
+        <text x="1900" y="272" text-anchor="end" font-size="20" fill="#A3A3A3">↑ 总结条（可选 · ≤2 行 · 仅竖线式）</text>
+
+        <!-- 左文右图：左栏与总结条同一左边界 x=20 -->
+        <rect x="20" y="380" width="700" height="580" fill="#FFFFFF" stroke="#DDDDDD" stroke-width="2" stroke-dasharray="10 8"/>
+        <text x="50" y="470" font-size="26" font-weight="600" fill="#A3A3A3">左栏 · 文字区</text>
+        <text x="50" y="508" font-size="21" fill="#CCCCCC">700px · 图标 + 小标题 + 两行内说明（不写序号）</text>
+
+        <rect x="780" y="380" width="1120" height="580" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="2"/>
+        <text x="1340" y="648" text-anchor="middle" font-size="28" font-weight="600" fill="#A3A3A3">右栏 · SVG 图形区</text>
+        <text x="1340" y="686" text-anchor="middle" font-size="21" fill="#CCCCCC">1120 × 700 · 图形上下左右居中</text>
+        <text x="450" y="360" text-anchor="middle" font-size="20" fill="#A3A3A3">间距 60px</text>
+
+        <!-- 通栏标注 -->
+        <line x1="20" y1="1000" x2="1900" y2="1000" stroke="#CC0000" stroke-width="2" stroke-dasharray="10 8"/>
+        <text x="20" y="1036" font-size="20" fill="#CC0000">通栏模式：图形左右拉满 x=20–1900（1880×700），垂直居中</text>
+
+        <!-- 页脚（可选） -->
+        <text x="1900" y="1036" text-anchor="end" font-size="18" fill="#CCCCCC">页脚（可选）：来源 14px · 页码 14px（≥ y1040）</text>
+
+        <!-- 规范标注 -->
+        <text x="120" y="14" font-size="18" fill="#E18585">↓ 距顶 20px 边距</text>
+        <text x="1900" y="150" text-anchor="end" font-size="18" fill="#E18585">标题区 150px（y20–170）：标题 48px 加粗 · 左对齐 · 垂直居中 · 基线 ≈ y112</text>
+        <text x="1900" y="230" text-anchor="end" font-size="18" fill="#E18585">5px 纯黑分隔线 @ y=170（横向拉通 x 0–1920，不留边距）</text>
+        <text x="120" y="1080" font-size="18" fill="#E18585">↑ 距底 20px 边距（内容不得越过 y=1060）</text>
+      </svg>
+    </div>
+    <div class="note">
+      <b>硬性坐标（v4）：</b>边距四边 20px；标题区 y=20–170（标题 <b>48px 加粗</b>、左对齐、垂直居中，基线约 y=112）；
+      <b>5px 纯黑分隔线 @ y=170，横向拉通 x 0–1920</b>；内容区 y=175–1060（1880×885）。
+      左右分栏 700 + 60 + 1120（图形 1120×700 上下左右居中）；通栏 1880×700 拉满并垂直居中；总结条仅竖线式；页脚不得低于 y=1040。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 01 四象限矩阵 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c01">
+    <div class="card-head">
+      <span class="idx">01</span>
+      <h2>四象限矩阵</h2>
+      <span class="tag">战略判断 / 场景分类 / 方法选择</span>
+      <span class="spec">右栏 1120×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="700" height="560" viewBox="0 0 700 560" xmlns="http://www.w3.org/2000/svg">
+        <!-- 象限底色 -->
+        <rect x="60" y="80" width="290" height="210" fill="#F5F5F5"/>
+        <rect x="350" y="80" width="290" height="210" fill="#FFFFFF"/>
+        <rect x="60" y="290" width="290" height="210" fill="#FFFFFF"/>
+        <rect x="350" y="290" width="290" height="210" fill="#FFF2F2" stroke="#CC0000" stroke-width="2"/>
+
+        <!-- 分隔线 + 轴箭头 -->
+        <line x1="350" y1="80" x2="350" y2="500" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="60" y1="290" x2="640" y2="290" stroke="#CCCCCC" stroke-width="2"/>
+        <polygon points="344,70 350,56 356,70" fill="#A3A3A3"/>
+        <polygon points="650,284 664,290 650,296" fill="#A3A3A3"/>
+        <rect x="60" y="80" width="580" height="420" fill="none" stroke="#A3A3A3" stroke-width="2"/>
+
+        <!-- 轴标签 -->
+        <text x="60" y="46" font-size="15" fill="#A3A3A3">↑ 维度二（低 → 高）</text>
+        <text x="640" y="540" text-anchor="end" font-size="15" fill="#A3A3A3">维度一（低 → 高） →</text>
+
+        <!-- Q1 -->
+        <text x="205" y="178" text-anchor="middle" font-size="17" font-weight="600" fill="#333333">Q1 象限标题</text>
+        <text x="205" y="206" text-anchor="middle" font-size="13" fill="#A3A3A3">补充说明</text>
+
+        <!-- Q2 -->
+        <text x="495" y="178" text-anchor="middle" font-size="17" font-weight="600" fill="#333333">Q2 象限标题</text>
+        <text x="495" y="206" text-anchor="middle" font-size="13" fill="#A3A3A3">补充说明</text>
+
+        <!-- Q3 -->
+        <text x="205" y="388" text-anchor="middle" font-size="17" font-weight="600" fill="#333333">Q3 象限标题</text>
+        <text x="205" y="416" text-anchor="middle" font-size="13" fill="#A3A3A3">补充说明</text>
+
+        <!-- Q4 高亮 -->
+        <text x="495" y="380" text-anchor="middle" font-size="17" font-weight="700" fill="#CC0000">Q4 主场区域</text>
+        <text x="495" y="408" text-anchor="middle" font-size="13" fill="#CC0000">核心战场 / 优先投入</text>
+        <text x="495" y="438" text-anchor="middle" font-size="12" fill="#A3A3A3">★ 高亮：fill #FFF2F2 · stroke #CC0000</text>
+      </svg>
+    </div>
+    <div class="note">
+      高亮象限统一使用 <b>fill:#FFF2F2 / stroke:#CC0000</b>。轴标签置灰并带箭头（标出"低 → 高"方向），象限标题深青，主场象限标题用主色红。
+      <b>投放：</b>右栏 1120×700，本模板 700 宽等比放大 1.6 倍；四象限内每条文字控制在 2 行内。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 02 矩阵网格 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c02">
+    <div class="card-head">
+      <span class="idx">02</span>
+      <h2>矩阵网格（3×3）</h2>
+      <span class="tag">多维评估 / 能力盘点 / 方案对比</span>
+      <span class="spec">右栏 1120×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="900" height="560" viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg">
+        <!-- 列标题 -->
+        <text x="293" y="96" text-anchor="middle" font-size="16" font-weight="600" fill="#333333">维度 A</text>
+        <text x="519" y="96" text-anchor="middle" font-size="16" font-weight="600" fill="#333333">维度 B</text>
+        <text x="745" y="96" text-anchor="middle" font-size="16" font-weight="600" fill="#333333">维度 C</text>
+
+        <!-- 行标题 -->
+        <text x="96" y="189" text-anchor="middle" font-size="15" font-weight="600" fill="#333333">对象 1</text>
+        <text x="96" y="315" text-anchor="middle" font-size="15" font-weight="600" fill="#333333">对象 2</text>
+        <text x="96" y="441" text-anchor="middle" font-size="15" font-weight="600" fill="#333333">对象 3</text>
+
+        <!-- 网格底色 -->
+        <rect x="180" y="120" width="678" height="378" fill="#FFFFFF"/>
+
+        <!-- 单元格 -->
+        <rect x="180" y="120" width="226" height="126" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <rect x="406" y="120" width="226" height="126" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/>
+        <rect x="632" y="120" width="226" height="126" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+
+        <rect x="180" y="246" width="226" height="126" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/>
+        <rect x="406" y="246" width="226" height="126" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <rect x="632" y="246" width="226" height="126" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/>
+
+        <rect x="180" y="372" width="226" height="126" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <rect x="406" y="372" width="226" height="126" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/>
+        <rect x="632" y="372" width="226" height="126" fill="#FFF2F2" stroke="#CC0000" stroke-width="2"/>
+
+        <!-- 单元格内容 -->
+        <text x="293" y="188" text-anchor="middle" font-size="14" fill="#A3A3A3">●●○</text>
+        <text x="519" y="188" text-anchor="middle" font-size="14" fill="#A3A3A3">●●●</text>
+        <text x="745" y="188" text-anchor="middle" font-size="14" fill="#A3A3A3">●○○</text>
+
+        <text x="293" y="314" text-anchor="middle" font-size="14" fill="#A3A3A3">●●●</text>
+        <text x="519" y="314" text-anchor="middle" font-size="14" fill="#A3A3A3">●○○</text>
+        <text x="745" y="314" text-anchor="middle" font-size="14" fill="#A3A3A3">●●○</text>
+
+        <text x="293" y="440" text-anchor="middle" font-size="14" fill="#A3A3A3">○○○</text>
+        <text x="519" y="440" text-anchor="middle" font-size="14" fill="#A3A3A3">●●○</text>
+        <text x="745" y="430" text-anchor="middle" font-size="15" font-weight="700" fill="#CC0000">●●● 最优</text>
+        <text x="745" y="456" text-anchor="middle" font-size="12" fill="#CC0000">优先选择</text>
+
+        <!-- 外框 -->
+        <rect x="180" y="120" width="678" height="378" fill="none" stroke="#A3A3A3" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="note">
+      表头行 / 表头列统一 15–16px 深青加粗，单元格内容用符号（●●○）或短词。高亮单元格同四象限配色。
+      <b>投放：</b>右栏 1120×700，等比放大 1.24 倍。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 03 金字塔模型 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c03">
+    <div class="card-head">
+      <span class="idx">03</span>
+      <h2>金字塔模型</h2>
+      <span class="tag">战略 / 管理 / 执行 · 层级递进</span>
+      <span class="spec">右栏 1120×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="700" height="560" viewBox="0 0 700 560" xmlns="http://www.w3.org/2000/svg">
+        <!-- 第 1 层：战略层 -->
+        <polygon points="300,60 400,60 442.5,170 257.5,170" fill="#CC0000"/>
+        <text x="350" y="122" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">战略层</text>
+
+        <!-- 第 2 层 -->
+        <polygon points="257.5,170 442.5,170 485,280 215,280" fill="#006393"/>
+        <text x="350" y="232" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">管理层</text>
+
+        <!-- 第 3 层 -->
+        <polygon points="215,280 485,280 527.5,390 172.5,390" fill="#333333"/>
+        <text x="350" y="342" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">执行层</text>
+
+        <!-- 第 4 层 -->
+        <polygon points="172.5,390 527.5,390 570,500 130,500" fill="#A3A3A3"/>
+        <text x="350" y="452" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">支撑层</text>
+
+        <!-- 右侧引线说明 -->
+        <line x1="580" y1="115" x2="628" y2="115" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="636" y="120" font-size="13" fill="#A3A3A3">核心命题</text>
+
+        <line x1="580" y1="225" x2="628" y2="225" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="636" y="230" font-size="13" fill="#A3A3A3">路径拆解</text>
+
+        <line x1="580" y1="335" x2="628" y2="335" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="636" y="340" font-size="13" fill="#A3A3A3">落地动作</text>
+
+        <line x1="580" y1="445" x2="628" y2="445" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="636" y="450" font-size="13" fill="#A3A3A3">资源保障</text>
+
+        <!-- 左侧自下而上箭头 -->
+        <line x1="80" y1="500" x2="80" y2="80" stroke="#CCCCCC" stroke-width="2"/>
+        <polygon points="74,84 80,70 86,84" fill="#CCCCCC"/>
+        <text x="66" y="290" text-anchor="middle" font-size="12" fill="#A3A3A3"
+              transform="rotate(-90 66 290)">自上而下分解 → 自下而上支撑</text>
+      </svg>
+    </div>
+    <div class="note">
+      层级颜色自上而下：主色红 → 深蓝 → 深青 → 辅助灰。白色文字统一 16px / 700。层级数建议 3–5 层；超过 4 层改用分解图。
+      <b>投放：</b>右栏 1120×700，等比放大 1.6 倍。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 04 雷达图 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c04">
+    <div class="card-head">
+      <span class="idx">04</span>
+      <h2>雷达图（五维评估 · 现状 vs 目标）</h2>
+      <span class="tag">能力评估 / 多维打分 / 差距分析</span>
+      <span class="spec">右栏 1120×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="700" height="620" viewBox="0 0 700 620" xmlns="http://www.w3.org/2000/svg">
+        <!-- 网格环（25 / 50 / 75 / 100） -->
+        <polygon points="350,80 549.7,225.1 473.4,459.9 226.6,459.9 150.3,225.1"
+                 fill="none" stroke="#A3A3A3" stroke-width="1.8"/>
+        <polygon points="350,132.5 499.8,241.3 442.6,417.4 257.4,417.4 200.2,241.3"
+                 fill="none" stroke="#CCCCCC" stroke-width="1.5"/>
+        <polygon points="350,185 449.8,257.6 411.7,374.9 288.3,374.9 250.2,257.6"
+                 fill="none" stroke="#CCCCCC" stroke-width="1.5"/>
+        <polygon points="350,237.5 399.9,273.8 380.9,332.5 319.1,332.5 300.1,273.8"
+                 fill="none" stroke="#CCCCCC" stroke-width="1.5"/>
+
+        <!-- 轴线 -->
+        <line x1="350" y1="290" x2="350" y2="80" stroke="#CCCCCC" stroke-width="1.5"/>
+        <line x1="350" y1="290" x2="549.7" y2="225.1" stroke="#CCCCCC" stroke-width="1.5"/>
+        <line x1="350" y1="290" x2="473.4" y2="459.9" stroke="#CCCCCC" stroke-width="1.5"/>
+        <line x1="350" y1="290" x2="226.6" y2="459.9" stroke="#CCCCCC" stroke-width="1.5"/>
+        <line x1="350" y1="290" x2="150.3" y2="225.1" stroke="#CCCCCC" stroke-width="1.5"/>
+
+        <!-- 量程刻度 -->
+        <text x="356" y="241" font-size="11" fill="#CCCCCC">25</text>
+        <text x="356" y="189" font-size="11" fill="#CCCCCC">50</text>
+        <text x="356" y="137" font-size="11" fill="#CCCCCC">75</text>
+        <text x="356" y="85" font-size="11" fill="#CCCCCC">100</text>
+
+        <!-- 目标值多边形（深蓝虚线） -->
+        <polygon points="350,80 529.8,231.6 467.3,451.4 245.1,434.4 160.3,228.3"
+                 fill="#006393" fill-opacity="0.06" stroke="#006393" stroke-width="2.5"
+                 stroke-dasharray="9 6" stroke-linejoin="round"/>
+
+        <!-- 当前评估值多边形 -->
+        <polygon points="350,101 479.8,247.8 448.8,425.9 288.3,374.9 200.2,241.3"
+                 fill="#CC0000" fill-opacity="0.12" stroke="#CC0000" stroke-width="2.5" stroke-linejoin="round"/>
+
+        <!-- 数据点 -->
+        <circle cx="350" cy="101" r="5" fill="#CC0000"/>
+        <circle cx="479.8" cy="247.8" r="5" fill="#CC0000"/>
+        <circle cx="448.8" cy="425.9" r="5" fill="#CC0000"/>
+        <circle cx="288.3" cy="374.9" r="5" fill="#CC0000"/>
+        <circle cx="200.2" cy="241.3" r="5" fill="#CC0000"/>
+
+        <!-- 维度标签 -->
+        <text x="350" y="58" text-anchor="middle" font-size="15" fill="#333333">维度一</text>
+        <text x="574" y="222" text-anchor="start" font-size="15" fill="#333333">维度二</text>
+        <text x="490" y="486" text-anchor="middle" font-size="15" fill="#333333">维度三</text>
+        <text x="210" y="486" text-anchor="middle" font-size="15" fill="#333333">维度四</text>
+        <text x="126" y="222" text-anchor="end" font-size="15" fill="#333333">维度五</text>
+
+        <!-- 最大差距批注 -->
+        <text x="70" y="424" font-size="13" font-weight="700" fill="#CC0000">◆ 最大差距</text>
+        <text x="70" y="446" font-size="12.5" fill="#CC0000">维度四 +0.35</text>
+        <text x="70" y="468" font-size="12.5" fill="#CC0000">维度二 +0.25</text>
+        <line x1="160" y1="450" x2="268" y2="410" stroke="#CC0000" stroke-width="1.2" stroke-dasharray="5 4"/>
+
+        <!-- 图例 -->
+        <rect x="60" y="528" width="18" height="4" fill="#CC0000"/>
+        <text x="86" y="535" font-size="13" fill="#333333">当前评估值</text>
+        <rect x="230" y="528" width="18" height="4" fill="#006393"/>
+        <text x="256" y="535" font-size="13" fill="#333333">三年目标值</text>
+        <text x="430" y="535" font-size="12.5" fill="#A3A3A3">刻度 25 / 50 / 75 / 100 · 五个维度等权</text>
+      </svg>
+    </div>
+    <div class="note">
+      <b>v2 升级：</b>由单一"当前值"扩展为 <b>现状（红实线）+ 目标（蓝虚线）</b> 双多边形，并补量程刻度与"最大差距"批注——
+      雷达图的价值在于差距，而不在于形状。网格环 4 层（25/50/75/100），外环 #A3A3A3、内环 #CCCCCC。
+      <b>投放：</b>右栏 1120×700；维度 5–6 个最优，超过 8 个改矩阵。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 05 发展阶段流程图 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c05">
+    <div class="card-head">
+      <span class="idx">05</span>
+      <h2>发展阶段流程图</h2>
+      <span class="tag">演进路径 / 阶段推进 / 里程碑</span>
+      <span class="spec">通栏 1880×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="1200" height="300" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="mk-stage" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#A3A3A3"/>
+          </marker>
+        </defs>
+
+        <!-- 阶段一 -->
+        <rect x="40" y="80" width="240" height="140" fill="#CC0000"/>
+        <circle cx="160" cy="128" r="24" fill="#FFFFFF" fill-opacity="0.22"/>
+        <text x="160" y="135" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">01</text>
+        <text x="160" y="188" text-anchor="middle" font-size="17" font-weight="600" fill="#FFFFFF">阶段名称</text>
+
+        <!-- 箭头 -->
+        <line x1="290" y1="150" x2="318" y2="150" stroke="#A3A3A3" stroke-width="2" marker-end="url(#mk-stage)"/>
+
+        <!-- 阶段二 -->
+        <rect x="320" y="80" width="240" height="140" fill="#006393"/>
+        <circle cx="440" cy="128" r="24" fill="#FFFFFF" fill-opacity="0.22"/>
+        <text x="440" y="135" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">02</text>
+        <text x="440" y="188" text-anchor="middle" font-size="17" font-weight="600" fill="#FFFFFF">阶段名称</text>
+
+        <!-- 箭头 -->
+        <line x1="570" y1="150" x2="598" y2="150" stroke="#A3A3A3" stroke-width="2" marker-end="url(#mk-stage)"/>
+
+        <!-- 阶段三 -->
+        <rect x="600" y="80" width="240" height="140" fill="#333333"/>
+        <circle cx="720" cy="128" r="24" fill="#FFFFFF" fill-opacity="0.22"/>
+        <text x="720" y="135" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">03</text>
+        <text x="720" y="188" text-anchor="middle" font-size="17" font-weight="600" fill="#FFFFFF">阶段名称</text>
+
+        <!-- 箭头 -->
+        <line x1="850" y1="150" x2="878" y2="150" stroke="#A3A3A3" stroke-width="2" marker-end="url(#mk-stage)"/>
+
+        <!-- 阶段四 -->
+        <rect x="880" y="80" width="240" height="140" fill="#A3A3A3"/>
+        <circle cx="1000" cy="128" r="24" fill="#FFFFFF" fill-opacity="0.22"/>
+        <text x="1000" y="135" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">04</text>
+        <text x="1000" y="188" text-anchor="middle" font-size="17" font-weight="600" fill="#FFFFFF">阶段名称</text>
+
+        <!-- 阶段下方时间轴 -->
+        <line x1="40" y1="262" x2="1160" y2="262" stroke="#CCCCCC" stroke-width="2"/>
+        <text x="160" y="288" text-anchor="middle" font-size="13" fill="#A3A3A3">2025</text>
+        <text x="440" y="288" text-anchor="middle" font-size="13" fill="#A3A3A3">2026</text>
+        <text x="720" y="288" text-anchor="middle" font-size="13" fill="#A3A3A3">2027</text>
+        <text x="1000" y="288" text-anchor="middle" font-size="13" fill="#A3A3A3">2028+</text>
+      </svg>
+    </div>
+    <div class="note">
+      阶段块 240×140，间隔 40。编号圆 r=24，白色 22% 不透明填充。箭头 #A3A3A3 / 2px。
+      <b>投放：</b>通栏 1880×700；本模板 1200 宽等比放大 1.57 倍，放大后需在块内补 2–3 个要点行（v2 增补了底部时间轴）。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 06 分解图 / 逻辑树 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c06">
+    <div class="card-head">
+      <span class="idx">06</span>
+      <h2>分解图 / 逻辑树</h2>
+      <span class="tag">问题拆解 / MECE 分解 / 归因分析</span>
+      <span class="spec">右栏 1120×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="900" height="560" viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg">
+        <!-- 根节点 -->
+        <rect x="330" y="30" width="240" height="70" fill="#CC0000"/>
+        <text x="450" y="72" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">核心问题 / 总目标</text>
+
+        <!-- 连接线 -->
+        <line x1="450" y1="100" x2="450" y2="150" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="150" y1="150" x2="750" y2="150" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="150" y1="150" x2="150" y2="200" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="450" y1="150" x2="450" y2="200" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="750" y1="150" x2="750" y2="200" stroke="#CCCCCC" stroke-width="2"/>
+
+        <!-- 一级分支 -->
+        <rect x="40" y="200" width="220" height="70" fill="#006393"/>
+        <text x="150" y="242" text-anchor="middle" font-size="16" font-weight="600" fill="#FFFFFF">分支一</text>
+
+        <rect x="340" y="200" width="220" height="70" fill="#006393"/>
+        <text x="450" y="242" text-anchor="middle" font-size="16" font-weight="600" fill="#FFFFFF">分支二</text>
+
+        <rect x="640" y="200" width="220" height="70" fill="#006393"/>
+        <text x="750" y="242" text-anchor="middle" font-size="16" font-weight="600" fill="#FFFFFF">分支三</text>
+
+        <!-- 分支一 → 叶子 -->
+        <line x1="150" y1="270" x2="150" y2="310" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="102" y1="310" x2="198" y2="310" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="102" y1="310" x2="102" y2="345" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="198" y1="310" x2="198" y2="345" stroke="#CCCCCC" stroke-width="2"/>
+        <rect x="58" y="345" width="88" height="56" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="102" y="380" text-anchor="middle" font-size="13" fill="#333333">子项</text>
+        <rect x="154" y="345" width="88" height="56" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="198" y="380" text-anchor="middle" font-size="13" fill="#333333">子项</text>
+
+        <!-- 分支二 → 叶子 -->
+        <line x1="450" y1="270" x2="450" y2="310" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="402" y1="310" x2="498" y2="310" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="402" y1="310" x2="402" y2="345" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="498" y1="310" x2="498" y2="345" stroke="#CCCCCC" stroke-width="2"/>
+        <rect x="358" y="345" width="88" height="56" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="402" y="380" text-anchor="middle" font-size="13" fill="#333333">子项</text>
+        <rect x="454" y="345" width="88" height="56" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="498" y="380" text-anchor="middle" font-size="13" fill="#333333">子项</text>
+
+        <!-- 分支三 → 叶子 -->
+        <line x1="750" y1="270" x2="750" y2="310" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="702" y1="310" x2="798" y2="310" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="702" y1="310" x2="702" y2="345" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="798" y1="310" x2="798" y2="345" stroke="#CCCCCC" stroke-width="2"/>
+        <rect x="658" y="345" width="88" height="56" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="702" y="380" text-anchor="middle" font-size="13" fill="#333333">子项</text>
+        <rect x="754" y="345" width="88" height="56" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="798" y="380" text-anchor="middle" font-size="13" fill="#333333">子项</text>
+
+        <!-- MECE 注释 -->
+        <line x1="40" y1="470" x2="860" y2="470" stroke="#CCCCCC" stroke-width="1.5" stroke-dasharray="8 6"/>
+        <text x="450" y="504" text-anchor="middle" font-size="14" fill="#A3A3A3">
+          遵循 MECE 原则：相互独立 · 完全穷尽
+        </text>
+      </svg>
+    </div>
+    <div class="note">
+      根节点主色红，一级分支深蓝，叶子节点浅灰底 + #CCCCCC 描边。连接线统一 #CCCCCC / 2px 直角走线。
+      <b>投放：</b>右栏 1120×700；层级固定 3 层（议题 → 驱动 → 抓手），叶子数 4–8 个。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 07 PDCA 循环 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c07">
+    <div class="card-head">
+      <span class="idx">07</span>
+      <h2>PDCA 闭环循环</h2>
+      <span class="tag">治理 / 运营 / 反馈 / 优化</span>
+      <span class="spec">右栏 1120×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="700" height="580" viewBox="0 0 700 580" xmlns="http://www.w3.org/2000/svg">
+        <!-- P 弧段 -->
+        <path d="M 368.8 111.0 A 180 180 0 0 1 529.0 271.2 L 457.4 278.7 A 108 108 0 0 0 361.3 182.6 Z"
+              fill="#CC0000"/>
+        <!-- D 弧段 -->
+        <path d="M 529.0 308.8 A 180 180 0 0 1 368.8 469.0 L 361.3 397.4 A 108 108 0 0 0 457.4 301.3 Z"
+              fill="#006393"/>
+        <!-- C 弧段 -->
+        <path d="M 331.2 469.0 A 180 180 0 0 1 171.0 308.8 L 242.6 301.3 A 108 108 0 0 0 338.7 397.4 Z"
+              fill="#333333"/>
+        <!-- A 弧段 -->
+        <path d="M 171.0 271.2 A 180 180 0 0 1 331.2 111.0 L 338.7 182.6 A 108 108 0 0 0 242.6 278.7 Z"
+              fill="#A3A3A3"/>
+
+        <!-- 顺时针方向箭头（贴合弧段中心线，指向下一段） -->
+        <polygon points="494.5,286.8 483.6,269.9 501.5,268.0" fill="#CC0000"/>
+        <polygon points="353.2,434.5 370.2,423.6 372.0,441.5" fill="#006393"/>
+        <polygon points="205.6,293.2 216.4,310.2 198.5,312.0" fill="#333333"/>
+        <polygon points="346.8,145.6 329.8,156.4 328.0,138.5" fill="#A3A3A3"/>
+
+        <!-- 弧段标签 -->
+        <text x="451.8" y="188.2" text-anchor="middle" dominant-baseline="central"
+              font-size="30" font-weight="700" fill="#FFFFFF">P</text>
+        <text x="451.8" y="391.8" text-anchor="middle" dominant-baseline="central"
+              font-size="30" font-weight="700" fill="#FFFFFF">D</text>
+        <text x="248.2" y="391.8" text-anchor="middle" dominant-baseline="central"
+              font-size="30" font-weight="700" fill="#FFFFFF">C</text>
+        <text x="248.2" y="188.2" text-anchor="middle" dominant-baseline="central"
+              font-size="30" font-weight="700" fill="#FFFFFF">A</text>
+
+        <!-- 中心文字 -->
+        <text x="350" y="278" text-anchor="middle" font-size="24" font-weight="700" fill="#333333">PDCA</text>
+        <text x="350" y="308" text-anchor="middle" font-size="14" fill="#A3A3A3">持续改进闭环</text>
+
+        <!-- 外部说明 -->
+        <text x="640" y="122" text-anchor="end" font-size="14" fill="#A3A3A3">Plan · 计划</text>
+        <text x="640" y="472" text-anchor="end" font-size="14" fill="#A3A3A3">Do · 执行</text>
+        <text x="60" y="472" text-anchor="start" font-size="14" fill="#A3A3A3">Check · 检查</text>
+        <text x="60" y="122" text-anchor="start" font-size="14" fill="#A3A3A3">Act · 处理</text>
+      </svg>
+    </div>
+    <div class="note">
+      四个 90° 环形弧段，间隙 12°，外径 180 / 内径 108，圆心 (350,290)。弧段配色：P 红 → D 蓝 → C 深青 → A 灰。
+      <b>投放：</b>右栏 1120×700，等比放大 1.6 倍；四个弧段外侧需各补 1 行要点（v2 增补了顺时针方向箭头）。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 08 漏斗模型 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c08">
+    <div class="card-head">
+      <span class="idx">08</span>
+      <h2>漏斗模型</h2>
+      <span class="tag">筛选 / 收敛 / 决策</span>
+      <span class="spec">右栏 1120×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="700" height="560" viewBox="0 0 700 560" xmlns="http://www.w3.org/2000/svg">
+        <!-- 层级 1 -->
+        <polygon points="110,40 590,40 542.5,150 157.5,150" fill="#CC0000"/>
+        <text x="350" y="102" text-anchor="middle" font-size="17" font-weight="600" fill="#FFFFFF">第一层 · 全量池</text>
+
+        <!-- 层级 2 -->
+        <polygon points="157.5,150 542.5,150 495,260 205,260" fill="#006393"/>
+        <text x="350" y="212" text-anchor="middle" font-size="17" font-weight="600" fill="#FFFFFF">第二层 · 初筛</text>
+
+        <!-- 层级 3 -->
+        <polygon points="205,260 495,260 447.5,370 252.5,370" fill="#333333"/>
+        <text x="350" y="322" text-anchor="middle" font-size="17" font-weight="600" fill="#FFFFFF">第三层 · 复筛</text>
+
+        <!-- 层级 4 -->
+        <polygon points="252.5,370 447.5,370 400,480 300,480" fill="#A3A3A3"/>
+        <text x="350" y="432" text-anchor="middle" font-size="16" font-weight="600" fill="#FFFFFF">最终决策</text>
+
+        <!-- 右侧收敛标注 -->
+        <line x1="600" y1="40" x2="640" y2="40" stroke="#CCCCCC" stroke-width="1.5"/>
+        <line x1="600" y1="480" x2="640" y2="480" stroke="#CCCCCC" stroke-width="1.5"/>
+        <line x1="632" y1="40" x2="632" y2="480" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="650" y="248" font-size="13" fill="#A3A3A3">逐层收敛</text>
+        <text x="650" y="272" font-size="13" fill="#A3A3A3">价值聚焦</text>
+      </svg>
+    </div>
+    <div class="note">
+      4 层梯形，每层高 110，顶宽 480 线性收敛至 100。层间无间隙。标签 16–17px / 600 / 白色。
+      <b>投放：</b>右栏 1120×700；放大后建议在每层右侧补"通过率 %"标注。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 09 闭环模型 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c09">
+    <div class="card-head">
+      <span class="idx">09</span>
+      <h2>闭环模型（四节点）</h2>
+      <span class="tag">运营闭环 / 反馈机制 / 循环优化</span>
+      <span class="spec">右栏 1120×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="700" height="580" viewBox="0 0 700 580" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="mk-loop" viewBox="0 0 10 10" refX="8" refY="5"
+                  markerWidth="5.5" markerHeight="5.5" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#A3A3A3"/>
+          </marker>
+        </defs>
+
+        <!-- 连接箭头 -->
+        <line x1="388.9" y1="138.9" x2="496" y2="246" stroke="#A3A3A3" stroke-width="2"
+              marker-end="url(#mk-loop)"/>
+        <line x1="501.1" y1="328.9" x2="394" y2="436" stroke="#A3A3A3" stroke-width="2"
+              marker-end="url(#mk-loop)"/>
+        <line x1="311.1" y1="441.1" x2="204" y2="334" stroke="#A3A3A3" stroke-width="2"
+              marker-end="url(#mk-loop)"/>
+        <line x1="198.9" y1="251.1" x2="306" y2="144" stroke="#A3A3A3" stroke-width="2"
+              marker-end="url(#mk-loop)"/>
+
+        <!-- 节点 -->
+        <circle cx="350" cy="100" r="55" fill="#CC0000"/>
+        <text x="350" y="94" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">环节一</text>
+        <text x="350" y="118" text-anchor="middle" font-size="12" fill="#FFFFFF" fill-opacity="0.85">Step 01</text>
+
+        <circle cx="540" cy="290" r="55" fill="#006393"/>
+        <text x="540" y="284" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">环节二</text>
+        <text x="540" y="308" text-anchor="middle" font-size="12" fill="#FFFFFF" fill-opacity="0.85">Step 02</text>
+
+        <circle cx="350" cy="480" r="55" fill="#333333"/>
+        <text x="350" y="474" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">环节三</text>
+        <text x="350" y="498" text-anchor="middle" font-size="12" fill="#FFFFFF" fill-opacity="0.85">Step 03</text>
+
+        <circle cx="160" cy="290" r="55" fill="#A3A3A3"/>
+        <text x="160" y="284" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">环节四</text>
+        <text x="160" y="308" text-anchor="middle" font-size="12" fill="#FFFFFF" fill-opacity="0.85">Step 04</text>
+
+        <!-- 中心 -->
+        <text x="350" y="284" text-anchor="middle" font-size="15" font-weight="600" fill="#A3A3A3">闭环</text>
+        <text x="350" y="308" text-anchor="middle" font-size="13" fill="#CCCCCC">持续迭代</text>
+      </svg>
+    </div>
+    <div class="note">
+      4 节点按 90° 分布于 R=190 圆周，节点 r=55。连接箭头沿切线方向，颜色 #A3A3A3。
+      <b>投放：</b>右栏 1120×700；与 07 PDCA 二选一，同一份 deck 内不要同时出现。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 10 双轮驱动 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c10">
+    <div class="card-head">
+      <span class="idx">10</span>
+      <h2>双轮驱动图</h2>
+      <span class="tag">模型 + 算法 / 双引擎 / 协同机制</span>
+      <span class="spec">右栏 1120×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="700" height="360" viewBox="0 0 700 360" xmlns="http://www.w3.org/2000/svg">
+        <!-- 左轮 -->
+        <circle cx="200" cy="180" r="110" fill="#FFFFFF" stroke="#CC0000" stroke-width="3"/>
+        <circle cx="200" cy="180" r="86" fill="#FFF2F2"/>
+        <text x="200" y="172" text-anchor="middle" font-size="20" font-weight="700" fill="#CC0000">模型</text>
+        <text x="200" y="200" text-anchor="middle" font-size="13" fill="#A3A3A3">Model</text>
+
+        <!-- 右轮 -->
+        <circle cx="500" cy="180" r="110" fill="#FFFFFF" stroke="#006393" stroke-width="3"/>
+        <circle cx="500" cy="180" r="86" fill="#EDF4F8"/>
+        <text x="500" y="172" text-anchor="middle" font-size="20" font-weight="700" fill="#006393">算法</text>
+        <text x="500" y="200" text-anchor="middle" font-size="13" fill="#A3A3A3">Algorithm</text>
+
+        <!-- 中间加号 -->
+        <circle cx="350" cy="180" r="26" fill="#333333"/>
+        <text x="350" y="192" text-anchor="middle" font-size="28" font-weight="700" fill="#FFFFFF">+</text>
+
+        <!-- 底部说明 -->
+        <line x1="90" y1="318" x2="610" y2="318" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="350" y="346" text-anchor="middle" font-size="14" fill="#A3A3A3">模型定义「做什么」 · 算法解决「怎么做」</text>
+      </svg>
+    </div>
+    <div class="note">
+      双轮 r=110，外描边 3px，内层浅色填充。中间「+」圆 r=26，深青填充。底部一句话收口。
+      <b>投放：</b>右栏 1120×700（该图较矮，建议居中放置或改为左右两轮 + 下方成果框的三段式）。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 11 时间轴 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c11">
+    <div class="card-head">
+      <span class="idx">11</span>
+      <h2>横向时间轴</h2>
+      <span class="tag">路线图 / 演进 / 关键节点</span>
+      <span class="spec">通栏 1880×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="1200" height="300" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg">
+        <!-- 主轴 -->
+        <line x1="80" y1="160" x2="1120" y2="160" stroke="#CCCCCC" stroke-width="3"/>
+
+        <!-- 节点 1 -->
+        <circle cx="80" cy="160" r="11" fill="#CC0000"/>
+        <circle cx="80" cy="160" r="5" fill="#FFFFFF"/>
+        <text x="80" y="128" text-anchor="middle" font-size="15" font-weight="700" fill="#CC0000">T1</text>
+        <text x="80" y="204" text-anchor="middle" font-size="14" fill="#333333">节点名称</text>
+
+        <!-- 节点 2 -->
+        <circle cx="320" cy="160" r="11" fill="#006393"/>
+        <circle cx="320" cy="160" r="5" fill="#FFFFFF"/>
+        <text x="320" y="128" text-anchor="middle" font-size="15" font-weight="700" fill="#006393">T2</text>
+        <text x="320" y="204" text-anchor="middle" font-size="14" fill="#333333">节点名称</text>
+
+        <!-- 节点 3 -->
+        <circle cx="560" cy="160" r="11" fill="#006393"/>
+        <circle cx="560" cy="160" r="5" fill="#FFFFFF"/>
+        <text x="560" y="128" text-anchor="middle" font-size="15" font-weight="700" fill="#006393">T3</text>
+        <text x="560" y="204" text-anchor="middle" font-size="14" fill="#333333">节点名称</text>
+
+        <!-- 节点 4 -->
+        <circle cx="800" cy="160" r="11" fill="#333333"/>
+        <circle cx="800" cy="160" r="5" fill="#FFFFFF"/>
+        <text x="800" y="128" text-anchor="middle" font-size="15" font-weight="700" fill="#333333">T4</text>
+        <text x="800" y="204" text-anchor="middle" font-size="14" fill="#333333">节点名称</text>
+
+        <!-- 节点 5 -->
+        <circle cx="1040" cy="160" r="11" fill="#A3A3A3"/>
+        <circle cx="1040" cy="160" r="5" fill="#FFFFFF"/>
+        <text x="1040" y="128" text-anchor="middle" font-size="15" font-weight="700" fill="#A3A3A3">T5</text>
+        <text x="1040" y="204" text-anchor="middle" font-size="14" fill="#333333">节点名称</text>
+
+        <!-- 端点箭头 -->
+        <line x1="1100" y1="160" x2="1130" y2="160" stroke="#CCCCCC" stroke-width="3"/>
+        <polygon points="1130,152 1146,160 1130,168" fill="#CCCCCC"/>
+
+        <!-- 节点下方补充说明行（v2 新增） -->
+        <text x="80" y="232" text-anchor="middle" font-size="12.5" fill="#A3A3A3">里程碑 / 交付物</text>
+        <text x="320" y="232" text-anchor="middle" font-size="12.5" fill="#A3A3A3">里程碑 / 交付物</text>
+        <text x="560" y="232" text-anchor="middle" font-size="12.5" fill="#A3A3A3">里程碑 / 交付物</text>
+        <text x="800" y="232" text-anchor="middle" font-size="12.5" fill="#A3A3A3">里程碑 / 交付物</text>
+        <text x="1040" y="232" text-anchor="middle" font-size="12.5" fill="#A3A3A3">里程碑 / 交付物</text>
+      </svg>
+    </div>
+    <div class="note">
+      主轴 #CCCCCC / 3px。节点 r=11 外圈 + r=5 白色内芯。时间标签在轴上方，名称与交付物在轴下方，均居中。
+      <b>投放：</b>通栏 1880×700；放大 1.57 倍后在每个节点下补 1 行交付物描述。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 12 箭头流程图 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c12">
+    <div class="card-head">
+      <span class="idx">12</span>
+      <h2>箭头流程图（Chevron）</h2>
+      <span class="tag">问题 → 分析 → 推理 → 结果</span>
+      <span class="spec">通栏 1880×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="1200" height="340" viewBox="0 0 1200 340" xmlns="http://www.w3.org/2000/svg">
+        <!-- Chevron 1 -->
+        <path d="M 40 80 L 284 80 L 320 140 L 284 200 L 40 200 L 76 140 Z" fill="#CC0000"/>
+        <text x="185" y="148" text-anchor="middle" font-size="18" font-weight="600" fill="#FFFFFF">场景问题</text>
+
+        <!-- Chevron 2 -->
+        <path d="M 320 80 L 564 80 L 600 140 L 564 200 L 320 200 L 356 140 Z" fill="#006393"/>
+        <text x="465" y="148" text-anchor="middle" font-size="18" font-weight="600" fill="#FFFFFF">模型构建</text>
+
+        <!-- Chevron 3 -->
+        <path d="M 600 80 L 844 80 L 880 140 L 844 200 L 600 200 L 636 140 Z" fill="#333333"/>
+        <text x="745" y="148" text-anchor="middle" font-size="18" font-weight="600" fill="#FFFFFF">算法推理</text>
+
+        <!-- Chevron 4 -->
+        <path d="M 880 80 L 1124 80 L 1160 140 L 1124 200 L 880 200 L 916 140 Z" fill="#A3A3A3"/>
+        <text x="1025" y="148" text-anchor="middle" font-size="18" font-weight="600" fill="#FFFFFF">结果输出</text>
+
+        <!-- 下方说明行（v2 新增） -->
+        <line x1="40" y1="234" x2="1160" y2="234" stroke="#CCCCCC" stroke-width="1.5" stroke-dasharray="8 6"/>
+        <text x="185" y="266" text-anchor="middle" font-size="13" fill="#A3A3A3">现象与痛点</text>
+        <text x="465" y="266" text-anchor="middle" font-size="13" fill="#A3A3A3">结构与规则</text>
+        <text x="745" y="266" text-anchor="middle" font-size="13" fill="#A3A3A3">计算与判断</text>
+        <text x="1025" y="266" text-anchor="middle" font-size="13" fill="#A3A3A3">决策与动作</text>
+      </svg>
+    </div>
+    <div class="note">
+      每个 Chevron 宽 280、高 120、尖端缩进 36，无缝咬合。文字水平居中于块内，白色 18px / 600。
+      <b>投放：</b>通栏 1880×700；放大后块内补 2 行说明（v2 增补了下方说明行）。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 13 总结陈述条 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c13">
+    <div class="card-head">
+      <span class="idx">13</span>
+      <h2>总结陈述条（竖线式）</h2>
+      <span class="tag">正文顶部摘要 · 最多 2 行 · 禁止 bullet 与大括号</span>
+      <span class="spec">内容区顶部组件 · 1880 宽</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="1200" height="200" viewBox="0 0 1200 200" xmlns="http://www.w3.org/2000/svg">
+        <text x="20" y="26" font-size="13" font-weight="600" fill="#A3A3A3" letter-spacing="1">竖线式（唯一允许样式）</text>
+
+        <rect x="20" y="46" width="6" height="92" fill="#CC0000"/>
+        <text x="52" y="82" font-size="26" font-weight="700" fill="#333333">核心结论前置：一句话讲清本页要传达的唯一判断</text>
+        <text x="52" y="118" font-size="18" font-weight="400" fill="#777777">补充边界：说明结论成立的假设条件、适用范围或衡量口径</text>
+
+        <line x1="20" y1="168" x2="1180" y2="168" stroke="#CCCCCC" stroke-width="1.5" stroke-dasharray="8 6"/>
+        <text x="20" y="192" font-size="13" fill="#CC0000">已取消「大括号式」：统一用 6px 红色竖线，竖线左端与内容区左边界 x=20 对齐</text>
+      </svg>
+    </div>
+    <div class="note">
+      仅保留竖线式：<b>禁止 bullet 圆点，禁止大括号</b>。第一行 26px / 600 / #333333；第二行 24px / 400 / #777777。
+      竖线宽 6px、高度覆盖两行，左端与内容区左边界 x=20 对齐。
+      <b>投放：</b>紧贴内容区顶部（y≈205 起），通栏 1880 宽，下沿与主内容留 44px 间距。
+    </div>
+  </section>
+
+  <div class="group-title">第二部分 · 新增构图<span>14–22（v2 补充：情绪节奏与特殊场景）</span></div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 14 中心辐射 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c14">
+    <div class="card-head">
+      <span class="idx">14</span>
+      <h2>中心辐射图（Hub &amp; Spoke）</h2>
+      <span class="tag">核心概念 + 发散要素 / 能力体系 / 生态构成</span>
+      <span class="spec">右栏 1120×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="900" height="640" viewBox="0 0 900 640" xmlns="http://www.w3.org/2000/svg">
+        <!-- 连接线：上排接下边中点，下排接上边中点 -->
+        <line x1="450" y1="248" x2="450" y2="124" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="387.4" y1="284.4" x2="200" y2="178" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="512.6" y1="284.4" x2="700" y2="178" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="450" y1="392" x2="450" y2="488" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="384.5" y1="349.9" x2="200" y2="434" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="515.5" y1="349.9" x2="700" y2="434" stroke="#CCCCCC" stroke-width="2"/>
+
+        <!-- 中心 -->
+        <circle cx="450" cy="320" r="72" fill="#CC0000"/>
+        <text x="450" y="328" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">核心命题</text>
+        <text x="450" y="354" text-anchor="middle" font-size="12" fill="#FFFFFF" fill-opacity="0.8">CORE</text>
+
+        <!-- 上排要素（矩形框略小 · 弧线略高）：连线接下边中点 -->
+        <rect x="120" y="122" width="160" height="56" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="200" y="155" text-anchor="middle" font-size="15" fill="#333333">要素一</text>
+        <circle cx="200" cy="178" r="3.5" fill="#A3A3A3"/>
+
+        <rect x="370" y="68" width="160" height="56" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="450" y="101" text-anchor="middle" font-size="15" fill="#333333">要素二</text>
+        <circle cx="450" cy="124" r="3.5" fill="#A3A3A3"/>
+
+        <rect x="620" y="122" width="160" height="56" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="700" y="155" text-anchor="middle" font-size="15" fill="#333333">要素三</text>
+        <circle cx="700" cy="178" r="3.5" fill="#A3A3A3"/>
+
+        <!-- 下排要素（弧线略低）：连线上边中点 -->
+        <rect x="120" y="434" width="160" height="56" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="200" y="467" text-anchor="middle" font-size="15" fill="#333333">要素四</text>
+        <circle cx="200" cy="434" r="3.5" fill="#A3A3A3"/>
+
+        <rect x="370" y="488" width="160" height="56" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="450" y="521" text-anchor="middle" font-size="15" fill="#333333">要素五</text>
+        <circle cx="450" cy="488" r="3.5" fill="#A3A3A3"/>
+
+        <rect x="620" y="434" width="160" height="56" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="700" y="467" text-anchor="middle" font-size="15" fill="#333333">要素六</text>
+        <circle cx="700" cy="434" r="3.5" fill="#A3A3A3"/>
+
+        <!-- 说明 -->
+        <text x="450" y="616" text-anchor="middle" font-size="13" fill="#A3A3A3">中心 = 核心命题；外圈 3–8 个支撑要素，沿椭圆（或圆）分布</text>
+      </svg>
+    </div>
+    <div class="note">
+      <b>v3 优化：</b>要素卡由 200×64 收窄为 <b>160×56</b>；外围不再限定同心圆，改为<b>椭圆分布</b>（上排 3 个略成弧线、下排 3 个对称下沉）；
+      <b>连线一律接在矩形框的下边中点（上排）或上边中点（下排）</b>，接点用 3.5px 灰点标记 —— 不许接在角点或斜边中点。
+      中心圆 r=72 主色红，要素卡浅灰底 + #CCCCCC 描边，连线 #CCCCCC / 2px。<b>要素数量 3–8 个</b>。
+      <b>投放：</b>右栏 1120×700 或通栏 1880×700（要素数 ≥6 时用通栏，避免右侧拥挤）。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 15 阶梯递进 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c15">
+    <div class="card-head">
+      <span class="idx">15</span>
+      <h2>阶梯递进图（成熟度阶梯）</h2>
+      <span class="tag">能力升级 / 成熟度演进 / 递进因果</span>
+      <span class="spec wide">通栏 1880×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="1200" height="430" viewBox="0 0 1200 430" xmlns="http://www.w3.org/2000/svg">
+        <!-- 纵轴 -->
+        <line x1="36" y1="360" x2="36" y2="36" stroke="#CCCCCC" stroke-width="2"/>
+        <polygon points="30,44 36,30 42,44" fill="#CCCCCC"/>
+        <text x="20" y="200" text-anchor="middle" font-size="12" fill="#A3A3A3"
+              transform="rotate(-90 20 200)">能力等级 / 成熟度</text>
+
+        <!-- 台阶 -->
+        <rect x="60" y="240" width="200" height="120" fill="#CCCCCC"/>
+        <text x="160" y="280" text-anchor="middle" font-size="14" font-weight="700" fill="#333333">01</text>
+        <text x="160" y="312" text-anchor="middle" font-size="17" font-weight="700" fill="#333333">线下化</text>
+        <text x="160" y="340" text-anchor="middle" font-size="12.5" fill="#555555">人工流转</text>
+
+        <rect x="280" y="190" width="200" height="170" fill="#A3A3A3"/>
+        <text x="380" y="230" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF">02</text>
+        <text x="380" y="262" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">线上化</text>
+        <text x="380" y="290" text-anchor="middle" font-size="12.5" fill="#FFFFFF">流程上线</text>
+
+        <rect x="500" y="140" width="200" height="220" fill="#006393"/>
+        <text x="600" y="180" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF">03</text>
+        <text x="600" y="212" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">数字化</text>
+        <text x="600" y="240" text-anchor="middle" font-size="12.5" fill="#FFFFFF">数据驱动</text>
+
+        <rect x="720" y="90" width="200" height="270" fill="#333333"/>
+        <text x="820" y="130" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF">04</text>
+        <text x="820" y="162" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">智能化</text>
+        <text x="820" y="190" text-anchor="middle" font-size="12.5" fill="#FFFFFF">模型决策</text>
+
+        <rect x="940" y="40" width="200" height="320" fill="#CC0000"/>
+        <text x="1040" y="80" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF">05</text>
+        <text x="1040" y="112" text-anchor="middle" font-size="17" font-weight="700" fill="#FFFFFF">生态化</text>
+        <text x="1040" y="140" text-anchor="middle" font-size="12.5" fill="#FFFFFF">协同创新</text>
+
+        <!-- 底部基线 + 阶段标签 -->
+        <line x1="60" y1="360" x2="1140" y2="360" stroke="#A3A3A3" stroke-width="2"/>
+        <line x1="160" y1="360" x2="160" y2="374" stroke="#A3A3A3" stroke-width="1.5"/>
+        <line x1="380" y1="360" x2="380" y2="374" stroke="#A3A3A3" stroke-width="1.5"/>
+        <line x1="600" y1="360" x2="600" y2="374" stroke="#A3A3A3" stroke-width="1.5"/>
+        <line x1="820" y1="360" x2="820" y2="374" stroke="#A3A3A3" stroke-width="1.5"/>
+        <line x1="1040" y1="360" x2="1040" y2="374" stroke="#A3A3A3" stroke-width="1.5"/>
+        <text x="160" y="398" text-anchor="middle" font-size="13" fill="#A3A3A3">起步</text>
+        <text x="380" y="398" text-anchor="middle" font-size="13" fill="#A3A3A3">规范</text>
+        <text x="600" y="398" text-anchor="middle" font-size="13" fill="#A3A3A3">提效</text>
+        <text x="820" y="398" text-anchor="middle" font-size="13" fill="#A3A3A3">智能</text>
+        <text x="1040" y="398" text-anchor="middle" font-size="13" fill="#A3A3A3">引领</text>
+
+        <text x="1140" y="34" text-anchor="end" font-size="13" fill="#CC0000">越往右 · 能力与价值越高 →</text>
+      </svg>
+    </div>
+    <div class="note">
+      台阶宽 200 / 间隔 20，高度递增体现升级幅度；配色由浅入深（#CCCCCC → #A3A3A3 → #006393 → #333333 → #CC0000）。
+      与 05 的区别：<b>05 强调"阶段推进 + 时间"，15 强调"等级跃升 + 高度差"</b>。
+      <b>投放：</b>通栏 1880×700，本模板 1200 宽等比放大 1.57 倍。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 16 对比双栏 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c16">
+    <div class="card-head">
+      <span class="idx">16</span>
+      <h2>对比双栏（Before / After）</h2>
+      <span class="tag">现状 vs 目标 / A vs B / 理想 vs 现实</span>
+      <span class="spec wide">通栏 1880×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="1200" height="480" viewBox="0 0 1200 480" xmlns="http://www.w3.org/2000/svg">
+        <!-- 表头 -->
+        <rect x="60" y="30" width="500" height="64" fill="#A3A3A3"/>
+        <text x="310" y="72" text-anchor="middle" font-size="19" font-weight="700" fill="#FFFFFF">BEFORE · 现状</text>
+        <rect x="640" y="30" width="500" height="64" fill="#CC0000"/>
+        <text x="890" y="72" text-anchor="middle" font-size="19" font-weight="700" fill="#FFFFFF">AFTER · 目标</text>
+
+        <!-- 中线 -->
+        <line x1="600" y1="20" x2="600" y2="450" stroke="#CCCCCC" stroke-width="2" stroke-dasharray="10 8"/>
+
+        <!-- 行 1 -->
+        <rect x="60" y="116" width="500" height="68" fill="#F5F5F5"/>
+        <text x="84" y="158" font-size="15" fill="#777777">流程割裂，靠人工串联</text>
+        <rect x="640" y="116" width="500" height="68" fill="#FFF2F2" stroke="#CC0000" stroke-width="1.5"/>
+        <text x="664" y="158" font-size="15" font-weight="600" fill="#333333">端到端贯通，自动流转</text>
+        <polygon points="588,138 608,150 588,162" fill="#CC0000"/>
+
+        <!-- 行 2 -->
+        <rect x="60" y="200" width="500" height="68" fill="#F5F5F5"/>
+        <text x="84" y="242" font-size="15" fill="#777777">口径不一，数据对不齐</text>
+        <rect x="640" y="200" width="500" height="68" fill="#FFF2F2" stroke="#CC0000" stroke-width="1.5"/>
+        <text x="664" y="242" font-size="15" font-weight="600" fill="#333333">统一口径，一数一源</text>
+        <polygon points="588,222 608,234 588,246" fill="#CC0000"/>
+
+        <!-- 行 3 -->
+        <rect x="60" y="284" width="500" height="68" fill="#F5F5F5"/>
+        <text x="84" y="326" font-size="15" fill="#777777">决策依赖经验与汇报</text>
+        <rect x="640" y="284" width="500" height="68" fill="#FFF2F2" stroke="#CC0000" stroke-width="1.5"/>
+        <text x="664" y="326" font-size="15" font-weight="600" fill="#333333">决策依赖数据与模型</text>
+        <polygon points="588,306 608,318 588,330" fill="#CC0000"/>
+
+        <!-- 行 4 -->
+        <rect x="60" y="368" width="500" height="68" fill="#F5F5F5"/>
+        <text x="84" y="410" font-size="15" fill="#777777">跨部门协同成本高</text>
+        <rect x="640" y="368" width="500" height="68" fill="#FFF2F2" stroke="#CC0000" stroke-width="1.5"/>
+        <text x="664" y="410" font-size="15" font-weight="600" fill="#333333">平台内协同，责任可溯</text>
+        <polygon points="588,390 608,402 588,414" fill="#CC0000"/>
+
+        <!-- 底部说明 -->
+        <text x="600" y="466" text-anchor="middle" font-size="13" fill="#A3A3A3">两侧对照维度必须一一对齐，差异点逐行同高</text>
+      </svg>
+    </div>
+    <div class="note">
+      左栏灰（现状/次要）、右栏浅红底 + 红框（目标/主张），中线虚线 + 红色右向箭头标记。对照行数 <b>3–5 行为宜</b>，每行 ≤ 16 字。
+      <b>投放：</b>通栏 1880×700；纯对比页不建议再配左文栏。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 17 大数字指标条 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c17">
+    <div class="card-head">
+      <span class="idx">17</span>
+      <h2>大数字指标条（KPI Strip）</h2>
+      <span class="tag">核心数据冲击 / 成果汇报 / 开场结论页</span>
+      <span class="spec wide">通栏 1880×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="1200" height="320" viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg">
+        <text x="40" y="40" font-size="13" fill="#A3A3A3">关键指标一眼看全（建议 3–4 个，禁止超过 4 个）</text>
+
+        <!-- 指标 1 -->
+        <rect x="40" y="60" width="270" height="210" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="175" y="172" text-anchor="middle" font-size="64" font-weight="700" fill="#CC0000">30%</text>
+        <text x="175" y="222" text-anchor="middle" font-size="15" font-weight="600" fill="#333333">端到端效率提升</text>
+        <text x="175" y="252" text-anchor="middle" font-size="12.5" fill="#A3A3A3">统一平台上线后</text>
+
+        <!-- 指标 2 -->
+        <rect x="330" y="60" width="270" height="210" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="465" y="172" text-anchor="middle" font-size="64" font-weight="700" fill="#CC0000">3×</text>
+        <text x="465" y="222" text-anchor="middle" font-size="15" font-weight="600" fill="#333333">数据交付提速</text>
+        <text x="465" y="252" text-anchor="middle" font-size="12.5" fill="#A3A3A3">T+7 缩短至 T+1</text>
+
+        <!-- 指标 3（高亮） -->
+        <rect x="620" y="60" width="270" height="210" fill="#FFF2F2" stroke="#CC0000" stroke-width="2"/>
+        <text x="755" y="172" text-anchor="middle" font-size="64" font-weight="700" fill="#CC0000">#1</text>
+        <text x="755" y="222" text-anchor="middle" font-size="15" font-weight="600" fill="#CC0000">行业对标定位</text>
+        <text x="755" y="252" text-anchor="middle" font-size="12.5" fill="#A3A3A3">客户满意度维度</text>
+
+        <!-- 指标 4 -->
+        <rect x="910" y="60" width="270" height="210" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="1045" y="172" text-anchor="middle" font-size="56" font-weight="700" fill="#CC0000">90 天</text>
+        <text x="1045" y="222" text-anchor="middle" font-size="15" font-weight="600" fill="#333333">首个闭环上线</text>
+        <text x="1045" y="252" text-anchor="middle" font-size="12.5" fill="#A3A3A3">从立项到验收</text>
+
+        <text x="40" y="300" font-size="13" fill="#A3A3A3">数字 64–72px / 700 / 主色红；标签 15px 深青；口径 12.5px 灰 —— 每个数字必须有口径，否则不许出现</text>
+      </svg>
+    </div>
+    <div class="note">
+      一排 3–4 个超大数字，<b>最多高亮一个</b>（浅红底 + 红框）。数字必须可溯源、带单位与口径；用于开场结论页或成果页。
+      <b>投放：</b>通栏 1880×700；数字区垂直居中，下方留 1 行结论句即可。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 18 便当格 Bento -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c18">
+    <div class="card-head">
+      <span class="idx">18</span>
+      <h2>便当格 / 非对称网格（Bento）</h2>
+      <span class="tag">1 主 + N 辅 / 多要点收口 / 破除等宽单调</span>
+      <span class="spec wide">通栏 1880×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="1200" height="560" viewBox="0 0 1200 560" xmlns="http://www.w3.org/2000/svg">
+        <!-- 主瓦片 -->
+        <rect x="40" y="40" width="560" height="480" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <rect x="40" y="40" width="560" height="10" fill="#CC0000"/>
+        <text x="80" y="126" font-size="26" font-weight="700" fill="#333333">主视觉 · 核心框架</text>
+        <text x="80" y="164" font-size="15" fill="#777777">放大一号：SVG 框架图 / 关键矩阵 / 核心结论句</text>
+        <rect x="80" y="200" width="480" height="280" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5" stroke-dasharray="10 8"/>
+        <text x="320" y="346" text-anchor="middle" font-size="15" fill="#A3A3A3">主图区</text>
+
+        <!-- 辅瓦片 1 -->
+        <rect x="620" y="40" width="540" height="140" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/>
+        <rect x="644" y="70" width="44" height="44" fill="#006393"/>
+        <text x="666" y="100" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">01</text>
+        <text x="712" y="92" font-size="19" font-weight="700" fill="#333333">辅助要点一</text>
+        <text x="712" y="126" font-size="14" fill="#777777">一行说明，不超过 24 字</text>
+
+        <!-- 辅瓦片 2 -->
+        <rect x="620" y="200" width="540" height="140" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/>
+        <rect x="644" y="230" width="44" height="44" fill="#333333"/>
+        <text x="666" y="260" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">02</text>
+        <text x="712" y="252" font-size="19" font-weight="700" fill="#333333">辅助要点二</text>
+        <text x="712" y="286" font-size="14" fill="#777777">一行说明，不超过 24 字</text>
+
+        <!-- 辅瓦片 3（放大） -->
+        <rect x="620" y="360" width="540" height="160" fill="#FFF2F2" stroke="#CC0000" stroke-width="2"/>
+        <rect x="644" y="390" width="44" height="44" fill="#CC0000"/>
+        <text x="666" y="420" text-anchor="middle" font-size="20" font-weight="700" fill="#FFFFFF">03</text>
+        <text x="712" y="412" font-size="19" font-weight="700" fill="#CC0000">收口要点（高亮）</text>
+        <text x="712" y="446" font-size="14" fill="#777777">可放结论句或一个关键数字</text>
+        <text x="712" y="480" font-size="13" fill="#A3A3A3">高亮瓦片 = 本页的落点</text>
+
+        <text x="40" y="546" font-size="13" fill="#A3A3A3">禁止等宽等高：1 大 + N 小，用尺寸差制造视觉节奏</text>
+      </svg>
+    </div>
+    <div class="note">
+      <b>Bento 的关键是"不整齐"</b>：主瓦片占 47% 宽，右侧 3 块高度不等（140 / 140 / 160），其中一块高亮。
+      <b>投放：</b>通栏 1880×700；整份 deck 使用不超过 2 次。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 19 天平权衡图 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c19">
+    <div class="card-head">
+      <span class="idx">19</span>
+      <h2>天平权衡图</h2>
+      <span class="tag">利弊权衡 / 投入产出 / 风险收益</span>
+      <span class="spec">右栏 1120×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="900" height="470" viewBox="0 0 900 470" xmlns="http://www.w3.org/2000/svg">
+        <!-- 两端标签 -->
+        <rect x="60" y="40" width="340" height="60" fill="#FFF2F2" stroke="#CC0000" stroke-width="1.5"/>
+        <text x="230" y="78" text-anchor="middle" font-size="17" font-weight="700" fill="#CC0000">收益 / 机会</text>
+        <rect x="500" y="40" width="340" height="60" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="670" y="78" text-anchor="middle" font-size="17" font-weight="700" fill="#333333">代价 / 风险</text>
+
+        <!-- 横梁 -->
+        <line x1="120" y1="200" x2="780" y2="200" stroke="#333333" stroke-width="8"/>
+
+        <!-- 支点 -->
+        <polygon points="450,208 390,320 510,320" fill="#333333"/>
+        <line x1="350" y1="322" x2="550" y2="322" stroke="#333333" stroke-width="3"/>
+
+        <!-- 吊绳与托盘 -->
+        <line x1="180" y1="200" x2="180" y2="300" stroke="#A3A3A3" stroke-width="2"/>
+        <polygon points="120,300 240,300 220,340 140,340" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="180" y="326" text-anchor="middle" font-size="16" font-weight="700" fill="#333333">3 项</text>
+
+        <line x1="720" y1="200" x2="720" y2="300" stroke="#A3A3A3" stroke-width="2"/>
+        <polygon points="660,300 780,300 760,340 680,340" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="720" y="326" text-anchor="middle" font-size="16" font-weight="700" fill="#333333">2 项</text>
+
+        <!-- 结论条 -->
+        <rect x="60" y="376" width="780" height="60" fill="#F5F5F5"/>
+        <text x="450" y="414" text-anchor="middle" font-size="16" font-weight="600" fill="#333333">结论：收益可量化、代价可承受 → 建议推进</text>
+
+        <text x="450" y="460" text-anchor="middle" font-size="12.5" fill="#A3A3A3">托盘内写明条目数量或权重；两端条目须同维度、可比较</text>
+      </svg>
+    </div>
+    <div class="note">
+      横梁 8px 深青，支点三角 + 底座线；两端托盘用浅灰，条目数或权重写在托盘内。底部<b>必须落到一句结论</b>，否则天平图只是装饰。
+      <b>投放：</b>右栏 1120×700；利弊条目各 ≤ 4 条，超出改用对比双栏（16）。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 20 因果箭头链 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c20">
+    <div class="card-head">
+      <span class="idx">20</span>
+      <h2>因果箭头链</h2>
+      <span class="tag">现象 → 根因 → 对策 → 结果 / 归因推导</span>
+      <span class="spec wide">通栏 1880×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="1200" height="350" viewBox="0 0 1200 350" xmlns="http://www.w3.org/2000/svg">
+        <text x="40" y="58" font-size="13" fill="#A3A3A3">因果链：现象 → 根因 → 对策 → 结果（每段配 1 行数据佐证）</text>
+
+        <!-- 块 1 -->
+        <rect x="40" y="100" width="250" height="120" fill="#A3A3A3"/>
+        <text x="60" y="134" font-size="12" fill="#FFFFFF" fill-opacity="0.85">STEP 1</text>
+        <text x="165" y="180" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">问题现象</text>
+        <text x="165" y="250" text-anchor="middle" font-size="13" fill="#777777">现象描述</text>
+
+        <!-- 箭头 1 -->
+        <line x1="298" y1="160" x2="304" y2="160" stroke="#A3A3A3" stroke-width="2.5"/>
+        <polygon points="314,160 300,153 300,167" fill="#A3A3A3"/>
+
+        <!-- 块 2 -->
+        <rect x="320" y="100" width="250" height="120" fill="#333333"/>
+        <text x="340" y="134" font-size="12" fill="#FFFFFF" fill-opacity="0.85">STEP 2</text>
+        <text x="445" y="180" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">根本原因</text>
+        <text x="445" y="250" text-anchor="middle" font-size="13" fill="#777777">5 Why 归因</text>
+
+        <!-- 箭头 2 -->
+        <line x1="578" y1="160" x2="584" y2="160" stroke="#A3A3A3" stroke-width="2.5"/>
+        <polygon points="594,160 580,153 580,167" fill="#A3A3A3"/>
+
+        <!-- 块 3 -->
+        <rect x="600" y="100" width="250" height="120" fill="#006393"/>
+        <text x="620" y="134" font-size="12" fill="#FFFFFF" fill-opacity="0.85">STEP 3</text>
+        <text x="725" y="180" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">关键对策</text>
+        <text x="725" y="250" text-anchor="middle" font-size="13" fill="#777777">优先级排序</text>
+
+        <!-- 箭头 3 -->
+        <line x1="858" y1="160" x2="864" y2="160" stroke="#A3A3A3" stroke-width="2.5"/>
+        <polygon points="874,160 860,153 860,167" fill="#A3A3A3"/>
+
+        <!-- 块 4 -->
+        <rect x="880" y="100" width="250" height="120" fill="#CC0000"/>
+        <text x="900" y="134" font-size="12" fill="#FFFFFF" fill-opacity="0.85">STEP 4</text>
+        <text x="1005" y="180" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">结果验证</text>
+        <text x="1005" y="250" text-anchor="middle" font-size="13" fill="#777777">量化验证</text>
+
+        <!-- 底部提示 -->
+        <line x1="40" y1="290" x2="1160" y2="290" stroke="#CCCCCC" stroke-width="1.5" stroke-dasharray="8 6"/>
+        <text x="600" y="322" text-anchor="middle" font-size="13" fill="#A3A3A3">避免跳跃归因：相邻两段之间必须有可验证的因果证据</text>
+      </svg>
+    </div>
+    <div class="note">
+      块 250×120，间隔 30；配色按论证强度递进（灰 → 深青 → 蓝 → 红），<b>末端必须用主色红</b>（结论落点）。
+      <b>投放：</b>通栏 1880×700；四段式最稳，超过 5 段改用横向流程图。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 21 金句聚焦页 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c21">
+    <div class="card-head">
+      <span class="idx">21</span>
+      <h2>金句聚焦页 / 过渡页</h2>
+      <span class="tag">章节过渡 / 核心结论 / 全篇呼吸点</span>
+      <span class="spec wide">通栏 1880×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="1200" height="400" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
+        <line x1="60" y1="196" x2="150" y2="196" stroke="#CCCCCC" stroke-width="2"/>
+        <line x1="1050" y1="196" x2="1140" y2="196" stroke="#CCCCCC" stroke-width="2"/>
+
+        <rect x="560" y="86" width="80" height="6" fill="#CC0000"/>
+
+        <text x="600" y="196" text-anchor="middle" font-size="40" font-weight="700" fill="#333333">把复杂的事说简单，把简单的事做到位</text>
+        <text x="600" y="252" text-anchor="middle" font-size="21" fill="#A3A3A3">（可选）一句支撑性副句，或整页留白</text>
+        <text x="600" y="332" text-anchor="middle" font-size="15" fill="#A3A3A3">—— 人月聊IT</text>
+
+        <text x="600" y="382" text-anchor="middle" font-size="12.5" fill="#CCCCCC">留白 ≥ 70%：金句页是全篇的呼吸点，一页只放一句话</text>
+      </svg>
+    </div>
+    <div class="note">
+      居中 40px / 700 一句话，上方 80×6 红色短线，两侧灰色装饰线，署名置灰。<b>用于章节过渡与总收口</b>，一份 deck 中 1–2 页即可。
+      <b>投放：</b>通栏 1880×700（此模板为示意尺寸，投放时整体垂直居中）。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 22 泳道流程图 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c22">
+    <div class="card-head">
+      <span class="idx">22</span>
+      <h2>泳道流程图（跨部门协作）</h2>
+      <span class="tag">责任主体 × 阶段 / 交接关系 / 落地动作</span>
+      <span class="spec wide">通栏 1880×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="1200" height="540" viewBox="0 0 1200 540" xmlns="http://www.w3.org/2000/svg">
+        <!-- 列标题 -->
+        <text x="300" y="80" text-anchor="middle" font-size="15" font-weight="600" fill="#333333">阶段一 · 立项</text>
+        <text x="540" y="80" text-anchor="middle" font-size="15" font-weight="600" fill="#333333">阶段二 · 设计</text>
+        <text x="780" y="80" text-anchor="middle" font-size="15" font-weight="600" fill="#333333">阶段三 · 试点</text>
+        <text x="1020" y="80" text-anchor="middle" font-size="15" font-weight="600" fill="#333333">阶段四 · 推广</text>
+
+        <!-- 泳道 -->
+        <rect x="40" y="100" width="140" height="120" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="110" y="166" text-anchor="middle" font-size="15" font-weight="600" fill="#333333">业务部门</text>
+        <rect x="180" y="100" width="980" height="120" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="1.5"/>
+
+        <rect x="40" y="240" width="140" height="120" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="110" y="306" text-anchor="middle" font-size="15" font-weight="600" fill="#333333">IT 部门</text>
+        <rect x="180" y="240" width="980" height="120" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="1.5"/>
+
+        <rect x="40" y="380" width="140" height="120" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="110" y="446" text-anchor="middle" font-size="15" font-weight="600" fill="#333333">数据团队</text>
+        <rect x="180" y="380" width="980" height="120" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="1.5"/>
+
+        <!-- 阶段分隔虚线 -->
+        <line x1="420" y1="100" x2="420" y2="500" stroke="#E5E5E5" stroke-width="1.5" stroke-dasharray="6 6"/>
+        <line x1="660" y1="100" x2="660" y2="500" stroke="#E5E5E5" stroke-width="1.5" stroke-dasharray="6 6"/>
+        <line x1="900" y1="100" x2="900" y2="500" stroke="#E5E5E5" stroke-width="1.5" stroke-dasharray="6 6"/>
+
+        <!-- 业务部门任务 -->
+        <rect x="200" y="125" width="160" height="50" fill="#FFFFFF" stroke="#CC0000" stroke-width="1.5"/>
+        <text x="280" y="156" text-anchor="middle" font-size="15" font-weight="600" fill="#CC0000">需求提出</text>
+
+        <rect x="700" y="125" width="160" height="50" fill="#FFFFFF" stroke="#CC0000" stroke-width="1.5"/>
+        <text x="780" y="156" text-anchor="middle" font-size="15" font-weight="600" fill="#CC0000">试点验证</text>
+
+        <rect x="940" y="125" width="160" height="50" fill="#FFFFFF" stroke="#CC0000" stroke-width="1.5"/>
+        <text x="1020" y="156" text-anchor="middle" font-size="15" font-weight="600" fill="#CC0000">推广落地</text>
+
+        <!-- IT 部门任务 -->
+        <rect x="440" y="265" width="160" height="50" fill="#EDF4F8" stroke="#006393" stroke-width="1.5"/>
+        <text x="520" y="296" text-anchor="middle" font-size="15" font-weight="600" fill="#006393">方案设计</text>
+
+        <rect x="700" y="265" width="160" height="50" fill="#EDF4F8" stroke="#006393" stroke-width="1.5"/>
+        <text x="780" y="296" text-anchor="middle" font-size="15" font-weight="600" fill="#006393">系统开发</text>
+
+        <!-- 数据团队任务 -->
+        <rect x="200" y="405" width="160" height="50" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="280" y="436" text-anchor="middle" font-size="15" font-weight="600" fill="#333333">数据摸底</text>
+
+        <rect x="440" y="405" width="160" height="50" fill="#F5F5F5" stroke="#CCCCCC" stroke-width="1.5"/>
+        <text x="520" y="436" text-anchor="middle" font-size="15" font-weight="600" fill="#333333">指标口径</text>
+
+        <!-- 关键交接（红色虚线） -->
+        <line x1="280" y1="177" x2="280" y2="392" stroke="#CC0000" stroke-width="2" stroke-dasharray="7 5"/>
+        <polygon points="280,402 274,390 286,390" fill="#CC0000"/>
+
+        <line x1="364" y1="430" x2="428" y2="430" stroke="#CC0000" stroke-width="2" stroke-dasharray="7 5"/>
+        <polygon points="438,430 426,424 426,436" fill="#CC0000"/>
+
+        <line x1="520" y1="403" x2="520" y2="327" stroke="#CC0000" stroke-width="2" stroke-dasharray="7 5"/>
+        <polygon points="520,317 514,329 526,329" fill="#CC0000"/>
+
+        <line x1="604" y1="290" x2="688" y2="290" stroke="#CC0000" stroke-width="2" stroke-dasharray="7 5"/>
+        <polygon points="698,290 686,284 686,296" fill="#CC0000"/>
+
+        <line x1="780" y1="263" x2="780" y2="187" stroke="#CC0000" stroke-width="2" stroke-dasharray="7 5"/>
+        <polygon points="780,177 774,189 786,189" fill="#CC0000"/>
+
+        <line x1="864" y1="150" x2="928" y2="150" stroke="#CC0000" stroke-width="2" stroke-dasharray="7 5"/>
+        <polygon points="938,150 926,144 926,156" fill="#CC0000"/>
+
+        <text x="600" y="528" text-anchor="middle" font-size="13" fill="#A3A3A3">泳道 = 责任主体；横向 = 阶段推进；红色虚线 = 关键交接点</text>
+      </svg>
+    </div>
+    <div class="note">
+      泳道 3–4 条，每条高 120；阶段列 4 列、列间虚线分隔。任务卡按责任方配色（主责红框 / IT 蓝 / 数据灰），
+      <b>红色虚线标出关键交接</b>——泳道图的价值就在"谁交给谁"。
+      <b>投放：</b>通栏 1880×700；单条泳道内任务 ≤ 3 个。
+    </div>
+  </section>
+
+  <div class="group-title">第三部分 · 文本类内容分类版式<span>23–27（v3 新增：内容无法图形化时，用「线 + 框」做分类聚合，不再强行画图）</span></div>
+
+  <div class="card" style="background:#FFFDFD;border-color:#F0C9C9">
+    <div class="card-head" style="border-bottom-color:#F0C9C9">
+      <span class="idx" style="color:#CC0000">选型</span>
+      <h2>横向分类 vs 纵向分列 —— 一句话判断</h2>
+      <span class="tag">两把尺子：子条目数量 × 单条字数</span>
+    </div>
+    <div class="card-body" style="display:block;overflow:visible">
+      <table style="width:100%;border-collapse:collapse;font-size:14px;line-height:1.75">
+        <thead>
+          <tr style="background:#F5F5F5">
+            <th style="text-align:left;padding:10px 14px;border:1px solid #E5E5E5;width:150px"></th>
+            <th style="text-align:left;padding:10px 14px;border:1px solid #E5E5E5">每类的子条目</th>
+            <th style="text-align:left;padding:10px 14px;border:1px solid #E5E5E5">单条字数</th>
+            <th style="text-align:left;padding:10px 14px;border:1px solid #E5E5E5">用哪个模板</th>
+            <th style="text-align:left;padding:10px 14px;border:1px solid #E5E5E5">骨架</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5"><b style="color:#CC0000">横向分类</b></td>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5">少（每类 1–3 条）</td>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5"><b>多</b>（每条 2–4 行、≥ 30 字）</td>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5"><b>23</b>（+ 结论带 → 27）</td>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5">2–4 列并列，每列一块"宽"栏</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5"><b style="color:#CC0000">纵向分列</b></td>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5"><b>多</b>（每类 4–8 条）</td>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5">少（每条 ≤ 14 字、单行）</td>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5"><b>24</b>（+ 分组框 → 25）</td>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5">2–4 列，每列一个"高"清单</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5">都不极端</td>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5">每类 3–5 条</td>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5">中（每条 ≤ 20 字）</td>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5"><b>25</b> 分组框（2×2）</td>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5">独立描边框聚合</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5">扁而多</td>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5">每类 <b>2–4 条</b>（每条 1 行）</td>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5">少（每条 ≤ 18 字）</td>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5"><b>26</b> 类目行式（横向滑）</td>
+            <td style="padding:10px 14px;border:1px solid #E5E5E5">类目在左、右侧 <b>只 1 列</b>（不得再分列）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note">
+      两者都是 <b>2–4 个类目</b>；类目数为 2 时可把列宽放大 1 倍（更舒展）。<b>区别只在"每类条目多少 × 单条字多字少"</b>：
+      条目少而字多 → <b>横向分类</b>（宽列吃长文本）；条目多而字少 → <b>纵向分列</b>（高列吃多条短条目）。判断失误会让页面要么右半空、要么文字挤成豆腐块。
+      <br><b>26 的单列铁律：</b>类目行式里<b>右侧永远只有 1 个框、1 列条目</b>（示例放 2 行）；条目变多时<b>加高行高、减少类目数</b>，<b>绝不在右侧再切 2–3 个子列</b>（那会退化成 23）。行高 = <code>380 ÷ 行数 − 20</code>。
+      <br><b>投放口径（决定是否真正"铺满 + 居中"）：</b>
+      ① 保留图底说明行 → <code>viewBox="0 0 1200 447"</code>，通栏 1880×700 <b>正好铺满</b>；
+      ② 删掉图底说明行（实际投放建议）→ viewBox 高度改为内容下沿：<b>23/24/25/26 用 <code>0 0 1200 380</code></b>（得 1880×595）、<b>27 用 <code>0 0 1200 404</code></b>（含结论带，得 1880×633），再在剩余空间内<b>上下左右居中</b>；
+      ③ 公式：<code>投放高度 = 1880 × viewBox高 ÷ 1200</code>（viewBox 宽恒为 1200）。类目数为 2 时也可整体投右栏 1120×700（等比 0.933）。
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 23 横向分类布局（少类目 · 长文本） -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c23">
+    <div class="card-head">
+      <span class="idx">23</span>
+      <h2>横向分类布局（少类目 · 长文本）</h2>
+      <span class="tag">每类子条目少、单条文字多 / 观点陈述 / 判断依据 / 无法图形化</span>
+      <span class="spec wide">通栏 1880×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="1200" height="447" viewBox="0 0 1200 447" xmlns="http://www.w3.org/2000/svg">
+        <!-- ── 类目一 · 现状 ── -->
+        <rect x="0" y="0" width="374" height="58" fill="#333333"/>
+        <g stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="19" y="19" width="9" height="9"/><rect x="30" y="19" width="9" height="9"/>
+          <rect x="19" y="30" width="9" height="9"/><rect x="30" y="30" width="9" height="9"/>
+        </g>
+        <text x="52" y="36" font-size="19" font-weight="700" fill="#FFFFFF">类目一 · 现状</text>
+        <rect x="0" y="58" width="374" height="322" fill="#FCFCFC" stroke="#E5E5E5" stroke-width="1.5"/>
+        <rect x="22" y="86" width="3.5" height="20" fill="#333333"/>
+        <text x="34" y="101" font-size="15.5" font-weight="700" fill="#333333">要点标题一</text>
+        <text x="34" y="131" font-size="13.5" fill="#777777">正文说明第一行，每行不超过 22 字</text>
+        <text x="34" y="157" font-size="13.5" fill="#777777">第二行同样长度，行高固定 26px</text>
+        <text x="34" y="183" font-size="13.5" fill="#777777">第三行为上限，超出请拆类目</text>
+        <line x1="22" y1="209" x2="352" y2="209" stroke="#E5E5E5" stroke-width="1.5"/>
+        <rect x="22" y="228" width="3.5" height="20" fill="#333333"/>
+        <text x="34" y="243" font-size="15.5" font-weight="700" fill="#333333">要点标题二</text>
+        <text x="34" y="273" font-size="13.5" fill="#777777">正文说明第一行</text>
+        <text x="34" y="299" font-size="13.5" fill="#777777">正文说明第二行</text>
+        <text x="34" y="325" font-size="13.5" fill="#777777">正文说明第三行</text>
+        <rect x="22" y="340" width="156" height="28" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="1.5"/>
+        <text x="34" y="359" font-size="12.5" fill="#A3A3A3">标签 · 现状描述</text>
+
+        <!-- ── 类目二 · 机制 ── -->
+        <rect x="413" y="0" width="374" height="58" fill="#006393"/>
+        <g stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="423,45 430,38 435,42 443,31"/>
+          <polyline points="437,31 443,31 443,37"/>
+        </g>
+        <text x="465" y="36" font-size="19" font-weight="700" fill="#FFFFFF">类目二 · 机制</text>
+        <rect x="413" y="58" width="374" height="322" fill="#FCFCFC" stroke="#E5E5E5" stroke-width="1.5"/>
+        <rect x="435" y="86" width="3.5" height="20" fill="#006393"/>
+        <text x="447" y="101" font-size="15.5" font-weight="700" fill="#333333">要点标题一</text>
+        <text x="447" y="131" font-size="13.5" fill="#777777">正文说明第一行，每行不超过 22 字</text>
+        <text x="447" y="157" font-size="13.5" fill="#777777">第二行同样长度，行高固定 26px</text>
+        <text x="447" y="183" font-size="13.5" fill="#777777">第三行为上限，超出请拆类目</text>
+        <line x1="435" y1="209" x2="765" y2="209" stroke="#E5E5E5" stroke-width="1.5"/>
+        <rect x="435" y="228" width="3.5" height="20" fill="#006393"/>
+        <text x="447" y="243" font-size="15.5" font-weight="700" fill="#333333">要点标题二</text>
+        <text x="447" y="273" font-size="13.5" fill="#777777">正文说明第一行</text>
+        <text x="447" y="299" font-size="13.5" fill="#777777">正文说明第二行</text>
+        <text x="447" y="325" font-size="13.5" fill="#777777">正文说明第三行</text>
+        <rect x="435" y="340" width="156" height="28" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="1.5"/>
+        <text x="447" y="359" font-size="12.5" fill="#A3A3A3">标签 · 机制描述</text>
+
+        <!-- ── 类目三 · 结论（高亮，全页唯一） ── -->
+        <rect x="826" y="0" width="374" height="58" fill="#CC0000"/>
+        <g stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="855" cy="29" r="9"/><circle cx="855" cy="29" r="3"/>
+        </g>
+        <text x="878" y="36" font-size="19" font-weight="700" fill="#FFFFFF">类目三 · 结论</text>
+        <rect x="826" y="58" width="374" height="322" fill="#FFF2F2" stroke="#CC0000" stroke-width="2"/>
+        <rect x="848" y="86" width="3.5" height="20" fill="#CC0000"/>
+        <text x="860" y="101" font-size="15.5" font-weight="700" fill="#CC0000">要点标题一</text>
+        <text x="860" y="131" font-size="13.5" fill="#555555">正文说明第一行，每行不超过 22 字</text>
+        <text x="860" y="157" font-size="13.5" fill="#555555">第二行同样长度，行高固定 26px</text>
+        <text x="860" y="183" font-size="13.5" fill="#555555">第三行为上限，超出请拆类目</text>
+        <line x1="848" y1="209" x2="1178" y2="209" stroke="#E8B4B4" stroke-width="1.5"/>
+        <rect x="848" y="228" width="3.5" height="20" fill="#CC0000"/>
+        <text x="860" y="243" font-size="15.5" font-weight="700" fill="#CC0000">要点标题二</text>
+        <text x="860" y="273" font-size="13.5" fill="#555555">正文说明第一行</text>
+        <text x="860" y="299" font-size="13.5" fill="#555555">正文说明第二行</text>
+        <text x="860" y="325" font-size="13.5" fill="#555555">正文说明第三行</text>
+        <rect x="848" y="340" width="156" height="28" fill="#FFF2F2" stroke="#CC0000" stroke-width="1.5"/>
+        <text x="860" y="359" font-size="12.5" fill="#CC0000">标签 · 结论落点</text>
+
+        <text x="600" y="428" text-anchor="middle" font-size="12.5" fill="#A3A3A3">横向分类：类目 2–4 个横向并列（1200 基准下每列 374px）｜每类 1–3 个要点、每个要点 2–4 行长文本｜类目栏 = 色块 + 线稿图标 + 类名</text>
+      </svg>
+    </div>
+    <div class="note">
+      <b>适用：</b>内容<b>没有可画的图形结构</b>（无层级 / 流程 / 因果 / 对比 / 矩阵关系），只是"几类观点 + 各自说明"——<b>不要硬造图形</b>，用本模板做分类聚合。
+      <b>骨架：</b>2–4 列等宽；每列 = 顶部色块标题栏（图标 + 类名）+ 描边内容框；框内每个要点 = <b>3.5px 类目色短竖线</b> + 小标题 + 2–4 行正文（13.5px / 行高 26px），要点之间用 <b>1.5px 浅灰横线</b>分隔。
+      <b>高亮：</b>全页只允许一列走红色（<code>#FFF2F2</code> / <code>#CC0000</code>），且应落在"结论/落点"那一类。
+      <b>投放：</b>通栏 1880×700（等比 1.567，正好铺满，无需留白）；整体在容器内上下左右居中。2 类目时可放右栏 1120×700（等比 0.933，垂直居中）。
+      <b>实际投放建议删掉图底说明行</b>：viewBox 高度改为内容下沿 —— <b>23/24/25/26 用 <code>0 0 1200 380</code></b>（1880×595）；<b>27 含结论带用 <code>0 0 1200 404</code></b>（1880×633）；随后在容器内上下左右居中。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 24 纵向分列分类（多条目 · 短文本） -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c24">
+    <div class="card-head">
+      <span class="idx">24</span>
+      <h2>纵向分列分类（多条目 · 短文本）</h2>
+      <span class="tag">每类条目多、单条字数少 / 清单式归类 / 要点归堆</span>
+      <span class="spec wide">通栏 1880×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="1200" height="447" viewBox="0 0 1200 447" xmlns="http://www.w3.org/2000/svg">
+        <!-- ── 列一 ── -->
+        <rect x="0" y="0" width="374" height="58" fill="#333333"/>
+        <g stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M38,29 a9,9 0 1 1 -3.2,-6.9"/><polygon points="38,18 38,25 33,22" fill="#FFFFFF" stroke="none"/>
+        </g>
+        <text x="52" y="36" font-size="19" font-weight="700" fill="#FFFFFF">类目一</text>
+        <text x="352" y="36" text-anchor="end" font-size="12.5" fill="#FFFFFF" fill-opacity="0.75">7 条</text>
+        <rect x="0" y="58" width="374" height="322" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="1.5"/>
+        <line x1="24" y1="81" x2="38" y2="81" stroke="#333333" stroke-width="2.5"/>
+        <text x="50" y="86" font-size="15" fill="#333333">短条目一（≤ 14 字）</text>
+        <line x1="18" y1="104" x2="356" y2="104" stroke="#F0F0F0" stroke-width="1.5"/>
+        <line x1="24" y1="127" x2="38" y2="127" stroke="#333333" stroke-width="2.5"/>
+        <text x="50" y="132" font-size="15" fill="#333333">短条目二</text>
+        <line x1="18" y1="150" x2="356" y2="150" stroke="#F0F0F0" stroke-width="1.5"/>
+        <line x1="24" y1="173" x2="38" y2="173" stroke="#333333" stroke-width="2.5"/>
+        <text x="50" y="178" font-size="15" fill="#333333">短条目三</text>
+        <line x1="18" y1="196" x2="356" y2="196" stroke="#F0F0F0" stroke-width="1.5"/>
+        <line x1="24" y1="219" x2="38" y2="219" stroke="#333333" stroke-width="2.5"/>
+        <text x="50" y="224" font-size="15" fill="#333333">短条目四</text>
+        <line x1="18" y1="242" x2="356" y2="242" stroke="#F0F0F0" stroke-width="1.5"/>
+        <line x1="24" y1="265" x2="38" y2="265" stroke="#333333" stroke-width="2.5"/>
+        <text x="50" y="270" font-size="15" fill="#333333">短条目五</text>
+        <line x1="18" y1="288" x2="356" y2="288" stroke="#F0F0F0" stroke-width="1.5"/>
+        <line x1="24" y1="311" x2="38" y2="311" stroke="#333333" stroke-width="2.5"/>
+        <text x="50" y="316" font-size="15" fill="#333333">短条目六</text>
+        <line x1="18" y1="334" x2="356" y2="334" stroke="#F0F0F0" stroke-width="1.5"/>
+        <line x1="24" y1="357" x2="38" y2="357" stroke="#333333" stroke-width="2.5"/>
+        <text x="50" y="362" font-size="15" fill="#333333">短条目七</text>
+
+        <!-- ── 列二 ── -->
+        <rect x="413" y="0" width="374" height="58" fill="#006393"/>
+        <g stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="442" cy="29" r="8"/><circle cx="442" cy="29" r="3.2"/>
+          <line x1="431" y1="29" x2="434" y2="29"/><line x1="450" y1="29" x2="453" y2="29"/>
+          <line x1="442" y1="18" x2="442" y2="21"/><line x1="442" y1="37" x2="442" y2="40"/>
+        </g>
+        <text x="465" y="36" font-size="19" font-weight="700" fill="#FFFFFF">类目二</text>
+        <text x="765" y="36" text-anchor="end" font-size="12.5" fill="#FFFFFF" fill-opacity="0.75">6 条</text>
+        <rect x="413" y="58" width="374" height="322" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="1.5"/>
+        <line x1="437" y1="81" x2="451" y2="81" stroke="#006393" stroke-width="2.5"/>
+        <text x="463" y="86" font-size="15" fill="#333333">短条目一（≤ 14 字）</text>
+        <line x1="431" y1="104" x2="769" y2="104" stroke="#F0F0F0" stroke-width="1.5"/>
+        <line x1="437" y1="127" x2="451" y2="127" stroke="#006393" stroke-width="2.5"/>
+        <text x="463" y="132" font-size="15" fill="#333333">短条目二</text>
+        <line x1="431" y1="150" x2="769" y2="150" stroke="#F0F0F0" stroke-width="1.5"/>
+        <line x1="437" y1="173" x2="451" y2="173" stroke="#006393" stroke-width="2.5"/>
+        <text x="463" y="178" font-size="15" fill="#333333">短条目三</text>
+        <line x1="431" y1="196" x2="769" y2="196" stroke="#F0F0F0" stroke-width="1.5"/>
+        <line x1="437" y1="219" x2="451" y2="219" stroke="#006393" stroke-width="2.5"/>
+        <text x="463" y="224" font-size="15" fill="#333333">短条目四</text>
+        <line x1="431" y1="242" x2="769" y2="242" stroke="#F0F0F0" stroke-width="1.5"/>
+        <line x1="437" y1="265" x2="451" y2="265" stroke="#006393" stroke-width="2.5"/>
+        <text x="463" y="270" font-size="15" fill="#333333">短条目五</text>
+        <line x1="431" y1="288" x2="769" y2="288" stroke="#F0F0F0" stroke-width="1.5"/>
+        <line x1="437" y1="311" x2="451" y2="311" stroke="#006393" stroke-width="2.5"/>
+        <text x="463" y="316" font-size="15" fill="#333333">短条目六</text>
+
+        <!-- ── 列三（高亮） ── -->
+        <rect x="826" y="0" width="374" height="58" fill="#CC0000"/>
+        <g stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="855" cy="24" r="4"/><path d="M847,39 a8,7 0 0 1 16,0"/>
+        </g>
+        <text x="878" y="36" font-size="19" font-weight="700" fill="#FFFFFF">类目三</text>
+        <text x="1178" y="36" text-anchor="end" font-size="12.5" fill="#FFFFFF" fill-opacity="0.75">7 条</text>
+        <rect x="826" y="58" width="374" height="322" fill="#FFF2F2" stroke="#CC0000" stroke-width="2"/>
+        <line x1="850" y1="81" x2="864" y2="81" stroke="#CC0000" stroke-width="2.5"/>
+        <text x="876" y="86" font-size="15" fill="#333333">短条目一（≤ 14 字）</text>
+        <line x1="844" y1="104" x2="1182" y2="104" stroke="#E8B4B4" stroke-width="1.5"/>
+        <line x1="850" y1="127" x2="864" y2="127" stroke="#CC0000" stroke-width="2.5"/>
+        <text x="876" y="132" font-size="15" fill="#333333">短条目二</text>
+        <line x1="844" y1="150" x2="1182" y2="150" stroke="#E8B4B4" stroke-width="1.5"/>
+        <line x1="850" y1="173" x2="864" y2="173" stroke="#CC0000" stroke-width="2.5"/>
+        <text x="876" y="178" font-size="15" fill="#333333">短条目三</text>
+        <line x1="844" y1="196" x2="1182" y2="196" stroke="#E8B4B4" stroke-width="1.5"/>
+        <line x1="850" y1="219" x2="864" y2="219" stroke="#CC0000" stroke-width="2.5"/>
+        <text x="876" y="224" font-size="15" fill="#333333">短条目四</text>
+        <line x1="844" y1="242" x2="1182" y2="242" stroke="#E8B4B4" stroke-width="1.5"/>
+        <line x1="850" y1="265" x2="864" y2="265" stroke="#CC0000" stroke-width="2.5"/>
+        <text x="876" y="270" font-size="15" fill="#333333">短条目五</text>
+        <line x1="844" y1="288" x2="1182" y2="288" stroke="#E8B4B4" stroke-width="1.5"/>
+        <line x1="850" y1="311" x2="864" y2="311" stroke="#CC0000" stroke-width="2.5"/>
+        <text x="876" y="316" font-size="15" fill="#333333">短条目六</text>
+        <line x1="844" y1="334" x2="1182" y2="334" stroke="#E8B4B4" stroke-width="1.5"/>
+        <line x1="850" y1="357" x2="864" y2="357" stroke="#CC0000" stroke-width="2.5"/>
+        <text x="876" y="362" font-size="15" fill="#333333">短条目七</text>
+
+        <text x="600" y="428" text-anchor="middle" font-size="12.5" fill="#A3A3A3">纵向分列：类目 2–4 个横向并列｜每类 4–8 条、每条 ≤ 14 字（单行）｜条目 = 类目色短横线 + 文字，行间 1.5px 浅灰细线｜类目栏右上角标条目数</text>
+      </svg>
+    </div>
+    <div class="note">
+      <b>与 23 的区别：</b>23 靠"宽列"吃长文本，24 靠"高列"吃多条目。每列固定行高 46px，<b>条目数 4–8 条</b>（336px 内容高度内正好放 7 条，内容少时整体垂直居中）。
+      <b>分隔线是灵魂：</b>行间 1.5px <code>#F0F0F0</code> 细线让"一堆短词"变成"一张清单"；<b>禁用圆点 bullet</b>，用 2.5px 短横线（类目色）作行首标记。
+      <b>高亮：</b>只允许一列红底（<code>#FFF2F2</code> / <code>#CC0000</code>），分隔线同步改为 <code>#E8B4B4</code>。
+      <b>投放：</b>通栏 1880×700（等比 1.567），整体上下左右居中。<b>实际投放建议删掉图底说明行</b>：viewBox 高度改为内容下沿 —— <b>23/24/25/26 用 <code>0 0 1200 380</code></b>（1880×595）；<b>27 含结论带用 <code>0 0 1200 404</code></b>（1880×633）；随后在容器内上下左右居中。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 25 分组框聚合 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c25">
+    <div class="card-head">
+      <span class="idx">25</span>
+      <h2>分组框聚合（每类一个独立框）</h2>
+      <span class="tag">每类 3–5 条中等长度 / 强调"类目边界" / 2 或 4 类目</span>
+      <span class="spec wide">通栏 1880×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="1200" height="447" viewBox="0 0 1200 447" xmlns="http://www.w3.org/2000/svg">
+        <!-- ── 框 1（左上）· 深青 ── -->
+        <rect x="0" y="0" width="580" height="200" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/>
+        <rect x="0" y="0" width="580" height="46" fill="#333333"/>
+        <g stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="17" y="14" width="8" height="8"/><rect x="27" y="14" width="8" height="8"/>
+          <rect x="17" y="24" width="8" height="8"/><rect x="27" y="24" width="8" height="8"/>
+        </g>
+        <text x="48" y="31" font-size="18" font-weight="700" fill="#FFFFFF">类目一</text>
+        <text x="562" y="31" text-anchor="end" font-size="12.5" fill="#FFFFFF" fill-opacity="0.75">4 条</text>
+        <rect x="22" y="62" width="3.5" height="16" fill="#333333"/>
+        <text x="36" y="76" font-size="15" fill="#333333">子条目文字（≤ 20 字）</text>
+        <rect x="22" y="96" width="3.5" height="16" fill="#333333"/>
+        <text x="36" y="110" font-size="15" fill="#333333">子条目文字</text>
+        <rect x="22" y="130" width="3.5" height="16" fill="#333333"/>
+        <text x="36" y="144" font-size="15" fill="#333333">子条目文字</text>
+        <rect x="22" y="164" width="3.5" height="16" fill="#333333"/>
+        <text x="36" y="178" font-size="15" fill="#333333">子条目文字</text>
+
+        <!-- ── 框 2（右上）· 深蓝 ── -->
+        <rect x="620" y="0" width="580" height="200" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/>
+        <rect x="620" y="0" width="580" height="46" fill="#006393"/>
+        <g stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M637,7 H 649 L 653,11 V 37 H 637 Z"/><polyline points="649,7 649,11 653,11"/>
+        </g>
+        <text x="668" y="31" font-size="18" font-weight="700" fill="#FFFFFF">类目二</text>
+        <text x="1182" y="31" text-anchor="end" font-size="12.5" fill="#FFFFFF" fill-opacity="0.75">4 条</text>
+        <rect x="642" y="62" width="3.5" height="16" fill="#006393"/>
+        <text x="656" y="76" font-size="15" fill="#333333">子条目文字（≤ 20 字）</text>
+        <rect x="642" y="96" width="3.5" height="16" fill="#006393"/>
+        <text x="656" y="110" font-size="15" fill="#333333">子条目文字</text>
+        <rect x="642" y="130" width="3.5" height="16" fill="#006393"/>
+        <text x="656" y="144" font-size="15" fill="#333333">子条目文字</text>
+        <rect x="642" y="164" width="3.5" height="16" fill="#006393"/>
+        <text x="656" y="178" font-size="15" fill="#333333">子条目文字</text>
+
+        <!-- ── 框 3（左下）· 辅助灰（文字用深青，保证对比度） ── -->
+        <rect x="0" y="216" width="580" height="200" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="1.5"/>
+        <rect x="0" y="216" width="580" height="46" fill="#A3A3A3"/>
+        <g stroke="#333333" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="27" cy="239" r="9"/><circle cx="27" cy="239" r="3"/>
+        </g>
+        <text x="48" y="247" font-size="18" font-weight="700" fill="#333333">类目三</text>
+        <text x="562" y="247" text-anchor="end" font-size="12.5" fill="#333333" fill-opacity="0.75">4 条</text>
+        <rect x="22" y="278" width="3.5" height="16" fill="#A3A3A3"/>
+        <text x="36" y="292" font-size="15" fill="#333333">子条目文字（≤ 20 字）</text>
+        <rect x="22" y="312" width="3.5" height="16" fill="#A3A3A3"/>
+        <text x="36" y="326" font-size="15" fill="#333333">子条目文字</text>
+        <rect x="22" y="346" width="3.5" height="16" fill="#A3A3A3"/>
+        <text x="36" y="360" font-size="15" fill="#333333">子条目文字</text>
+        <rect x="22" y="380" width="3.5" height="16" fill="#A3A3A3"/>
+        <text x="36" y="394" font-size="15" fill="#333333">子条目文字</text>
+
+        <!-- ── 框 4（右下 · 高亮）· 主色红 ── -->
+        <rect x="620" y="216" width="580" height="200" fill="#FFF2F2" stroke="#CC0000" stroke-width="2"/>
+        <rect x="620" y="216" width="580" height="46" fill="#CC0000"/>
+        <g stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M639,229 a9,9 0 1 1 -3.2,-6.9"/><polygon points="639,218 639,225 634,222" fill="#FFFFFF" stroke="none"/>
+        </g>
+        <text x="668" y="247" font-size="18" font-weight="700" fill="#FFFFFF">类目四 · 落点</text>
+        <text x="1182" y="247" text-anchor="end" font-size="12.5" fill="#FFFFFF" fill-opacity="0.75">4 条</text>
+        <rect x="642" y="278" width="3.5" height="16" fill="#CC0000"/>
+        <text x="656" y="292" font-size="15" fill="#333333">子条目文字（≤ 20 字）</text>
+        <rect x="642" y="312" width="3.5" height="16" fill="#CC0000"/>
+        <text x="656" y="326" font-size="15" fill="#333333">子条目文字</text>
+        <rect x="642" y="346" width="3.5" height="16" fill="#CC0000"/>
+        <text x="656" y="360" font-size="15" fill="#333333">子条目文字</text>
+        <rect x="642" y="380" width="3.5" height="16" fill="#CC0000"/>
+        <text x="656" y="394" font-size="15" fill="#333333">子条目文字</text>
+
+        <text x="600" y="441" text-anchor="middle" font-size="12.5" fill="#A3A3A3">分组框聚合：2–4 个独立描边框（4 类用 2×2；3 类用 1×3；2 类用 1×2 放大）｜每类 3–5 条、每条 ≤ 20 字｜框 = 色块标题条 + 线稿图标 + 类目色短竖线条目</text>
+      </svg>
+    </div>
+    <div class="note">
+      <b>框是主角：</b>与 24 的"一列清单"不同，25 让每个类目拥有<b>自己的闭合边框</b>，适合"类目之间需要划清界限"的内容（如 四个来源 / 四类风险 / 四种角色）。
+      <b>排布：</b>4 类用 2×2（580×200）；3 类改 1×3（每框 374×420，条目增至 6–8 条）；2 类用 1×2（每框 920×420）。
+      <b>高亮：</b>只允许一个框走红（<code>#FFF2F2</code> 底 + <code>#CC0000</code> 2px 描边），且应落在"落点 / 结论"那一类。
+      <b>投放：</b>通栏 1880×700（等比 1.567），整体上下左右居中。<b>实际投放建议删掉图底说明行</b>：viewBox 高度改为内容下沿 —— <b>23/24/25/26 用 <code>0 0 1200 380</code></b>（1880×595）；<b>27 含结论带用 <code>0 0 1200 404</code></b>（1880×633）；随后在容器内上下左右居中。
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 26 类目行式清单 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c26">
+    <div class="card-head">
+      <span class="idx">26</span>
+      <h2>类目行式清单（左类目 + 右侧单列条目）</h2>
+      <span class="tag">类目扁而多 / 右侧 1 列 · 每框 2 行条目 / 最省竖向空间</span>
+      <span class="spec wide">通栏 1880×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="1200" height="447" viewBox="0 0 1200 447" xmlns="http://www.w3.org/2000/svg">
+        <!-- ── 行 1 ── -->
+        <rect x="0" y="0" width="250" height="80" fill="#333333"/>
+        <g stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="18" y="30" width="8" height="8"/><rect x="28" y="30" width="8" height="8"/>
+          <rect x="18" y="40" width="8" height="8"/><rect x="28" y="40" width="8" height="8"/>
+        </g>
+        <text x="54" y="36" font-size="18" font-weight="700" fill="#FFFFFF">类目一</text>
+        <text x="54" y="60" font-size="12.5" fill="#FFFFFF" fill-opacity="0.75">2 条</text>
+        <rect x="274" y="0" width="926" height="80" fill="#FAFAFA" stroke="#E5E5E5" stroke-width="1.5"/>
+        <line x1="290" y1="29" x2="304" y2="29" stroke="#333333" stroke-width="2.5"/>
+        <text x="314" y="34" font-size="15" fill="#333333">条目一：业务现状 / 瓶颈</text>
+        <line x1="290" y1="57" x2="304" y2="57" stroke="#333333" stroke-width="2.5"/>
+        <text x="314" y="62" font-size="15" fill="#333333">条目二：影响范围与量级</text>
+
+        <!-- ── 行 2 ── -->
+        <line x1="0" y1="90" x2="1200" y2="90" stroke="#F0F0F0" stroke-width="1.5"/>
+        <rect x="0" y="100" width="250" height="80" fill="#006393"/>
+        <g stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="14,37 21,30 26,34 34,23"/>
+          <polyline points="28,23 34,23 34,29"/>
+        </g>
+        <text x="54" y="136" font-size="18" font-weight="700" fill="#FFFFFF">类目二</text>
+        <text x="54" y="160" font-size="12.5" fill="#FFFFFF" fill-opacity="0.75">2 条</text>
+        <rect x="274" y="100" width="926" height="80" fill="#FAFAFA" stroke="#E5E5E5" stroke-width="1.5"/>
+        <line x1="290" y1="129" x2="304" y2="129" stroke="#006393" stroke-width="2.5"/>
+        <text x="314" y="134" font-size="15" fill="#333333">条目一：机制 / 规则 / 口径</text>
+        <line x1="290" y1="157" x2="304" y2="157" stroke="#006393" stroke-width="2.5"/>
+        <text x="314" y="162" font-size="15" fill="#333333">条目二：责任主体与边界</text>
+
+        <!-- ── 行 3 ── -->
+        <line x1="0" y1="190" x2="1200" y2="190" stroke="#F0F0F0" stroke-width="1.5"/>
+        <rect x="0" y="200" width="250" height="80" fill="#A3A3A3"/>
+        <g stroke="#333333" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="27" cy="240" r="8"/><circle cx="27" cy="240" r="3.2"/>
+          <line x1="16" y1="240" x2="19" y2="240"/><line x1="35" y1="240" x2="38" y2="240"/>
+          <line x1="27" y1="229" x2="27" y2="232"/><line x1="27" y1="248" x2="27" y2="251"/>
+        </g>
+        <text x="54" y="236" font-size="18" font-weight="700" fill="#333333">类目三</text>
+        <text x="54" y="260" font-size="12.5" fill="#333333" fill-opacity="0.75">2 条</text>
+        <rect x="274" y="200" width="926" height="80" fill="#FAFAFA" stroke="#E5E5E5" stroke-width="1.5"/>
+        <line x1="290" y1="229" x2="304" y2="229" stroke="#A3A3A3" stroke-width="2.5"/>
+        <text x="314" y="234" font-size="15" fill="#333333">条目一：数据 / 指标 / 台账</text>
+        <line x1="290" y1="257" x2="304" y2="257" stroke="#A3A3A3" stroke-width="2.5"/>
+        <text x="314" y="262" font-size="15" fill="#333333">条目二：更新频率与来源</text>
+
+        <!-- ── 行 4（高亮） ── -->
+        <line x1="0" y1="290" x2="1200" y2="290" stroke="#F0F0F0" stroke-width="1.5"/>
+        <rect x="0" y="300" width="250" height="80" fill="#CC0000"/>
+        <g stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="27" cy="340" r="9"/><circle cx="27" cy="340" r="3"/>
+        </g>
+        <text x="54" y="336" font-size="18" font-weight="700" fill="#FFFFFF">类目四</text>
+        <text x="54" y="360" font-size="12.5" fill="#FFFFFF" fill-opacity="0.75">2 条</text>
+        <rect x="274" y="300" width="926" height="80" fill="#FFF2F2" stroke="#CC0000" stroke-width="1.5"/>
+        <line x1="290" y1="329" x2="304" y2="329" stroke="#CC0000" stroke-width="2.5"/>
+        <text x="314" y="334" font-size="15" fill="#333333">条目一：落点 / 下一步动作</text>
+        <line x1="290" y1="357" x2="304" y2="357" stroke="#CC0000" stroke-width="2.5"/>
+        <text x="314" y="362" font-size="15" fill="#333333">条目二：验收标准与时间</text>
+
+        <text x="600" y="420" text-anchor="middle" font-size="12.5" fill="#A3A3A3">类目行式：2–4 行，每行 = 左侧类目色块（250px，图标 + 类名 + 条数）+ 右侧 1 个通宽条目框（926×80，内含 1 列 × 2 行条目）｜行间 1.5px 浅灰横线 —— 右侧只允许 1 列，不再分列</text>
+      </svg>
+    </div>
+    <div class="note">
+      <b>最适合"类目扁而多、单条话不多"的清单</b>（如四类来源 × 各 2–4 条）。类目横过来放在左侧，比分列式更<b>省竖向空间</b>。
+      <b>右侧硬性只有 1 列：</b>每行右侧是 <b>1 个整框</b>，框内条目<b>自上而下排成 1 列</b>（示例放 2 行，标为参考数据）。<b>不得再把右侧切成 2–3 个子列</b>——一旦分列，行式"逐行读数"的节奏就断了，视觉上也和 23 横向分类撞车。
+      <b>线 + 框三重奏：</b>① 左类目色块（实心框）② 右条目框（描边框，每行仅此一个）③ 行间横线（分隔线）；框内每行条目前置 <b>2.5px 类目色短横线</b>（长 14）。
+      <b>条目更多怎么办：</b>不要分列，改为<b>减少类目数 + 加高行高</b>——行高 = <code>380 ÷ 行数 − 20</code>；4 行 → 80（2 条）、3 行 → 106（3 条）、2 行 → 170（5 条）。始终 1 列。
+      <b>投放：</b>通栏 1880×700（等比 1.567），整体上下左右居中。<b>实际投放建议删掉图底说明行</b>：viewBox 高度改为内容下沿 —— <b>23/24/25/26 用 <code>0 0 1200 380</code></b>（1880×595）；<b>27 含结论带用 <code>0 0 1200 404</code></b>（1880×633）；随后在容器内上下左右居中。
+    </div>
+  </section>
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 27 分类 + 结论带 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section class="card" id="c27">
+    <div class="card-head">
+      <span class="idx">27</span>
+      <h2>分类 + 底部结论带</h2>
+      <span class="tag">先分类、后收口 / 分类页必须有落点 / 与卡 13 总结条呼应</span>
+      <span class="spec wide">通栏 1880×700</span>
+      <button class="btn btn-copy">复制 SVG</button>
+    </div>
+    <div class="card-body">
+      <svg width="1200" height="447" viewBox="0 0 1200 447" xmlns="http://www.w3.org/2000/svg">
+        <!-- ── 类目一 ── -->
+        <rect x="0" y="0" width="374" height="56" fill="#333333"/>
+        <g stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M29,17 H 41 L 45,21 V 39 H 29 Z"/><polyline points="41,17 41,21 45,21"/>
+        </g>
+        <text x="56" y="35" font-size="18" font-weight="700" fill="#FFFFFF">类目一</text>
+        <rect x="0" y="56" width="374" height="236" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="1.5"/>
+        <line x1="24" y1="84" x2="38" y2="84" stroke="#333333" stroke-width="2.5"/>
+        <text x="50" y="90" font-size="15" fill="#333333">短条目一（≤ 16 字）</text>
+        <line x1="18" y1="112" x2="356" y2="112" stroke="#F0F0F0" stroke-width="1.5"/>
+        <line x1="24" y1="140" x2="38" y2="140" stroke="#333333" stroke-width="2.5"/>
+        <text x="50" y="146" font-size="15" fill="#333333">短条目二</text>
+        <line x1="18" y1="168" x2="356" y2="168" stroke="#F0F0F0" stroke-width="1.5"/>
+        <line x1="24" y1="196" x2="38" y2="196" stroke="#333333" stroke-width="2.5"/>
+        <text x="50" y="202" font-size="15" fill="#333333">短条目三</text>
+        <line x1="18" y1="224" x2="356" y2="224" stroke="#F0F0F0" stroke-width="1.5"/>
+        <line x1="24" y1="252" x2="38" y2="252" stroke="#333333" stroke-width="2.5"/>
+        <text x="50" y="258" font-size="15" fill="#333333">短条目四</text>
+
+        <!-- ── 类目二 ── -->
+        <rect x="413" y="0" width="374" height="56" fill="#006393"/>
+        <g stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M451,28 a9,9 0 1 1 -3.2,-6.9"/><polygon points="451,17 451,24 446,21" fill="#FFFFFF" stroke="none"/>
+        </g>
+        <text x="469" y="35" font-size="18" font-weight="700" fill="#FFFFFF">类目二</text>
+        <rect x="413" y="56" width="374" height="236" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="1.5"/>
+        <line x1="437" y1="84" x2="451" y2="84" stroke="#006393" stroke-width="2.5"/>
+        <text x="463" y="90" font-size="15" fill="#333333">短条目一（≤ 16 字）</text>
+        <line x1="431" y1="112" x2="769" y2="112" stroke="#F0F0F0" stroke-width="1.5"/>
+        <line x1="437" y1="140" x2="451" y2="140" stroke="#006393" stroke-width="2.5"/>
+        <text x="463" y="146" font-size="15" fill="#333333">短条目二</text>
+        <line x1="431" y1="168" x2="769" y2="168" stroke="#F0F0F0" stroke-width="1.5"/>
+        <line x1="437" y1="196" x2="451" y2="196" stroke="#006393" stroke-width="2.5"/>
+        <text x="463" y="202" font-size="15" fill="#333333">短条目三</text>
+        <line x1="431" y1="224" x2="769" y2="224" stroke="#F0F0F0" stroke-width="1.5"/>
+        <line x1="437" y1="252" x2="451" y2="252" stroke="#006393" stroke-width="2.5"/>
+        <text x="463" y="258" font-size="15" fill="#333333">短条目四</text>
+
+        <!-- ── 类目三 ── -->
+        <rect x="826" y="0" width="374" height="56" fill="#CC0000"/>
+        <g stroke="#FFFFFF" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="855" cy="28" r="9"/><circle cx="855" cy="28" r="3"/>
+        </g>
+        <text x="882" y="35" font-size="18" font-weight="700" fill="#FFFFFF">类目三</text>
+        <rect x="826" y="56" width="374" height="236" fill="#FFF2F2" stroke="#CC0000" stroke-width="2"/>
+        <line x1="850" y1="84" x2="864" y2="84" stroke="#CC0000" stroke-width="2.5"/>
+        <text x="876" y="90" font-size="15" fill="#333333">短条目一（≤ 16 字）</text>
+        <line x1="844" y1="112" x2="1182" y2="112" stroke="#E8B4B4" stroke-width="1.5"/>
+        <line x1="850" y1="140" x2="864" y2="140" stroke="#CC0000" stroke-width="2.5"/>
+        <text x="876" y="146" font-size="15" fill="#333333">短条目二</text>
+        <line x1="844" y1="168" x2="1182" y2="168" stroke="#E8B4B4" stroke-width="1.5"/>
+        <line x1="850" y1="196" x2="864" y2="196" stroke="#CC0000" stroke-width="2.5"/>
+        <text x="876" y="202" font-size="15" fill="#333333">短条目三</text>
+        <line x1="844" y1="224" x2="1182" y2="224" stroke="#E8B4B4" stroke-width="1.5"/>
+        <line x1="850" y1="252" x2="864" y2="252" stroke="#CC0000" stroke-width="2.5"/>
+        <text x="876" y="258" font-size="15" fill="#333333">短条目四</text>
+
+        <!-- ── 底部结论带（整幅收口） ── -->
+        <rect x="0" y="320" width="1200" height="84" fill="#FFF2F2" stroke="#CC0000" stroke-width="2"/>
+        <g stroke="#CC0000" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="38" cy="362" r="11"/><circle cx="38" cy="362" r="3.6"/>
+        </g>
+        <text x="74" y="356" font-size="19" font-weight="700" fill="#CC0000">结论：一句话讲清本页落点（≤ 40 字）</text>
+        <text x="74" y="384" font-size="13.5" fill="#777777">支撑说明（可选 · 一行）：口径 / 条件 / 下一步</text>
+        <text x="1184" y="372" text-anchor="end" font-size="13" fill="#CC0000">分类的收口</text>
+
+        <text x="600" y="430" text-anchor="middle" font-size="12.5" fill="#A3A3A3">分类 + 结论带：上部 2–4 类目（色块标题栏 + 短条目，行间细线）｜底部整幅高亮结论带（#FFF2F2 / #CC0000）—— 分类之后必须落到一句结论</text>
+      </svg>
+    </div>
+    <div class="note">
+      <b>为什么要有这一张：</b>分类页最容易被诟病"列了一堆，不知道结论是什么"。27 在分类之下压一条 <b>整幅高亮带</b>，把 2–4 个类目收口成一句话——<b>与卡 13 的区别</b>：13 是内容区顶部的"总结条"（组件），27 的结论带是<b>图形内部</b>的一部分（参与构图与居中计算）。
+      <b>规范：</b>结论带高 84px、红色描边 2px；结论句 19px / 700 / <code>#CC0000</code>；支撑行 13.5px / <code>#777777</code>；带内左侧可放 22px 线稿图标（靶心 / 对勾 / 旗帜）。
+      <b>投放：</b>通栏 1880×700（等比 1.567），整体上下左右居中。<b>实际投放建议删掉图底说明行</b>：viewBox 高度改为内容下沿 —— <b>23/24/25/26 用 <code>0 0 1200 380</code></b>（1880×595）；<b>27 含结论带用 <code>0 0 1200 404</code></b>（1880×633）；随后在容器内上下左右居中。
+    </div>
+  </section>
+
+</div>
+<script>
+(function(){
+  function copyText(text){
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise(function(resolve, reject){
+      try{
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = document.execCommand('copy');
+        document.body.removeChild(ta);
+        ok ? resolve() : reject(new Error('copy failed'));
+      }catch(e){ reject(e); }
+    });
+  }
+  document.querySelectorAll('.btn-copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var card = btn.closest('.card');
+      var svg = card ? card.querySelector('.card-body svg') : null;
+      if(!svg) return;
+      var code = '<!-- 咨询公司风格 SVG 模板 · 复制自图表模板库 v3 -->\n' + svg.outerHTML;
+      var label = btn.textContent;
+      copyText(code).then(function(){
+        btn.textContent = '已复制 SVG ✓';
+        btn.style.borderColor = '#CC0000';
+        btn.style.color = '#CC0000';
+      }, function(){
+        btn.textContent = '已选中，请按 Ctrl+C';
+        var range = document.createRange();
+        range.selectNode(svg);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }).then(function(){
+        setTimeout(function(){
+          btn.textContent = label;
+          btn.style.borderColor = '';
+          btn.style.color = '';
+        }, 1800);
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
